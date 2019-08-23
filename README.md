@@ -1,7 +1,6 @@
 # LazyBicycle
 
 ## Project setup
-```
 npm install
 ```
 
