@@ -11,3 +11,6 @@ new Vue({
   render: h => h(App),
 }).$mount('#app')
 
+const express = require("express");
+const app = express();
+app.listen(5000, () => console.log('**********【服务器启动成功】**********'));

@@ -207,6 +207,17 @@
 ### 用户
 ```
 {
+    username: String,
+    pwd: String,
+    name: String,
+    avatar: String,
+    roles: Array,
+    createTime: { type: Date, default: Date.now},
+    loginTime: Date,
+    likebooks:Array,
+    likemovies:Array
+}
+{
     "username": "test", 
     "userid": 1, 
     "key": "123456", 
