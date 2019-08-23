@@ -6,8 +6,8 @@
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
-    "server": "nodemon src/server/index.js",
-    "start": "pm2 start src/sever/index.js"
+    "server": "nodemon src/server/app.js",
+    "start": "pm2 start src/sever/app.js"
   },
   "dependencies": {
     "core-js": "^2.6.5",
