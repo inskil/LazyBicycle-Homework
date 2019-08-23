@@ -6,11 +6,12 @@
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
-    "server": "nodemon src/server/app.js",
-    "start": "pm2 start src/sever/app.js"
+    "server": "cross-env NODE_ENV=development nodemon src/sever/app.js",
+    "start": "cross-env NODE_ENV=development pm2 start src/sever/app.js"
   },
   "dependencies": {
     "core-js": "^2.6.5",
+    "cross-env": "^5.2.0",
     "express-session": "^1.16.2",
     "ip": "latest",
     "iview": "^3.4.2",
