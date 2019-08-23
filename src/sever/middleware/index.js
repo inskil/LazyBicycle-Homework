@@ -11,7 +11,7 @@ export default app => {
 
     //缓存拦截器
     app.use(async (ctx, next) => { 
-        if (ctx.url == '/favicon.ico') return
+        if (ctx.url === '/favicon.ico') return
 
         await next()
         ctx.status = 200
