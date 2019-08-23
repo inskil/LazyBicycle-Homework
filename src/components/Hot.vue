@@ -1,5 +1,5 @@
 <template>
-    <div class="carousel">
+    <div class="head_carousel">
         <Carousel autoplay v-model="value2" :dots="setting.dots" :radius-dot="setting.radiusDot" loop>
             <CarouselItem>
                 <div class="demo-carousel" align="center"><img class="head_pic" :src="head_pic.pic1"></div>
@@ -15,13 +15,10 @@
             </CarouselItem>
         </Carousel>
     </div>
-
 </template>
 
 <script>
     export default {
-        components:{
-        },
         data () {
             return {
                 value2: 0,
@@ -40,8 +37,8 @@
     }
 </script>
 
-<style scoped>
-.carousel{
+<style langscoped>
+.head_carousel{
     top: 10px;
     left: 10%;
     width:25rem;

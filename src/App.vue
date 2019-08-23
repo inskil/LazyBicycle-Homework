@@ -1,18 +1,28 @@
 <template>
   <div id="app">
-    <guide-bar/>
-    <Hot/>
+    <guide-bar style="background-color: #009999"/>
+    <carousel style="background-color: #FFFFFF"/>
+    <div style="font-size: xx-large; background-color: #CCFFFF; color: #009999">
+      影视
+      <wrapper/>
+    </div>
+    <div style="font-size: xx-large; background-color: #DDFFFF; color: #009999">
+      书籍
+      <wrapper/>
+    </div>
   </div>
 </template>
 
 <script>
 import GuideBar from "@/components/GuideBar.vue"
-import Hot from "@/components/Hot.vue"
+import Carousel from "@/components/Carousel"
+import Wrapper from "@/components/Wrapper"
 export default {
   name: 'app',
   components: {
+    Carousel,
     GuideBar,
-    Hot
+    Wrapper
   }
 }
 </script>

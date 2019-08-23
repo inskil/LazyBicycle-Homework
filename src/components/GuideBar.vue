@@ -1,9 +1,9 @@
 <template>
-    <Menu mode="horizontal" :theme="theme1" active-name="1">
-        <MenuItem name="1">
+    <Menu mode="horizontal" :theme="theme1" active-name="1" style="font-size: large">
+        <MenuItem name="1" style="font-size: large">
             热门推荐
         </MenuItem>
-        <MenuItem name="2">
+        <MenuItem name="2"style="font-size: large">
             书籍
         </MenuItem>
         <Submenu name="3">
@@ -15,7 +15,7 @@
                 <MenuItem name="3-2">电影</MenuItem>
             </MenuGroup>
         </Submenu>
-        <MenuItem name="4">
+        <MenuItem name="4" style="font-size: large">
             小组
         </MenuItem>
     </Menu>
@@ -24,12 +24,11 @@
     export default {
         data () {
             return {
-                theme1: 'light'
+                theme1: 'dark'
             }
         }
     }
 </script>
 
 <style scoped>
-
 </style>
