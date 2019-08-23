@@ -81,7 +81,7 @@
             "剧情"
         ]
     },
-    "id": "https://api.douban.com/movie/1292052",
+    "id": "1292052",
     "mobile_link": "https://m.douban.com/movie/subject/1292052/",
     "alt": "https://movie.douban.com/movie/1292052",
     "tags": [
