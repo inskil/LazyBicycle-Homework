@@ -3,6 +3,7 @@ import conf from '../../config'
 
 export default () => {
     return async (ctx, next) => {
+        console.log("-------middle-auth----body-----",ctx.request.body);
         if ( conf.auth.blackList.some(v => ctx.path.indexOf(v) >= 0) ) {
             let token = ctx.cookies.get(conf.auth.tokenKey);
             try {

@@ -14,7 +14,7 @@ module.exports = {
         console.log('----------------删除图片 del_markdown_upload_img-----------------------');
         let id = ctx.request.query.id
         try {
-            ctx.remove(musicModel, {_id: id})
+            //ctx.remove(musicModel, {_id: id})
             ctx.send()
         }catch(e){
             ctx.sendError(e)

@@ -1,4 +1,4 @@
-import blogModel from '../../models/blog'
+import blogModel from '../../models/movie'
 import path from 'path'
 
 module.exports = {

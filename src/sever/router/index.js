@@ -1,36 +1,37 @@
 import fs from 'fs'
 import path from 'path'
 import koaRouter from 'koa-router'
+
 const router = koaRouter()
 
 export default app => {
 
-/*----------------------admin-------------------------------*/
-    // 用户请求
-    router.post('/admin_demo_api/user/login', app.admin.user.login)
-    router.get('/admin_demo_api/user/info', app.admin.user.info)
-    router.get('/admin_demo_api/user/list', app.admin.user.list)
-    router.post('/admin_demo_api/user/add', app.admin.user.add)
-    router.post('/admin_demo_api/user/update', app.admin.user.update)
-    router.get('/admin_demo_api/user/del', app.admin.user.del)
+    /*----------------------user-------------------------------*/
+    router.post('/user/login', app.client.user.login)
+    router.get('/user/info', app.client.user.info)
+    router.get('/user/list', app.client.user.list)
+    router.post('/user/add', app.client.user.add)
+    router.post('/user/update', app.client.user.update)
+    router.get('/user/del', app.client.user.del)
 
+    /*----------------------movie-------------------------------*/
+    router.get('/movie', app.client.movie.list)
+    router.get('/onemoviebykey', app.client.movie.OneInfoByKey)
+    router.get("/moviesbykey", app.client.movie.moviesByKey)
 
-    // 文章请求
-    router.get('/admin_demo_api/blog/list', app.admin.blog.list)
-    router.post('/admin_demo_api/blog/add', app.admin.blog.add)
-    router.post('/admin_demo_api/blog/update', app.admin.blog.update)
-    router.get('/admin_demo_api/blog/del', app.admin.blog.del)
+    /*----------------------book------------------------------*/
+    router.get('/book', app.client.book.list)
+    router.get('/onebookbykey', app.client.book.OneInfoByKey)
+    router.get('/booksbykey', app.client.book.booksByKey)
+    //router.get('/booklist', app.client.book.list)
+    //router.get('/bookreview', app.client.book.review)
 
-    // 其他请求
-    router.post('/admin_demo_api/markdown_upload_img', app.admin.other.markdown_upload_img)
+    /*----------------------review-----------------------------*/
+    router.get('/bookreview', app.client.review.bookreview)
+    router.get('/moviereview', app.client.review.moviereview)
 
-
-/*----------------------client-------------------------------*/
-    // client/文章请求
-    router.get('/client_demo_api/blog/list', app.client.blog.list)
-    router.get('/client_demo_api/blog/info', app.client.blog.info)
-
-    
+    /*----------------------search-----------------------------*/
+    router.get('/search', app.client.search.search)
 
 
     app.use(router.routes()).use(router.allowedMethods());

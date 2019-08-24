@@ -10,7 +10,8 @@ import Func from './func'
 export default app => {
 
     //缓存拦截器
-    app.use(async (ctx, next) => { 
+    app.use(async (ctx, next) => {
+        console.log("----------middle-body-----");
         if (ctx.url === '/favicon.ico') return
 
         await next()

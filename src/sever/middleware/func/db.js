@@ -118,6 +118,7 @@ export const findOne = (model, conditions, fields, options = {}) => {
     } : options.sort;
     delete options.sort;
     return new Promise((resolve, reject) => {
+        console.log("model:")
         model.findOne(conditions, fields, options, function (err, res) {
             if (err) {
                 console.error('Error: ' + JSON.stringify(err));

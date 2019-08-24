@@ -4,6 +4,8 @@ import userModel from '../../models/user'
 module.exports = {
     async login (ctx, next) {
         console.log('----------------登录接口 user/login-----------------------');
+        console.log(ctx)
+        console.log(ctx.request)
         let {username, pwd} = ctx.request.body;
         console.log(username)
         try {

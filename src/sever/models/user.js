@@ -9,5 +9,5 @@ let userSchema = db.Schema({
     loginTime: Date,
     likebooks:Array,
     likemovies:Array
-})
+},{collection:"user"})
 export default db.model('user', userSchema);
