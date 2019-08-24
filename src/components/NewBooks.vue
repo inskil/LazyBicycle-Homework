@@ -13,8 +13,8 @@
 </template>
 
 <script>
-    import '../assets/js/jquery-2.1.1.min.js';
-    import '../assets/js/ripple.min.js'
+    import '@/assets/js/jquery-2.1.1.min.js';
+    import '@/assets/js/ripple.min.js'
     export default {
         name: "NewBooks",
         data(){
@@ -139,7 +139,7 @@
 </script>
 
 <style scoped>
-    @import "../assets/css/ripple.min.css";
+    @import "~@/assets/css/ripple.min.css";
     .book_list{
         width: 80%;
         left: 10%;

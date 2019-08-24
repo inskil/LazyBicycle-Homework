@@ -121,9 +121,9 @@
 </script>
 
 <style scoped>
-    @import '../assets/css/normalize.css';
-    @import '../assets/css/htmleaf-demo.css';
-    @import '../assets/css/style.css';
+    @import '~@/assets/css/normalize.css';
+    @import '~@/assets/css/htmleaf-demo.css';
+    @import '~@/assets/css/style.css';
     .inner p{
         overflow: hidden;
         text-overflow: ellipsis;
