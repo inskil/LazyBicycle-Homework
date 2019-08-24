@@ -3,12 +3,12 @@
     <guide-bar style="background-color: #009999"/>
     <carousel style="background-color: #FFFFFF"/>
     <div style="font-size: xx-large; background-color: #CCFFFF; color: #009999">
-      影视
-      <wrapper/>
+      书籍
+      <book-wrapper/>
     </div>
     <div style="font-size: xx-large; background-color: #DDFFFF; color: #009999">
-      书籍
-      <wrapper/>
+      影视
+      <movie-wrapper/>
     </div>
   </div>
 </template>
@@ -16,13 +16,15 @@
 <script>
 import GuideBar from "@/components/GuideBar.vue"
 import Carousel from "@/components/Carousel"
-import Wrapper from "@/components/Wrapper"
+import BookWrapper from "@/components/BookWrapper"
+import MovieWrapper from "@/components/MovieWrapper"
 export default {
   name: 'app',
   components: {
     Carousel,
     GuideBar,
-    Wrapper
+    BookWrapper,
+    MovieWrapper
   }
 }
 </script>
