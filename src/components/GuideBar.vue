@@ -3,7 +3,7 @@
         <MenuItem name="1" style="font-size: large">
             热门推荐
         </MenuItem>
-        <MenuItem name="2"style="font-size: large">
+        <MenuItem name="2" style="font-size: large">
             书籍
         </MenuItem>
         <Submenu name="3">
