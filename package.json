@@ -3,11 +3,12 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "serve": "vue-cli-service serve",
+    "serve": "vue-cli-service serve --dev",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
+    "axios": "^0.19.0",
     "core-js": "^2.6.5",
     "cropper": "^4.0.0",
     "element-ui": "^2.11.1",
@@ -16,6 +17,7 @@
     "less": "^3.10.3",
     "less-loader": "^5.0.0",
     "node-sass": "^4.12.0",
+    "qs": "latest",
     "sass-loader": "^7.3.1",
     "stylus": "^0.54.7",
     "stylus-loader": "^3.0.2",
@@ -24,6 +26,7 @@
     "vue-hot-reload-api": "^2.3.3",
     "vue-loader": "latest",
     "vue-router": "^3.1.2",
+    "vuex": "^3.1.1",
     "webpack": "^4.39.0"
   },
   "devDependencies": {

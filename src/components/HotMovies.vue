@@ -1,14 +1,14 @@
 <template>
     <div class="carousel">
         <Carousel autoplay v-model="value2" :dots="setting.dots" :radius-dot="setting.radiusDot" loop>
-            <CarouselItem v-for="book in bookList" v-bind:key="book.id">
+            <CarouselItem v-for="book in movieList" v-bind:key="book.id">
                 <div class="demo-carousel" align="center">
                     <div class="material-card material-shadow-2 material-hover">
                         <img class="pic" :src="book.images[0].large">
                         <div class="text">
                             <h1>{{book.title}}</h1>
                             <br><br>
-                            <p id="pp">{{book.summary}}</p>
+                            <p>{{book.summary}}</p>
                         </div>
                     </div>
                 </div>
@@ -21,7 +21,7 @@
     import {mapGetters} from 'vuex'
 
     export default {
-        name: "HotBooks",
+        name: "HotMovies",
         data() {
             return {
                 loading: false,
@@ -36,7 +36,7 @@
         },
         computed: {
             ...mapGetters([
-                'bookList'
+                'movieList'
             ]),
         },
         watch: {
@@ -45,30 +45,47 @@
         },
         methods: {
             fetchDate: function () {
-                console.log("tooooooooooooooooooooooooooooooooo")
-                const {fullPath} = this.$route
-                this.$router.replace({
-                    path: '/redirect' + fullPath
-                })
+                console.log("feching````````````````````")
+                this.getMovie()
+                setTimeout(this.fix, 1000)
             },
-            getBook() {
-                this.loading = true
-                this.$store.dispatch('getBookList', {
+            getMovie() {
+                this.$store.dispatch('getMovieList', {
                     //type: this.$route.params.classify,
                     count: 8
                 })
-
             },
+            // fix() {
+            //     $(function () {
+            //         console.log("rending......................")
+            //         $(".material-ripple").click(function (a) {
+            //             var i = $(this);
+            //             0 == i.find(".material-ink").length && i.prepend("<div class='material-ink'></div>");
+            //             var t = i.find(".material-ink");
+            //             if (t.removeClass("animate"), !t.height() && !t.width()) {
+            //                 var e = Math.max(i.outerWidth(), i.outerHeight());
+            //                 t.css({height: e, width: e})
+            //             }
+            //             var r = a.pageX - i.offset().left - t.width() / 2,
+            //                 h = a.pageY - i.offset().top - t.height() / 2,
+            //                 l = i.data("ripple-color");
+            //             t.css({top: h + "px", left: r + "px", background: l}).addClass("animate")
+            //         });
+            //     });
+            // }
         },
         created() {
             // Getting books data on created
-            this.getBook()
+            this.fetchDate()
         },
 
+
     }
+
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
+
     .carousel {
         width: 80%;
         left: 10%;
