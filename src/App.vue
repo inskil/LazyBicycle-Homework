@@ -1,19 +1,31 @@
 <template>
   <div id="app">
-    <guide-bar/>
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <guide-bar style="background-color: #009999"/>
+    <detailinfo style="background-color: #FFFFFF"/>
+    <!--<div style="font-size: xx-large; background-color: #CCFFFF; color: #009999">
+      影视
+      <wrapper/>
+    </div>
+    <div style="font-size: xx-large; background-color: #DDFFFF; color: #009999">
+      书籍
+      <wrapper/>
+    </div>
+    -->
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
-import GuideBar from "@/components/GuideBar";
+import GuideBar from "@/components/GuideBar.vue"
+import Carousel from "@/components/Carousel"
+import Wrapper from "@/components/Wrapper"
+import detailinfo from "@/components/detailinfo"
 export default {
   name: 'app',
   components: {
-    HelloWorld,
-    GuideBar
+    Carousel,
+    GuideBar,
+    Wrapper,
+    detailinfo
   }
 }
 </script>
@@ -27,9 +39,9 @@ export default {
   color: #2c3e50;
 }
 </style>
-<style lang="scss">
-  @import "style/Color.scss";
-  #app{
-    background: $mybeige;
-  }
-</style>
+<!--<style lang="scss">-->
+<!--  @import "style/Color.scss";-->
+<!--  #app{-->
+<!--    background: $mybeige;-->
+<!--  }-->
+<!--</style>-->
