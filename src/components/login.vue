@@ -1,91 +1,93 @@
 <template>
-    <div class="login">
-      <v-header :bgFlag="bgValue">
-        <a @click="$router.go(-1)" slot="back">
-          <i class="mintui mintui-back colorGreen"></i>
-        </a>
-      </v-header>
-      <div class="welcome">欢迎来到豆瓣</div>
-      <div class="form">
-        <input id="userName" type="text" placeholder="手机号/邮箱">
-        <input id="passWord" type="password" placeholder="密码">
-      </div>
-      <button class="login-btn">登录</button>
-      <div class="forget-box">
-        <router-link class="colorGreen" to="/register">注册豆瓣</router-link>
-        <a>忘记密码</a>
-      </div>
-    </div>
+  <div>
+    <h1>注册</h1>
+    <Form ref="formCustom" :model="formCustom" :rules="ruleCustom" :label-width="80" class="form">
+      <FormItem label="用户名：" prop="name">
+        <Input v-model="formCustom.name" placeholder="请输入用户名"></Input>
+      </FormItem>
+      <FormItem label="密码：" prop="passwd">
+        <Input type="password" v-model="formCustom.passwd"  placeholder="请输入密码"></Input>
+      </FormItem>
+      <FormItem label="确认密码：" prop="passwdCheck">
+        <Input type="password" v-model="formCustom.passwdCheck"  placeholder="请确认密码"></Input>
+      </FormItem>
+      <FormItem>
+        <Button type="primary" @click="handleSubmit('ruleCustom')">提交</Button>
+        <Button @click="handleReset('ruleCustom')" style="margin-left: 8px">重置</Button>
+      </FormItem>
+    </Form>
+  </div>
 </template>
-<style lang="stylus" rel="stylesheet/stylus">
-.login
-  height 12.38rem
-  background-color #fff
-  padding-top .96rem
-.welcome
-  height 3rem
-  line-height 3rem
-  text-align center
-  font-size 30px
-  color #42bd56
-  font-weight 500
-.form
-  padding 0 .4rem
-  input
-    width 100%
-    display block
-    padding .1rem .2rem
-    border none
-    outline none
-    font-size 15px
-    position relative
-    box-sizing border-box
-    border-bottom 1px solid #dcdcdc
-    &#userName
-      margin-bottom .6rem
-    &:focus
-      color #42bd56
-.login-btn
-  width 6.8rem
-  height .8rem
-  margin-left .35rem
-  margin-top .4rem
-  border none
-  border-radius 3px
-  outline none
-  background-color #42bd56
-  color #fff
-  font-size 15px
-.forget-box
-  display flex
-  margin 0 auto
-  margin-top .4rem
-  width 4rem
-  font-size 14px
-  color #aaa
-  a
-    display block
-    width 2rem
-    text-align center
-    position relative
-    &.colorGreen
-      color #42bd56
-      &:after
-        content ''
-        width 1px
-        height 15px
-        background-color #aaa
-        position absolute
-        right 0
-        top 0
-
+<style>
+  .form{
+    top: 2rem;
+    left: 32%;
+    width: 30%;
+    position: relative;
+  }
 </style>
 <script>
-    export default{
-      data () {
-        return {
-          bgValue: true
+  export default {
+    data () {
+      const validateName = (rule, value, callback) => {
+        if (value === '') {
+          callback(new Error('请输入用户名'));
+        } else {
+          callback();
+        }
+      };
+      const validatePass = (rule, value, callback) => {
+        if (value === '') {
+          callback(new Error('请输入密码'));
+        } else {
+          if (this.formCustom.passwdCheck !== '') {
+            // 对第二个密码框单独验证
+            this.$refs.formCustom.validateField('passwdCheck');
+          }
+          callback();
+        }
+      };
+      const validatePassCheck = (rule, value, callback) => {
+        if (value === '') {
+          callback(new Error('请再次输入密码'));
+        } else if (value !== this.formCustom.passwd) {
+          callback(new Error('两次输入不一致'));
+        } else {
+          callback();
+        }
+      };
+      return {
+        formCustom: {
+          name: '',
+          passwd: '',
+          passwdCheck: ''
+        },
+        ruleCustom: {
+          name:[
+            { validator: validateName, trigger: 'blur' }
+          ],
+          passwd: [
+            { validator: validatePass, trigger: 'blur' }
+          ],
+          passwdCheck: [
+            { validator: validatePassCheck, trigger: 'blur' }
+          ]
         }
       }
+    },
+    methods: {
+      handleSubmit (name) {
+        this.$refs[name].validate((valid) => {
+          if (valid) {
+            this.$Message.success('注册成功!');
+          } else {
+            this.$Message.error('注册失败!');
+          }
+        })
+      },
+      handleReset (name) {
+        this.$refs[name].resetFields();
+      }
     }
+  }
 </script>

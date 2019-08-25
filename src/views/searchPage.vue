@@ -9,9 +9,9 @@
 </template>
 
 <script>
-    import SearchBox from "../components/SearchBox";
-    import SearchMenu from "../components/SearchMenu";
-    import SearchResult from "../components/SearchResult";
+    import SearchBox from "@/components/SearchBox";
+    import SearchMenu from "@/components/SearchMenu";
+    import SearchResult from "@/components/SearchResult";
     export default {
         name: "searchPage",
         components: {

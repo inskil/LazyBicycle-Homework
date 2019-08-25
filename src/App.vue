@@ -1,7 +1,7 @@
 <template>
   <div id="app">
-    <guide-bar style="background-color: #009999"/>
-    <router-view></router-view>
+    <guide-bar/>
+    <router-view/>
   </div>
 </template>
 
