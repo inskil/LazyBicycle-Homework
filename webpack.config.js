@@ -65,7 +65,6 @@ module.exports = {
             }
         }
     },
-
     plugins: [new VuePlugin(),
         new webpack.ProvidePlugin({
             $: "jquery",
@@ -74,3 +73,4 @@ module.exports = {
             "window.jQuery": "jquery"})
     ]
 }
+

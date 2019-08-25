@@ -1,14 +1,14 @@
 <template>
     <div id="app">
-            <carousel style="background-color: #FFFFFF"/>
-            <div style="font-size: xx-large; background-color: #CCFFFF; color: #009999">
-              书籍
-              <book-wrapper/>
-            </div>
-            <div style="font-size: xx-large; background-color: #DDFFFF; color: #009999">
-              影视
-              <movie-wrapper/>
-            </div>
+        <carousel style="background-color: #FFFFFF"/>
+        <div style="font-size: xx-large; background-color: #CCFFFF; color: #009999">
+            书籍
+            <book-wrapper/>
+        </div>
+        <div style="font-size: xx-large; background-color: #DDFFFF; color: #009999">
+            影视
+            <movie-wrapper/>
+        </div>
     </div>
 </template>
 
@@ -36,3 +36,4 @@
     /*    color: #2c3e50;*/
     /*}*/
 </style>
+

@@ -16,7 +16,7 @@
                         </div>
                         <div class="headline">{{book.title}}</div>
                         <a href="#0">
-                            <div class="link">了解更多...</div>
+                            <div class="link">更多...</div>
                         </a>
                     </div>
                 </div>
@@ -31,7 +31,7 @@
                         </div>
                         <div class="headline">{{movie.title}}</div>
                         <a href="#0">
-                            <div class="link">了解更多...</div>
+                            <div class="link">更多...</div>
                         </a>
                     </div>
                 </div>

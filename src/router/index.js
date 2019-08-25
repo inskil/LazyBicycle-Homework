@@ -23,6 +23,16 @@ const router = new Router({
             path: '/movie',
             name:'movie',
             component: _import_('moviePage'),
+        },
+        {
+            path: '/search',
+            name:'search',
+            component: _import_('searchPage'),
+        },
+        {
+            path: '/login',
+            name:'login',
+            component: _import_('loginPage'),
         }
         // {
         //     path: '/article/:id',
