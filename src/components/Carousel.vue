@@ -34,9 +34,9 @@
 </template>
 
 <script>
-    import '../assets/js/jquery-2.1.1.min.js';
-    import '../assets/js/demo.js'
-    import '../assets/js/slick.min.js'
+    import '@/assets/js/jquery-2.1.1.min.js';
+    import '@/assets/js/demo.js'
+    import '@/assets/js/slick.min.js'
     export default {
         name: "Carousel",
         data(){
@@ -111,7 +111,7 @@
 </script>
 
 <style scoped>
-    @import '../assets/css/base.css';
-    @import '../assets/css/slick.min.css';
-    @import '../assets/css/demo.css';
+    @import '~@/assets/css/base.css';
+    @import '~@/assets/css/slick.min.css';
+    @import '~@/assets/css/demo.css';
 </style>
