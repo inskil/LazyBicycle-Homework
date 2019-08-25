@@ -3,6 +3,8 @@ import App from './App.vue'
 import iView from 'iview'
 import router from "@/router";
 import 'iview/dist/styles/iview.css';
+import 'jquery';
+import $ from 'jquery';
 
 Vue.use(iView)
 
