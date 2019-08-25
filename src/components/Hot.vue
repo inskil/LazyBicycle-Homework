@@ -37,7 +37,8 @@
     }
 </script>
 
-<style scoped>
+
+<style langscoped>
 .head_carousel{
     top: 10px;
     left: 10%;

@@ -7,6 +7,7 @@
 
 <script>
 import GuideBar from "@/components/GuideBar.vue"
+
 export default {
   name: 'app',
   components: {
