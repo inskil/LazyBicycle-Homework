@@ -118,7 +118,7 @@
             </div>
             <div id="review_new" style="width: 100%;">
                 <div id="review_kuang" style="width: 79%; float:left">
-                <i-input type="textarea" :autosize="{minRows: 3,maxRows: 5}" placeholder="请输入..."></i-input>
+                    <Input v-model="summary_value" type="textarea" :autosize="{minRows: 3,maxRows: 5}" placeholder="Enter something..." />
                 </div>
                 <div id="review_buttom" style="width: 20%;float: right">
                     <div style="float:top;height:40px" ></div>
@@ -145,7 +145,7 @@
             return {
 
                 value: 0,
-
+                summary_value: "",
 
                 id: 1234567,
                 title: 'balala',
@@ -208,6 +208,7 @@
                     title: '评价发表成功',
                     desc: nodesc ? '' : ''
                 });
+                this.summary_value = ""
             },
             heart_success(nodesc) {
                 this.$Notice.success({
