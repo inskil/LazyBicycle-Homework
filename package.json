@@ -3,23 +3,26 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "serve": "vue-cli-service serve",
+    "serve": "vue-cli-service serve --dev",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
+    "axios": "^0.19.0",
     "core-js": "^2.6.5",
     "cropper": "^4.0.0",
     "element-ui": "^2.11.1",
     "iview": "^3.4.2",
     "jquery": "^3.4.1",
     "node-sass": "^4.12.0",
+    "qs": "latest",
     "sass-loader": "^7.3.1",
     "vue": "^2.6.10",
     "vue-cli": "^2.9.6",
+    "vue-loader": "latest",
     "vue-router": "^3.1.2",
-    "webpack": "^4.39.0",
-    "vue-loader": "latest"
+    "vuex": "^3.1.1",
+    "webpack": "^4.39.0"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "^3.11.0",

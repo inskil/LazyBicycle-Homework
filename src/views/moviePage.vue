@@ -1,23 +1,21 @@
 <template>
     <div id="app">
-        <hot-books/>
-        <h1><br>新书速递</h1>
-        <new-books/>
-        <h1><br>好书推荐</h1>
-        <new-books/>
+        <hot-movies/>
+        <h1><br>最新电影</h1>
+        <new-movies/>
+        <h1><br>高分电影</h1>
+        <new-movies/>
     </div>
 </template>
 
 <script>
-    import HotBooks from "@/components/HotBooks";
-    import NewBooks from "@/components/NewBooks";
+    import HotMovies from "@/components/HotMovies";
+    import NewMovies from "@/components/NewMovies";
     export default {
-        name: 'bookPage',
+        name: 'moviePage',
         components: {
-            HotBooks,
-            NewBooks
-        },
-        created() {
+            HotMovies,
+            NewMovies
         }
     }
 

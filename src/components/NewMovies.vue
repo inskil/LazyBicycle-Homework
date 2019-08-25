@@ -1,24 +1,25 @@
 <template>
     <Row class="book_list" justify="center" type="flex">
-        <Col v-for="book in bookList" v-bind:key="book.id" span="6" class="book_col" align="center">
+        <Col v-for="book in movieList" v-bind:key="book.id" span="6" class="book_col" align="center">
             <div class="book_card material-card material-shadow-5 material-hover">
-                <img class="pic" :src="book.images[0].large">
+                <img class="pic" :src="book.images[0].large  ">
             </div>
             <h3>{{book.title}}</h3>
-            <my-rate :message=book.rating[0].average></my-rate>
+            <myRate :message=book.rating[0].average  />
             {{book.rating[0].average}}
             <br>
-            {{book.author[0]}}
+            {{book.directors[0].name}}
         </Col>
     </Row>
 </template>
 
 <script>
+    import '@/assets/js/ripple.min.js'
     import myRate from "@/components/myRate";
     import {mapGetters} from 'vuex'
 
     export default {
-        name: "NewBooks",
+        name: "NewMovies",
         components: {
             myRate
         },
@@ -37,8 +38,8 @@
         },
         computed: {
             ...mapGetters([
-                'bookList'
-            ])
+                'movieList'
+            ]),
         },
         watch: {
             // 如果路由有变化，会再次执行该方法
@@ -46,13 +47,14 @@
         },
         methods: {
             fetchDate: function () {
-                this.getBook()
+                this.getMovie()
             },
-            getBook() {
-                this.$store.dispatch('getBookList', {
+            getMovie() {
+                this.$store.dispatch('getMovieList', {
                     //type: this.$route.params.classify,
                     count: 8
                 })
+
             },
         },
         created() {

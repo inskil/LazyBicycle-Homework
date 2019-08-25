@@ -1,6 +1,7 @@
 const fs = require('fs')
 const path = require('path')
 const VuePlugin = require('vue-loader/lib/plugin')
+var webpack = require("webpack");
 
 module.exports = {
     // Expose __dirname to allow automatically setting basename.
@@ -65,5 +66,11 @@ module.exports = {
         }
     },
 
-    plugins: [new VuePlugin()]
+    plugins: [new VuePlugin(),
+        new webpack.ProvidePlugin({
+            $: "jquery",
+            jQuery: "jquery",
+            jquery: "jquery",
+            "window.jQuery": "jquery"})
+    ]
 }
