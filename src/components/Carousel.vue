@@ -12,7 +12,7 @@
                         <div class="location"><Rate disabled allow-half v-model="book.rating.average"/></div>
                         <div class="headline">{{book.title}}</div>
                         <a href="#0">
-                            <div class="link">了解更多...</div>
+                            <div class="link">更多...</div>
                         </a>
                     </div>
                 </div>
@@ -24,7 +24,7 @@
                         <div class="location"><Rate disabled allow-half v-model="movie.rating.average"/></div>
                         <div class="headline">{{movie.title}}</div>
                         <a href="#0">
-                            <div class="link">了解更多...</div>
+                            <div class="link">更多...</div>
                         </a>
                     </div>
                 </div>

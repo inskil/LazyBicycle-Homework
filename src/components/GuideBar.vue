@@ -25,7 +25,7 @@
                        @on-enter="search_some()"/>
             </div>
             <div style="float: left">
-                <i-button type="ghost" shape="circle" icon="ios-search" @click="search_some()"></i-button>
+                <i-button type="ghost" shape="circle" icon="ios-search" @click="search_some()" :to="{name:'search'}"></i-button>
             </div>
 
         </div>
