@@ -1,6 +1,6 @@
 <template>
     <div>
-        <Menu mode="horizontal" :theme="theme1" active-name="1" style="font-size: large;width: 80%;float: left; background-color: #009999">
+        <Menu mode="horizontal" :theme="theme1" active-name="1" class="page">
             <MenuItem :to="{name:'hot'}" name="1" style="font-size: large">
                 热门推荐
             </MenuItem>
@@ -30,11 +30,11 @@
             </div>
         </Menu>
         <div style="font-size: large; width: 20%; left:80%; position:absolute">
-            <div v-if="login" style="background-color: #009999">
-                <div style="float: left;width: 10rem">
-                    <span style="color: white;font: 15px Arial;"><Icon type="md-person" /> {{user_name}}</span>
+            <div v-if="login" style="background-color: #009999; height: 4rem">
+                <div style="float: left">
+                    <span class="name"><Icon type="md-person" /> {{user_name}}</span>
                 </div>
-                <div align="left">
+                <div align="left" style="left: 1rem; position: relative; top: 1rem">
                     <Dropdown>
                         <a href="javascript:void(0)">
                             <Avatar v-bind:src="user_head"/>
@@ -46,7 +46,7 @@
                     </Dropdown>
                 </div>
             </div>
-            <Menu v-else mode="horizontal" :theme="theme1" style="background-color: #009999">
+            <Menu v-else mode="horizontal" :theme="theme1" style="background-color: #009999; height: 4rem">
                 <MenuItem :to="{name:'login'}" style="font-size: large">
                     <Icon type="md-person" /> 登录
                 </MenuItem>
@@ -83,4 +83,24 @@
 </script>
 
 <style scoped>
+    .page{
+        font-size: large;
+        height: 4rem;
+        width: 80%;
+        float: left;
+        background-color: #009999
+    }
+    .name{
+        color: white;
+        font-size: large;
+        width: 10rem;
+        top: 1rem;
+        position: relative;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        word-break: break-all;
+        -webkit-line-clamp: 1;
+    }
 </style>
