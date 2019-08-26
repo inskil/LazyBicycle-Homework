@@ -6,7 +6,7 @@ module.exports = {
         console.log('----------------登录接口 user/login-----------------------');
         console.log(ctx)
         console.log(ctx.request)
-        let {username, pwd} = ctx.request.body;
+        let {username, pwd} = ctx.request.query;
         console.log(username)
         try {
             let data = await ctx.findOne(userModel, {username: username});
@@ -88,9 +88,9 @@ module.exports = {
 
     async add (ctx, next) {
         console.log('----------------添加管理员 user/add-----------------------');
-        let paramsData = ctx.request.body;
+        let paramsData = ctx.request.query;
         try {
-            let data = await ctx.findOne(userModel, {name: paramsData.name})
+            let data = await ctx.findOne(userModel, {name: paramsData.username})
             if (data) {
                 ctx.sendError('数据已经存在, 请重新添加!')
             }else{
