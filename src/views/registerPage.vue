@@ -1,15 +1,15 @@
 <template>
     <div id="app">
-        <login/>
+        <register/>
     </div>
 </template>
 
 <script>
-    import login from "@/components/login";
+    import register from "@/components/register";
     export default {
         name: "registerPage",
         components: {
-            login
+            register
         }
     }
 </script>

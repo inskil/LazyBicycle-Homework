@@ -1,12 +1,15 @@
 <template>
     <div>
-        <h1 style="margin-top:10%">登录</h1>
+        <h1>注册</h1>
         <Form ref="formCustom" :model="formCustom" :rules="ruleCustom" :label-width="80" class="form">
             <FormItem label="用户名：" prop="name">
                 <Input v-model="formCustom.name" placeholder="请输入用户名"></Input>
             </FormItem>
             <FormItem label="密码：" prop="passwd">
                 <Input type="password" v-model="formCustom.passwd" placeholder="请输入密码"></Input>
+            </FormItem>
+            <FormItem label="确认密码：" prop="passwdCheck">
+                <Input type="password" v-model="formCustom.passwdCheck" placeholder="请确认密码"></Input>
             </FormItem>
             <FormItem>
                 <Button type="primary" @click="handleSubmit('ruleCustom')">提交</Button>
@@ -15,16 +18,10 @@
         </Form>
     </div>
 </template>
-<style>
-    .form {
-        top: 2rem;
-        left: 32%;
-        width: 30%;
-        position: relative;
-    }
-</style>
+
 <script>
     export default {
+        name: "register",
         data() {
             const validateName = (rule, value, callback) => {
                 if (value === '') {
@@ -89,3 +86,13 @@
         }
     }
 </script>
+
+
+<style scoped>
+    .form {
+        top: 2rem;
+        left: 32%;
+        width: 30%;
+        position: relative;
+    }
+</style>
