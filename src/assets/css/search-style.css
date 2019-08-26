@@ -3,7 +3,7 @@ body{margin: 0;}
 div.search {padding: 30px 0}
 form {
   position: relative;
-  width: 300px;
+  width: 30rem;
   margin: 0 auto;
 }
 .d1 {background: #A3D0C3;}
@@ -167,7 +167,7 @@ form {
   z-index: 2;
 }
 .d6 input{
-  width: 300px;
+  width: 30rem;
   z-index: 1;
   border-bottom: 2px solid #5cadff;
 }

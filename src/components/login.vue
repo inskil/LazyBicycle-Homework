@@ -74,10 +74,8 @@
                 }
             }
         },
-
         methods: {
             handleSubmit(name) {
-                console.log("函数开始了")
                 this.$refs['formCustom'].validate((valid) => {
                     if (valid) {
                         const _this = this;
@@ -94,14 +92,14 @@
                             console.log(result)
                             _this.disablebtn = false;
                             _this.loginText = "登录";
-
+                            _this.$Message.success('登录成功!');
                         }).catch(function (error) {
                             //失败
                             _this.disablebtn = false;
                             _this.loginText = "登录"
                         })
                     } else {
-                        this.$Message.error('登录失败!');
+                        this.$Message.error('注册失败!');
                     }
                 });
             },

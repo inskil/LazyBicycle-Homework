@@ -12,7 +12,7 @@
                     <div class="number">书籍</div>
                     <div class="body">
                         <div class="location">
-                            <Rate disabled allow-half v-model="book.rating.average"/>
+                            <my-rate :message=book.rating[0].average></my-rate>
                         </div>
                         <div class="headline">{{book.title}}</div>
                         <router-link :to="{name:'bookDetail'}">
@@ -27,7 +27,7 @@
                     <div class="number">影视</div>
                     <div class="body">
                         <div class="location">
-                            <Rate disabled allow-half v-model="movie.rating.average"/>
+                            <myRate :message=movie.rating[0].average  />
                         </div>
                         <div class="headline">{{movie.title}}</div>
                         <router-link :to="{name:'movieDetail'}">
@@ -44,9 +44,13 @@
     import {mapGetters} from 'vuex'
     import $ from 'jquery'
     import '@/assets/js/slick.min.js';
+    import myRate from "@/components/myRate";
 
     export default {
         name: "Carousel",
+        components: {
+            myRate
+        },
         data() {
             return {
                 loading: false,

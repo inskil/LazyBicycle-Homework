@@ -27,49 +27,49 @@
                     小组
                 </MenuItem>
             </router-link>
-            <div style="float: left">
+
+            <div style="float: left; padding-left: 5rem">
                 <div style="float: left; padding-right: 10px">
-                    <Input v-model="searchVal" placeholder="Enter something..." style="width: 180px"
+                    <Input v-model="searchVal" placeholder="Enter something..." style="width: 20rem"
                            @on-enter="search_some()"/>
                 </div>
                 <div style="float: left">
                     <i-button type="ghost" shape="circle" icon="ios-search" @click="search_some()"></i-button>
                 </div>
-
             </div>
 
-            <div style="font-size: large; width: 20%; left:80%; position:absolute">
-                <div v-if="login" style="background-color: #009999; height: 4rem">
-                    <div style="float: left">
-                        <span class="name"><Icon type="md-person"/> {{user_name}}</span>
+                <div style="font-size: large; width: 20%; left:80%; position:absolute">
+                    <div v-if="login">
+                        <div style="float: left">
+                            <span class="name"><Icon type="md-person"/> {{user_name}}</span>
+                        </div>
+                        <div align="left" style="left: 1rem; position: relative">
+                            <Dropdown>
+                                <a href="javascript:void(0)">
+                                    <Avatar v-bind:src="user_head"/>
+                                </a>
+                                <Dropdown-menu slot="list">
+                                    <Dropdown-item>注销</Dropdown-item>
+                                    <Dropdown-item>切换账号</Dropdown-item>
+                                </Dropdown-menu>
+                            </Dropdown>
+                        </div>
                     </div>
-                    <div align="left" style="left: 1rem; position: relative; top: 1rem">
-                        <Dropdown>
-                            <a href="javascript:void(0)">
-                                <Avatar v-bind:src="user_head"/>
-                            </a>
-                            <Dropdown-menu slot="list">
-                                <Dropdown-item>注销</Dropdown-item>
-                                <Dropdown-item>切换账号</Dropdown-item>
-                            </Dropdown-menu>
-                        </Dropdown>
-                    </div>
+                    <Menu v-else mode="horizontal" :theme="theme1">
+                        <router-link :to="{name:'login'}">
+                            <MenuItem style="font-size: large">
+                                <Icon type="md-person"/>
+                                登录
+                            </MenuItem>
+                        </router-link>
+                        <router-link :to="{name:'register'}">
+                            <MenuItem style="font-size: large">
+                                <Icon type="md-person-add"/>
+                                注册
+                            </MenuItem>
+                        </router-link>
+                    </Menu>
                 </div>
-                <Menu v-else mode="horizontal" :theme="theme1" >
-                    <router-link :to="{name:'login'}" >
-                    <MenuItem  style="font-size: large">
-                        <Icon type="md-person"/>
-                        登录
-                    </MenuItem>
-                    </router-link>
-                    <router-link :to="{name:'register'}" >
-                    <MenuItem  style="font-size: large">
-                        <Icon type="md-person-add"/>
-                        注册
-                    </MenuItem>
-                    </router-link>
-                </Menu>
-            </div>
         </Menu>
     </div>
 
@@ -89,9 +89,8 @@
         methods: {
             search_some() {
                 if (this.searchVal !== "") {
-                    this.$router.push({name:'search'})
-                }
-                else{
+                    this.$router.push({name: 'search'})
+                } else {
                     this.$Notice.success({
                         title: "不能查找空内容"
                     });

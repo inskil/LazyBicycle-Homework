@@ -1,9 +1,11 @@
 <template>
     <div id="app">
         <hot-books/>
-        <h1><br>新书速递</h1>
+        <br>
+        <Divider><h1>新书速递</h1></Divider>
         <new-books/>
-        <h1><br>好书推荐</h1>
+        <br>
+        <Divider><h1>好书推荐</h1></Divider>
         <new-books/>
     </div>
 </template>

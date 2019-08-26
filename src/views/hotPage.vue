@@ -1,14 +1,12 @@
 <template>
-    <div id="app">
-        <carousel style="background-color: #FFFFFF"/>
-        <div style="font-size: xx-large; background-color: #CCFFFF; color: #009999">
-            书籍
-            <book-wrapper/>
-        </div>
-        <div style="font-size: xx-large; background-color: #DDFFFF; color: #009999">
-            影视
-            <movie-wrapper/>
-        </div>
+    <div id="app" style="background-color: #FFFFFF">
+        <carousel/>
+        <br>
+        <Divider><h1>书籍</h1></Divider>
+        <book-wrapper/>
+        <br>
+        <Divider><h1>影视</h1></Divider>
+        <movie-wrapper/>
     </div>
 </template>
 

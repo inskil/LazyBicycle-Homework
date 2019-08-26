@@ -87,7 +87,7 @@
                             console.log(result)
                             _this.disablebtn = false;
                             _this.loginText = "注册";
-                            this.$Message.success('注册成功!');
+                            _this.$Message.success('注册成功!');
                         }).catch(function (error) {
                             //失败
                             _this.disablebtn = false;

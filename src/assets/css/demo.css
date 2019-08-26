@@ -9,7 +9,7 @@
  * https://coidea.website
  */
 
- @import url("https://fonts.googleapis.com/css?family=Abril+Fatface|Josefin+Sans");
+ /*@import url("https://fonts.googleapis.com/css?family=Abril+Fatface|Josefin+Sans");*/
 html,
 body {
   margin: 0;
@@ -205,8 +205,9 @@ body {
   }
 }
 .carousel .slider-nav .slick-list .slick-track .slick-slide div .nav-item .content .headline {
-  font-family: "Abril Fatface", cursive;
-  font-size: 2.867em;
+  font-family: "SimHei", cursive;
+  font-size: 2.5em;
+  font-weight: bold;
   transition-delay: 50ms;
   color: #ffffff;
   letter-spacing: -2px;
@@ -287,7 +288,7 @@ body {
 }
 .carousel .navigation .back,
 .carousel .navigation .forward {
-  font-family: "Josefin Sans", sans-serif;
+  /*font-family: "Josefin Sans", sans-serif;*/
   color: #ffffff;
   width: 56px;
   height: 48px;

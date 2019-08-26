@@ -1,9 +1,11 @@
 <template>
     <div id="app">
         <hot-movies/>
-        <h1><br>最新电影</h1>
+        <br>
+        <Divider><h1>最新电影</h1></Divider>
         <new-movies/>
-        <h1><br>高分电影</h1>
+        <br>
+        <Divider><h1>高分电影</h1></Divider>
         <new-movies/>
     </div>
 </template>

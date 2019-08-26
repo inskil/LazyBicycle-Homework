@@ -5,11 +5,12 @@
                 <div class="container">
                     <div class="front" v-bind:style="{backgroundImage:'url(' + movie.images[0].large + ')'}">
                         <div class="inner">
-                            <p>{{movie.directors[0].name}}</p>
-                            <span>{{movie.title}}</span>
+                            <span><h2>{{movie.title}}</h2></span>
+                            <br>
+                            <h3>{{movie.directors[0].name}}</h3>
                         </div>
                     </div>
-                    <div class="back">
+                    <div class="back" v-bind:style="{backgroundImage:'url(' + movie.images[0].large + ')'}">
                         <div class="inner">
                             <p>{{movie.summary}}</p>
                         </div>

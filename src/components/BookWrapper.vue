@@ -6,11 +6,12 @@
                 <div class="container">
                     <div class="front" v-bind:style="{backgroundImage:'url(' + book.images[0].large + ')'}">
                         <div class="inner">
-                            <p>{{book.author[0]}}</p>
-                            <span>{{book.title}}</span>
+                            <span><h2>{{book.title}}</h2></span>
+                            <br>
+                            <h3>{{book.author[0]}}</h3>
                         </div>
                     </div>
-                    <div class="back">
+                    <div class="back" v-bind:style="{backgroundImage:'url(' + book.images[0].large + ')'}">
                         <div class="inner">
                             <p>{{book.summary}}</p>
                         </div>
