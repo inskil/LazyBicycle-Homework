@@ -15,9 +15,9 @@
                             <Rate disabled allow-half v-model="book.rating.average"/>
                         </div>
                         <div class="headline">{{book.title}}</div>
-                        <a href="#0">
+                        <router-link :to="{name:'bookDetail'}">
                             <div class="link">更多...</div>
-                        </a>
+                        </router-link>
                     </div>
                 </div>
             </div>
@@ -30,9 +30,9 @@
                             <Rate disabled allow-half v-model="movie.rating.average"/>
                         </div>
                         <div class="headline">{{movie.title}}</div>
-                        <a href="#0">
+                        <router-link :to="{name:'movieDetail'}">
                             <div class="link">更多...</div>
-                        </a>
+                        </router-link>
                     </div>
                 </div>
             </div>

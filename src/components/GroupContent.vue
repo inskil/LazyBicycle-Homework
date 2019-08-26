@@ -2,7 +2,7 @@
     <div class="wrapper">
         <div class="content">
             <h1>
-                <div class="head-nav">
+                <div class="head-nav" style="padding-left: 150px ">
                     <span class="head-title">讨论精选</span>
                     <p></p>
                 </div>
@@ -10,80 +10,80 @@
             <div class="grid-16-8 clearfix">
                 <Col span="12" offset="2">
                     <div class="article">
-                    <!--讨论精选-->
-                    <div class="" v-for="article in articles" v-bind:key="article.title">
-                        <div class="channel-item">
-                            <div class="likes">{{article.like}}<br>喜欢</div>
-                            <div class="bd">
-                                <h3><a href="https://www.douban.com/group/topic/149297974/">{{article.title}}</a></h3>
-                                <div class="block">
-                                    <div class="pic">
-                                        <div class="pic-wrap">
-                                            <img src="article.images.large">
+                        <!--讨论精选-->
+                        <div class="" v-for="article in articles" v-bind:key="article.title">
+                            <div class="channel-item">
+                                <div class="likes">{{article.like}}<br>喜欢</div>
+                                <div class="bd">
+                                    <h3><a href="https://www.douban.com/group/topic/149297974/">{{article.title}}</a></h3>
+                                    <div class="block">
+                                        <div class="pic">
+                                            <div class="pic-wrap">
+                                                <img v-bind:src="article.images.large">
+                                            </div>
                                         </div>
+                                        <p>{{article.summary}}</p>
                                     </div>
-                                    <p>{{article.summary}}</p>
-                                </div>
-                                <div class="source">
-                                    <span class="from">来自<a href="https://www.douban.com/group/blabla/">{{article.comefrom}}</a></span>
-                                    <span class="pubtime">{{article.time}}</span>
+                                    <div class="source">
+                                        <span class="from">来自<a href="https://www.douban.com/group/blabla/">{{article.comefrom}}</a></span>
+                                        <span class="pubtime">{{article.time}}</span>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
 
-                    <!--页数-->
-                    <div class="paginator">
+                        <!--页数-->
+                        <div class="paginator">
                         <span class="prev">
                             &lt;前页
                         </span>
-                        <span class="thispage" data-total-page="336">1</span>
-                        <a href="?start=30">2</a>
-                        <a href="?start=60">3</a>
-                        <a href="?start=90">4</a>
-                        <a href="?start=120">5</a>
-                        <a href="?start=150">6</a>
-                        <a href="?start=180">7</a>
-                        <a href="?start=210">8</a>
-                        <a href="?start=240">9</a>
-                        <span class="break">...</span>
-                        <a href="?start=10020">335</a>
-                        <a href="?start=10050">336</a>
-                        <span class="next">
+                            <span class="thispage" data-total-page="336">1</span>
+                            <a href="?start=30">2</a>
+                            <a href="?start=60">3</a>
+                            <a href="?start=90">4</a>
+                            <a href="?start=120">5</a>
+                            <a href="?start=150">6</a>
+                            <a href="?start=180">7</a>
+                            <a href="?start=210">8</a>
+                            <a href="?start=240">9</a>
+                            <span class="break">...</span>
+                            <a href="?start=10020">335</a>
+                            <a href="?start=10050">336</a>
+                            <span class="next">
                             <link rel="next" href="?start=30">
                             <a href="?start=30">后页&gt;</a>
                         </span>
+                        </div>
                     </div>
-                </div>
                 </Col>
                 <Col span="8">
-                <!--推荐小组-->
-                <div class="aside">
-                    <div id="dale_group_explore_top_right" ad-status="loaded"></div>
-                    <div class="mod channel-group-rec">
-                        <div class="hd">
-                            <h2>值得加入的小组</h2>
-                        </div>
-                        <div class="bd" v-for="group in groups" v-bind:key="group.title">
-                            <ul>
-                                <li class="">
-                                    <div class="pic">
-                                        <a href="https://www.douban.com/group/230893/"><img src="group.images.large" class=""></a>
-                                    </div>
-                                    <div class="info">
-                                        <div class="title">
-                                            <a href="https://www.douban.com/group/230893/" class="">{{group.title}}</a>
+                    <!--推荐小组-->
+                    <div class="aside">
+                        <div id="dale_group_explore_top_right" ad-status="loaded"></div>
+                        <div class="mod channel-group-rec">
+                            <div class="hd">
+                                <h2>值得加入的小组</h2>
+                            </div>
+                            <div class="bd" v-for="group in groups" v-bind:key="group.title">
+                                <ul>
+                                    <li class="">
+                                        <div class="pic">
+                                            <a href="https://www.douban.com/group/230893/"><img v-bind:src="group.images.large" class=""></a>
                                         </div>
-                                        <span class="num">{{group.number}}个有为小青年</span>
-                                        <span class="join">
+                                        <div class="info">
+                                            <div class="title">
+                                                <a href="https://www.douban.com/group/230893/" class="">{{group.title}}</a>
+                                            </div>
+                                            <span class="num">{{group.number}}个有为小青年</span>
+                                            <span class="join">
                             <a href="https://www.douban.com/group/230893/?action=join&amp;ck=" class="j a_show_login lnk-join"><i>+</i>加入小组</a>
                         </span>
-                                    </div>
-                                </li>
-                            </ul>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
                         </div>
                     </div>
-                </div>
                 </Col>
             </div>
         </div>
@@ -99,42 +99,42 @@
                     {
                         title:"吃喝在武汉",
                         images:{
-                            large:"https://img3.doubanio.com/icon/g18454-3.jpg"
+                            large:"https://images.weserv.nl/?url=https://img3.doubanio.com/icon/g18454-3.jpg"
                         },
                         number:"38263",
                     },
                     {
                         title:"吃喝在武汉",
                         images:{
-                            large:"https://img3.doubanio.com/icon/g18454-3.jpg"
+                            large:"https://images.weserv.nl/?url=https://img3.doubanio.com/icon/g18454-3.jpg"
                         },
                         number:"38263",
                     },
                     {
                         title:"吃喝在武汉",
                         images:{
-                            large:"https://img3.doubanio.com/icon/g18454-3.jpg"
+                            large:"https://images.weserv.nl/?url=https://img3.doubanio.com/icon/g18454-3.jpg"
                         },
                         number:"38263",
                     },
                     {
                         title:"吃喝在武汉",
                         images:{
-                            large:"https://img3.doubanio.com/icon/g18454-3.jpg"
+                            large:"https://images.weserv.nl/?url=https://img3.doubanio.com/icon/g18454-3.jpg"
                         },
                         number:"38263",
                     },
                     {
                         title:"吃喝在武汉",
                         images:{
-                            large:"https://img3.doubanio.com/icon/g18454-3.jpg"
+                            large:"https://images.weserv.nl/?url=https://img3.doubanio.com/icon/g18454-3.jpg"
                         },
                         number:"38263",
                     },
                     {
                         title:"吃喝在武汉",
                         images:{
-                            large:"https://img3.doubanio.com/icon/g18454-3.jpg"
+                            large:"https://images.weserv.nl/?url=https://img3.doubanio.com/icon/g18454-3.jpg"
                         },
                         number:"38263",
                     }
@@ -144,7 +144,7 @@
                         like:"590",
                         title:"只有雪山荒漠羊群的冬日青海",
                         images:{
-                            large:"https://img1.doubanio.com/view/group_topic/small/public/p200063059.webp"
+                            large:"https://images.weserv.nl/?url=https://img1.doubanio.com/view/group_topic/small/public/p200063059.webp"
                         },
                         comefrom:"豆瓣鹅组小组",
                         time:"昨天02:11",
@@ -153,7 +153,7 @@
                         like:"590",
                         title:"只有雪山荒漠羊群的冬日青海",
                         images:{
-                            large:"https://img1.doubanio.com/view/group_topic/small/public/p200063059.webp"
+                            large:"https://images.weserv.nl/?url=https://img1.doubanio.com/view/group_topic/small/public/p200063059.webp"
                         },
                         comefrom:"豆瓣鹅组小组",
                         time:"昨天02:11",
@@ -162,7 +162,7 @@
                         like:"590",
                         title:"只有雪山荒漠羊群的冬日青海",
                         images:{
-                            large:"https://img1.doubanio.com/view/group_topic/small/public/p200063059.webp"
+                            large:"https://images.weserv.nl/?url=https://img1.doubanio.com/view/group_topic/small/public/p200063059.webp"
                         },
                         comefrom:"豆瓣鹅组小组",
                         time:"昨天02:11",
@@ -171,7 +171,7 @@
                         like:"590",
                         title:"只有雪山荒漠羊群的冬日青海",
                         images:{
-                            large:"https://img1.doubanio.com/view/group_topic/small/public/p200063059.webp"
+                            large:"https://images.weserv.nl/?url=https://img1.doubanio.com/view/group_topic/small/public/p200063059.webp"
                         },
                         comefrom:"豆瓣鹅组小组",
                         time:"昨天02:11",

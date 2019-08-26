@@ -22,9 +22,11 @@
                     </router-link>
                 </MenuGroup>
             </Submenu>
-            <MenuItem :to="{name:'group'}" name="4" style="font-size: large">
-                小组
-            </MenuItem>
+            <router-link :to="{name:'group'}">
+                <MenuItem name="4" style="font-size: large">
+                    小组
+                </MenuItem>
+            </router-link>
             <div style="float: left">
                 <div style="float: left; padding-right: 10px">
                     <Input v-model="searchVal" placeholder="Enter something..." style="width: 180px"
