@@ -1,6 +1,6 @@
 <template>
     <div>
-        <h1>注册</h1>
+        <Divider style="margin-top:10%"><h1>注册</h1></Divider>
         <Form ref="formCustom" :model="formCustom" :rules="ruleCustom" :label-width="80" class="form">
             <FormItem label="用户名：" prop="name">
                 <Input v-model="formCustom.name" placeholder="请输入用户名"></Input>

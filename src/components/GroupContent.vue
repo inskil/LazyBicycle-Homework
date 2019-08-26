@@ -146,7 +146,7 @@
                         images:{
                             large:"https://images.weserv.nl/?url=https://img1.doubanio.com/view/group_topic/small/public/p200063059.webp"
                         },
-                        comefrom:"豆瓣鹅组小组",
+                        comefrom:"鹅组小组",
                         time:"昨天02:11",
                         summary:"没有油菜花和人潮的淡季青海，可能才是真正意义上的青海。面对壮阔的美景，有时候连相机都来不及拿出。包车路线西宁青海湖茶卡盐湖祁连山脉.还有哦我是一月底去的，冬季不建议自驾，冰雪..."
                     },{
@@ -155,7 +155,7 @@
                         images:{
                             large:"https://images.weserv.nl/?url=https://img1.doubanio.com/view/group_topic/small/public/p200063059.webp"
                         },
-                        comefrom:"豆瓣鹅组小组",
+                        comefrom:"鹅组小组",
                         time:"昨天02:11",
                         summary:"没有油菜花和人潮的淡季青海，可能才是真正意义上的青海。面对壮阔的美景，有时候连相机都来不及拿出。包车路线西宁青海湖茶卡盐湖祁连山脉.还有哦我是一月底去的，冬季不建议自驾，冰雪..."
                     },{
@@ -164,7 +164,7 @@
                         images:{
                             large:"https://images.weserv.nl/?url=https://img1.doubanio.com/view/group_topic/small/public/p200063059.webp"
                         },
-                        comefrom:"豆瓣鹅组小组",
+                        comefrom:"鹅组小组",
                         time:"昨天02:11",
                         summary:"没有油菜花和人潮的淡季青海，可能才是真正意义上的青海。面对壮阔的美景，有时候连相机都来不及拿出。包车路线西宁青海湖茶卡盐湖祁连山脉.还有哦我是一月底去的，冬季不建议自驾，冰雪..."
                     },{
@@ -173,7 +173,7 @@
                         images:{
                             large:"https://images.weserv.nl/?url=https://img1.doubanio.com/view/group_topic/small/public/p200063059.webp"
                         },
-                        comefrom:"豆瓣鹅组小组",
+                        comefrom:"鹅组小组",
                         time:"昨天02:11",
                         summary:"没有油菜花和人潮的淡季青海，可能才是真正意义上的青海。面对壮阔的美景，有时候连相机都来不及拿出。包车路线西宁青海湖茶卡盐湖祁连山脉.还有哦我是一月底去的，冬季不建议自驾，冰雪..."
                     },
