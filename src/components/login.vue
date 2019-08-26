@@ -24,6 +24,8 @@
     }
 </style>
 <script>
+    import axios from '@uutils/fetch'
+
     export default {
         data() {
             const validateName = (rule, value, callback) => {
@@ -72,15 +74,33 @@
                 }
             }
         },
+
         methods: {
             handleSubmit(name) {
                 this.$refs['formCustom'].validate((valid) => {
                     if (valid) {
-                        this.$Message.success('注册成功!');
+                        const _this = this;
+                        this.disablebtn = true;
+                        this.loginText = "登录中...";
+                        //this.$reqs就访问到了main.js中绑定的axios
+                        axios.post("/user/login", {
+                            username: this.username,
+                            password: this.password
+                        }).then(function (result) {
+                            //成功
+                            console.log(result)
+                            _this.disablebtn = false;
+                            _this.loginText = "登录";
+
+                        }).catch(function (error) {
+                            //失败
+                            _this.disablebtn = false;
+                            _this.loginText = "登录"
+                        })
                     } else {
-                        this.$Message.error('注册失败!');
+                        this.$Message.error('登录失败!');
                     }
-                })
+                });
             },
             handleReset(name) {
                 this.$refs['formCustom'].resetFields();
