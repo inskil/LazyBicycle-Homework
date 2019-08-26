@@ -34,7 +34,7 @@
                            @on-enter="search_some()"/>
                 </div>
                 <div style="float: left">
-                    <i-button type="ghost" shape="circle" icon="ios-search" @click="search_some()"></i-button>
+                    <router-link :to="{name:'search'}"><MenuItem><i-button type="ghost" shape="circle" icon="ios-search""></i-button></MenuItem></router-link>
                 </div>
             </div>
 
