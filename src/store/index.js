@@ -14,8 +14,8 @@ const store = new Vuex.Store({
         book,
         // subject,
         // group,
-        // search,
-        // user,
+        //search,
+        //user,
         app,
     },
     getters

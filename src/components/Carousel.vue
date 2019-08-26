@@ -67,7 +67,7 @@
             fetchDate: function () {
                 this.getBook()
                 this.getMovie()
-                setTimeout(this.slick,500)
+                setTimeout(this.slick,2000)
             },
             getBook() {
                 this.$store.dispatch('getBookList', {

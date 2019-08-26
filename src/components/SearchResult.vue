@@ -18,7 +18,7 @@
 </template>
 
 <script>
-    import '@/assets/js/jquery-2.1.1.min.js';
+    //import '@/assets/js/jquery-2.1.1.min.js';
     import '@/assets/js/ripple.min.js'
     export default {
         name: "SearchResult",

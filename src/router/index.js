@@ -33,7 +33,12 @@ const router = new Router({
             path: '/login',
             name:'login',
             component: _import_('loginPage'),
-        }
+        },
+        {
+            path: '/register',
+            name:'register',
+            component: _import_('registerPage'),
+        },
         // {
         //     path: '/article/:id',
         //     component: _import_('Article/index')
