@@ -89,8 +89,9 @@ module.exports = {
     async add (ctx, next) {
         console.log('----------------添加管理员 user/add-----------------------');
         let paramsData = ctx.request.query;
+        console.log(paramsData)
         try {
-            let data = await ctx.findOne(userModel, {name: paramsData.username})
+            let data = await ctx.findOne(userModel, {username: paramsData.username})
             if (data) {
                 ctx.sendError('数据已经存在, 请重新添加!')
             }else{
