@@ -1,6 +1,6 @@
 import axios from 'axios'
 import qs from 'qs'
-import { Message } from 'element-ui'
+import {Message} from 'element-ui'
 
 
 axios.defaults.withCredentials = true
@@ -18,7 +18,7 @@ axios.interceptors.response.use(response => response, err => Promise.resolve(err
 
 // 检查状态码
 function checkStatus(res) {
-    //console.log(res)
+    console.log(res)
     if (res.status === 200 || res.status === 304) {
        return res.data
     }
@@ -60,11 +60,14 @@ export default {
     // })
 
     post(url, data) {
+        console.log("posting")
         if (!url) return
+        var data1 = qs.stringify(data)
+        console.log('data1'+ data1)
         return axios({
             method: 'post',
             url: url,
-            data: qs.stringify(data),
+            data: data1,
             timeout: 30000
         }).then(checkStatus).then(checkCode)
     }

@@ -24,7 +24,7 @@
     }
 </style>
 <script>
-    import axios from '@uutils/fetch'
+    import axios from '../utils/fetch'
 
     export default {
         data() {
@@ -77,16 +77,19 @@
 
         methods: {
             handleSubmit(name) {
+                console.log("函数开始了")
                 this.$refs['formCustom'].validate((valid) => {
                     if (valid) {
                         const _this = this;
                         this.disablebtn = true;
                         this.loginText = "登录中...";
+                       var pa={
+                            username: this.formCustom.name,
+                            pwd: this.formCustom.passwd
+                        }
+                        console.log('papapappa'+pa)
                         //this.$reqs就访问到了main.js中绑定的axios
-                        axios.post("/user/login", {
-                            username: this.username,
-                            password: this.password
-                        }).then(function (result) {
+                        axios.post("/user/login",pa).then(function (result) {
                             //成功
                             console.log(result)
                             _this.disablebtn = false;

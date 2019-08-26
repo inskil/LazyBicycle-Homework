@@ -91,9 +91,12 @@
                 if (this.searchVal !== "") {
                     this.$router.push({name:'search'})
                 }
-                this.$Notice.success({
-                    title: "不能查找空内容"
-                });
+                else{
+                    this.$Notice.success({
+                        title: "不能查找空内容"
+                    });
+                }
+
                 this.searchVal = ''
 
             }

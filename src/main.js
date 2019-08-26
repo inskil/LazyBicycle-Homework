@@ -7,12 +7,9 @@ import store from "@/store";
 import 'iview/dist/styles/iview.css';
 import axios from 'axios'
 
-import $ from 'jquery'
-
 Vue.use(iView)
 
 Vue.prototype.$axios = axios
-axios.defaults.baseURL='/api'
 
 
 
