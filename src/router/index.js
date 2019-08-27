@@ -54,6 +54,11 @@ const router = new Router({
             name:'bookDetail',
             component: _import_('bookDetailPage'),
         },
+        {
+            path: '/topic',
+            name:'topicDetail',
+            component: _import_('topicPage'),
+        }
         // {
         //     path: '/article/:id',
         //     component: _import_('Article/index')

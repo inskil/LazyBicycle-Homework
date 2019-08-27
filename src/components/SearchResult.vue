@@ -1,19 +1,34 @@
 <template>
     <div>
-        <table>
-            <tr v-for="book in books" v-bind:key="book.id" style="padding: 1rem">
-                <th align="left" style="font-weight: normal; width: 60%; border-bottom: dashed 1px #5cadff">
-                    <h3>[图书] {{book.title}}</h3>
-                    <div>
-                        <div class="author">作者：{{book.author}}</div>
-                        <div class="rate">评分：</div>
-                        <Rate disabled allow-half v-model="book.rating.average" style="bottom: 0.5rem; position: relative"/>
-                    </div>
-                    <div class="summary">{{book.summary}}</div>
-                </th>
-                <th><div class="pic_div material-card material-shadow-2 material-hover"><img class="pic" :src="book.images.large"></div></th>
-            </tr>
-        </table>
+        <div class="search d6">
+            <form>
+                <input type="text" placeholder="搜索你感兴趣的书籍、影视和小组...">
+                <button type="submit"></button>
+            </form>
+        </div>
+        <div>
+            <Menu active-name="all" style="float: left; width: 15%">
+                <MenuItem name="all" class="search-menu"><Icon type="ios-paper" />全部</MenuItem>
+                <MenuItem name="book" class="search-menu"><Icon type="ios-book" />书籍</MenuItem>
+                <MenuItem name="movie" class="search-menu"><Icon type="ios-film" />影视</MenuItem>
+                <MenuItem name="group" class="search-menu"><Icon type="ios-people" />小组</MenuItem>
+                <MenuItem name="discussion" class="search-menu"><Icon type="ios-text" />讨论</MenuItem>
+            </Menu>
+            <table style="left: 20%; width:80%; position: absolute">
+                <tr v-for="book in books" v-bind:key="book.id" style="padding: 1rem">
+                    <th align="left" style="font-weight: normal; width: 60%; border-bottom: dashed 1px #5cadff">
+                        <h3>[图书] {{book.title}}</h3>
+                        <div>
+                            <div class="author">作者：{{book.author}}</div>
+                            <div class="rate">评分：</div>
+                            <Rate disabled allow-half v-model="book.rating.average" style="bottom: 0.5rem; position: relative"/>
+                        </div>
+                        <div class="summary">{{book.summary}}</div>
+                    </th>
+                    <th><div class="pic_div material-card material-shadow-2 material-hover"><img class="pic" :src="book.images.large"></div></th>
+                </tr>
+            </table>
+        </div>
     </div>
 </template>
 
@@ -145,6 +160,8 @@
 
 <style scoped>
     @import "~@/assets/css/ripple.min.css";
+    @import '~@/assets/css/search-style.css';
+    @import "https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css";
     .author{
         float:left;
         bottom: 0;

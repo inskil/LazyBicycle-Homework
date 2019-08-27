@@ -1,6 +1,6 @@
 <template>
     <div>
-        <Menu mode="horizontal" :theme="theme1" active-name="1" style="font-size: large">
+        <Menu mode="horizontal" :theme="theme1" style="font-size: large">
             <router-link :to="{name:'hot'}" style="color: aliceblue">
                 <MenuItem name="1" style="font-size: large">热门推荐</MenuItem>
             </router-link>
@@ -30,46 +30,46 @@
 
             <div style="float: left; padding-left: 5rem">
                 <div style="float: left; padding-right: 10px">
-                    <Input v-model="searchVal" placeholder="Enter something..." style="width: 20rem"
+                    <Input v-model="searchVal" placeholder="搜索你感兴趣的书籍、影视和小组..." style="width: 20rem"
                            @on-enter="search_some()"/>
                 </div>
                 <div style="float: left">
-                    <router-link :to="{name:'search'}"><MenuItem><i-button type="ghost" shape="circle" icon="ios-search""></i-button></MenuItem></router-link>
+                    <router-link :to="{name:'search'}"><MenuItem><i-button type="ghost" shape="circle" icon="ios-search"/></MenuItem></router-link>
                 </div>
             </div>
 
-                <div style="font-size: large; width: 20%; left:80%; position:absolute">
-                    <div v-if="login">
-                        <div style="float: left">
-                            <span class="name"><Icon type="md-person"/> {{user_name}}</span>
-                        </div>
-                        <div align="left" style="left: 1rem; position: relative">
-                            <Dropdown>
-                                <a href="javascript:void(0)">
-                                    <Avatar v-bind:src="user_head"/>
-                                </a>
-                                <Dropdown-menu slot="list">
-                                    <Dropdown-item>注销</Dropdown-item>
-                                    <Dropdown-item>切换账号</Dropdown-item>
-                                </Dropdown-menu>
-                            </Dropdown>
-                        </div>
+            <div style="font-size: large; width: 20%; left:80%; position:absolute">
+                <div v-if="login">
+                    <div style="float: left">
+                        <span class="name"><Icon type="md-person"/> {{user_name}}</span>
                     </div>
-                    <Menu v-else mode="horizontal" :theme="theme1">
-                        <router-link :to="{name:'login'}">
-                            <MenuItem style="font-size: large">
-                                <Icon type="md-person"/>
-                                登录
-                            </MenuItem>
-                        </router-link>
-                        <router-link :to="{name:'register'}">
-                            <MenuItem style="font-size: large">
-                                <Icon type="md-person-add"/>
-                                注册
-                            </MenuItem>
-                        </router-link>
-                    </Menu>
+                    <div align="left" style="left: 1rem; position: relative">
+                        <Dropdown>
+                            <a href="javascript:void(0)">
+                                <Avatar v-bind:src="user_head"/>
+                            </a>
+                            <Dropdown-menu slot="list">
+                                <Dropdown-item>注销</Dropdown-item>
+                                <Dropdown-item>切换账号</Dropdown-item>
+                            </Dropdown-menu>
+                        </Dropdown>
+                    </div>
                 </div>
+                <Menu v-else mode="horizontal" :theme="theme1">
+                    <router-link :to="{name:'login'}">
+                        <MenuItem style="font-size: large">
+                            <Icon type="md-person"/>
+                            登录
+                        </MenuItem>
+                    </router-link>
+                    <router-link :to="{name:'register'}">
+                        <MenuItem style="font-size: large">
+                            <Icon type="md-person-add"/>
+                            注册
+                        </MenuItem>
+                    </router-link>
+                </Menu>
+            </div>
         </Menu>
     </div>
 
