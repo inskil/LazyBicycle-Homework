@@ -6,6 +6,7 @@
 export const add = (model, conditions) => {
     return new Promise((resolve, reject) => {
         model.create(conditions, (err, res) => {
+            console.log(conditions)
             if (err) {
                 console.error('Error: ' + JSON.stringify(err));
                 reject(err);
@@ -135,7 +136,7 @@ export const findOne = (model, conditions, fields, options = {}) => {
         }).sort(sort);
     })
 }
-
+655
 
 export const findPage = async (model, conditions, fields, options = {}) => {
     var sort = options.sort == undefined ? {
