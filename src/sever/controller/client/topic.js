@@ -1,5 +1,6 @@
 import topicModel from '../../models/topic'
 import groupModel from "../../models/group";
+import userModel from "../../models/user";
 
 module.exports = {
     async list(ctx, next) {
@@ -118,6 +119,98 @@ module.exports = {
                 ctx.send('添加成功')
             } else {
                 ctx.sendError("无此topic")
+            }
+        } catch (e) {
+            return ctx.sendError(e)
+        }
+    },
+    async totop(ctx, next) {
+        console.log('----------------置顶帖子-----------------------');
+        let predata = ctx.request.body;
+        try {
+            let data = await ctx.findOne(userModel, {uid: predata.uid});
+            console.log(data);
+            let count = data.admingroup.indexOf(predata.gid);
+            if(count > -1){
+                let data = await ctx.findOne(topicModel, {tid: predata.tid});
+                if(data){
+                    await ctx.update(topicModel, {tid: predata.tid}, {$set:{istop:true}});
+                    return ctx.send(data);
+                }else{
+                    return ctx.sendError("该topic不存在");
+                }
+            }
+            else {
+                return ctx.sendError("该用户无此权限");
+            }
+        } catch (e) {
+            return ctx.sendError(e)
+        }
+    },
+    async togood(ctx, next) {
+        console.log('----------------加精帖子-----------------------');
+        let predata = ctx.request.body;
+        try {
+            let data = await ctx.findOne(userModel, {uid: predata.uid});
+            console.log(data);
+            let count = data.admingroup.indexOf(predata.gid);
+            if(count > -1){
+                let data = await ctx.findOne(topicModel, {tid: predata.tid});
+                if(data){
+                    await ctx.update(topicModel, {tid: predata.tid}, {$set:{isgood:true}});
+                    return ctx.send(data);
+                }else{
+                    return ctx.sendError("该topic不存在");
+                }
+            }
+            else {
+                return ctx.sendError("该用户无此权限");
+            }
+        } catch (e) {
+            return ctx.sendError(e)
+        }
+    },
+    async nottop(ctx, next) {
+        console.log('----------------取消置顶帖子-----------------------');
+        let predata = ctx.request.body;
+        try {
+            let data = await ctx.findOne(userModel, {uid: predata.uid});
+            console.log(data);
+            let count = data.admingroup.indexOf(predata.gid);
+            if(count > -1){
+                let data = await ctx.findOne(topicModel, {tid: predata.tid});
+                if(data){
+                    await ctx.update(topicModel, {tid: predata.tid}, {$set:{istop:false}});
+                    return ctx.send(data);
+                }else{
+                    return ctx.sendError("该topic不存在");
+                }
+            }
+            else {
+                return ctx.sendError("该用户无此权限");
+            }
+        } catch (e) {
+            return ctx.sendError(e)
+        }
+    },
+    async notgood(ctx, next) {
+        console.log('----------------取消加精帖子-----------------------');
+        let predata = ctx.request.body;
+        try {
+            let data = await ctx.findOne(userModel, {uid: predata.uid});
+            console.log(data);
+            let count = data.admingroup.indexOf(predata.gid);
+            if(count > -1){
+                let data = await ctx.findOne(topicModel, {tid: predata.tid});
+                if(data){
+                    await ctx.update(topicModel, {tid: predata.tid}, {$set:{isgood:false}});
+                    return ctx.send(data);
+                }else{
+                    return ctx.sendError("该topic不存在");
+                }
+            }
+            else {
+                return ctx.sendError("该用户无此权限");
             }
         } catch (e) {
             return ctx.sendError(e)
