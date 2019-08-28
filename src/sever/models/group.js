@@ -3,14 +3,13 @@ let groupSchema = db.Schema({
     groupname: String,
     grouphead: String,
     gid: Number,
-    uid:Number,
     text: String,
     createtime: Date,
     usercount: Number,
     user: Array,
     admin: Array,
-    creator:{},
+    creator:Array,
     topicmax: Number,
-    tid: Array
+    tid: Document
 },{collection:"group"})
 export default db.model('group', groupSchema)

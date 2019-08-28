@@ -32,8 +32,7 @@ export default app => {
 
     /*----------------------group-----------------------------*/
     router.get('/group', app.client.group.list)
-    router.post('/addgroup', app.client.group.addgroup)
-    router.post('/getnewgid')
+    router.get('/addgroup', app.client.group.addgroup)
     router.get('/onegroupbykey', app.client.group.OneInfoByKey)
     router.get('/groupsbykey', app.client.group.groupsByKey)
 
