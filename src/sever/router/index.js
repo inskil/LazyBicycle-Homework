@@ -15,6 +15,12 @@ export default app => {
     router.get('/user/usergroup',app.client.user.usergroup)
     router.get('/user/isuserofgroup',app.client.user.isuserofgroup)
     router.get('/user/isadminofgroup',app.client.user.isadminofgroup)
+    router.post('/user/likebook',app.client.user.likebook)
+    router.post('/user/likemovie',app.client.user.likemovie)
+    router.post('/user/isuserlikebook',app.client.user.isuserlikebook)
+    router.post('/user/isuserlikemovie',app.client.user.isuserlikemovie)
+    router.post('/user/unlikebook',app.client.user.unlikebook)
+    router.post('/user/unlikemovie',app.client.user.unlikemovie)
     /*----------------------movie-------------------------------*/
     router.get('/movie', app.client.movie.list)
     router.get('/onemoviebykey', app.client.movie.OneInfoByKey)
@@ -54,7 +60,10 @@ export default app => {
     router.get('/topic/getnewtid', app.client.topic.getnewtid)
     router.get('/topic/addreviewsreview', app.client.topic.addreviewsreview)
     router.get('/topic/addreview', app.client.topic.addreview)
-
+    router.post('/topic/totop', app.client.topic.totop)
+    router.post('/topic/togood', app.client.topic.togood)
+    router.post('/topic/nottop', app.client.topic.nottop)
+    router.post('/topic/notgood', app.client.topic.notgood)
 
     /*----------------------search-----------------------------*/
     router.get('/search', app.client.search.search)

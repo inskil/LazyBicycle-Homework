@@ -201,13 +201,13 @@ quitgroup
 {
     uid:$
 }
-//get 查询所给uid是否属于所给gid的小组 true or false
+//get 查询所给uid是否属于所给gid的小组 请判断是否为true
 isuserofgroup{
 {
     uid:$
     gid:$
 }
-//get 返回是否该uid能够管理gid  true or false
+//get 返回是否该uid能够管理gid  请判断是否为true
 isadminofgroup
 {
     uid:$
@@ -285,8 +285,73 @@ topicmsg:{
         text:
     }  
 }
+//post 置顶帖子
+ /topic/totop
+ {
+     tid:
+     uid:
+     gid:
+ }
+ //post 加精帖子
+ /topic/togood
+ {
+     tid:
+     uid:
+     gid:
+ }
+//post 取消置顶帖子
+/topic/nottop
+{
+    tid:
+    uid:
+    gid:
+}
+//post 取消加精帖子
+/topic/notgood
+{
+    tid:
+    uid:
+    gid:
+}
 ```
 
 ## user
+```
 //post 新用户注册获得新的id
 /user/getnewuid
+//post 用户收藏一本书
+/user/likebook{
+    bid:
+    uid:
+}
+//post 用户收藏一个电影
+/user/likemovie
+{
+    mid:
+    uid:
+}
+//post 查询所给uid是否收藏了这本书 请判断是否为true
+/user/isuserlikebook
+{
+    bid:
+    uid:
+}
+//post 查询所给uid是否收藏了这个电影 请判断是否为true
+/user/isuserlikemovie
+{
+    mid:
+    uid:
+}
+//post 用户取消收藏一个电影
+/user/unlikebook
+{
+    bid:
+    uid:
+}
+//post 用户取消收藏一个电影
+/user/unlikemovie
+{
+    mid:
+    uid:
+}
+```
