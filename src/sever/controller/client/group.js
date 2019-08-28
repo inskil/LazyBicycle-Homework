@@ -107,8 +107,11 @@ module.exports = {
     },
     async getnewgid(ctx, next) {
         console.log('----------------获取新的gid-----------------------');
+<<<<<<< Updated upstream
 
+=======
         let {data = ""} = ctx.request.query;
+>>>>>>> Stashed changes
         try {
             let data = await ctx.findOne(allmaxModel, {"name": "gidmax"});
             let gidmax = data.count + 1;
