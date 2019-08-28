@@ -141,13 +141,8 @@ port:'8888'
         text:      //小组信息，界面里小组名下面的部分                                   
     }
 }                            
-<<<<<<< Updated upstream
 //post 在all maxgid中获取然后++
 /getnewgid
-=======
-//post 在all maxgid中获取然后++ 
-/getnewgip
->>>>>>> Stashed changes
 ```
 ### group admin
 //此处需要与前端一起测试，先跳过
@@ -248,6 +243,7 @@ topicmsg:{
 }
 ```
 ```
+//get 添加topic 的 review
 /topic/addreview
 {
     gid:
@@ -260,6 +256,7 @@ topicmsg:{
     username:
     }
 }
+//get 添加review的review
 /topic/addreviewsreview
 {
     gid:

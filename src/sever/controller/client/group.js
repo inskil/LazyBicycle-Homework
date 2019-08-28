@@ -21,7 +21,6 @@ module.exports = {
             return ctx.sendError(e)
         }
     },
-
     async OneInfoByKey(ctx, next) {
         console.log('----------------获取指定一条指定title的info-----------------------');
         let {title = ""} = ctx.request.query;
@@ -32,7 +31,6 @@ module.exports = {
             return ctx.sendError(e)
         }
     },
-
     async groupsByKey(ctx, next) {
         console.log('----------------获取指定多条指定title的info-----------------------');
         let {title = "", start = 1, count = 0} = ctx.request.query;
@@ -107,11 +105,7 @@ module.exports = {
     },
     async getnewgid(ctx, next) {
         console.log('----------------获取新的gid-----------------------');
-<<<<<<< Updated upstream
-
-=======
         let {data = ""} = ctx.request.query;
->>>>>>> Stashed changes
         try {
             let data = await ctx.findOne(allmaxModel, {"name": "gidmax"});
             let gidmax = data.count + 1;
@@ -156,10 +150,10 @@ module.exports = {
         try {
             let data = await ctx.findOne(groupModel, {"gid": gid});
             if (!data) return ctx.send("无此小组");
-            let i = 0,len = data.user.length;
+            let i = 0, len = data.user.length;
             for (i = 0; i < len && data.user[i].uid !== uid; i++) ;
             if (data.user.length - 1 === i && data.user[i].uid !== uid) return ctx.send("此人不在小组中");
-            else if ( data.user[i].uid === uid){
+            else if (data.user[i].uid === uid) {
                 data.user.splice(i);
                 console.log(data)
                 await ctx.update(groupModel, {gid: gid}, data);
@@ -175,4 +169,5 @@ module.exports = {
         } catch (e) {
             return ctx.sendError(e)
         }
-},
+    },
+}

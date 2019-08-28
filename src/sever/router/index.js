@@ -37,12 +37,9 @@ export default app => {
     router.get('/group', app.client.group.list)
     router.post('/addgroup', app.client.group.addgroup)
     router.post('/getnewgid',app.client.group.getnewgid)
-<<<<<<< Updated upstream
-=======
     router.post('/delgroup',app.admin.group.delgroup)
     router.post('/joingroup',app.client.group.joingroup)
     router.post('/quitgroup',app.client.group.quitgroup)
->>>>>>> Stashed changes
     router.get('/onegroupbykey', app.client.group.OneInfoByKey)
     router.get('/groupsbykey', app.client.group.groupsByKey)
 
@@ -53,6 +50,7 @@ export default app => {
     router.get('/topicsbykey', app.client.topic.topicsByKey)
     router.get('/topic/addtopic', app.client.topic.addtopic)
     router.get('/topic/getnewtid', app.client.topic.getnewtid)
+    router.get('/topic/addreviewsreview', app.client.topic.addreviewsreview)
 
     /*----------------------search-----------------------------*/
     router.get('/search', app.client.search.search)
