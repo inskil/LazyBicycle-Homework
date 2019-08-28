@@ -119,7 +119,6 @@ export const findOne = (model, conditions, fields, options = {}) => {
     } : options.sort;
     delete options.sort;
     return new Promise((resolve, reject) => {
-        console.log("model:")
         model.findOne(conditions, fields, options, function (err, res) {
             if (err) {
                 console.error('Error: ' + JSON.stringify(err));
@@ -136,7 +135,6 @@ export const findOne = (model, conditions, fields, options = {}) => {
         }).sort(sort);
     })
 }
-655
 
 export const findPage = async (model, conditions, fields, options = {}) => {
     var sort = options.sort == undefined ? {

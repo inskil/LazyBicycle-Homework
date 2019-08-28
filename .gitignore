@@ -19,3 +19,6 @@ yarn-error.log*
 *.njsproj
 *.sln
 *.sw?
+*.log
+*.log
+logs/all/task-2019-08-28.log

@@ -3,7 +3,7 @@ const auth = {
     admin_secret: 'admin-token',
     tokenKey: 'Token-Auth',
     whiteList: ['login', 'client_api'],
-    blackList: ['admin_api']
+    blackList: ['delgroup']
 }
 
 const log = {

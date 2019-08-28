@@ -128,8 +128,7 @@ port:'8888'
 ## group
 ### 小组的增删
 ```
-//增加小组
-//数据库中需要在user和group双向加
+//post 增加一个新的小组
 /addgroup
 {
     uid:
@@ -144,13 +143,18 @@ port:'8888'
 }                            
 //post 在all maxgid中获取然后++
 /getnewgid
+//post 在all maxgid中获取然后++ 
+/getnewgip
 ```
 ### group admin
+//此处需要与前端一起测试，先跳过
 ```
 /delgroup{
+	uid:$
     gid:$
 }
 /deltopic{
+	uid:$
     gid:$
     tid:$
 }
@@ -158,14 +162,18 @@ port:'8888'
 
 ### group user
 ```
-//加入小组
-jiongroup{      
+//post  加入小组
+joingroup      
 {
-    uid:$
     gid:$
+	user:{
+		username：$
+		userheadimg：$
+		uid:$
+	}
+	
 }
-return ok,no
-//退出小组
+//post  退出小组
 quitgroup
 {
     uid:$

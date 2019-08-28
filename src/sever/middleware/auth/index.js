@@ -3,8 +3,9 @@ import conf from '../../config'
 
 export default () => {
     return async (ctx, next) => {
-        console.log("-------middle-auth----body-----",ctx.request.body);
+        console.log("-------middle-auth----body-----");
         if ( conf.auth.blackList.some(v => ctx.path.indexOf(v) >= 0) ) {
+            console.log("-------blacklist-----",ctx.request.query);
             let token = ctx.cookies.get(conf.auth.tokenKey);
             try {
                 jwt.verify(token, conf.auth.admin_secret);
