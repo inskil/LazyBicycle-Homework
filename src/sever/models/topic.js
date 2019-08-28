@@ -9,8 +9,8 @@ let topicSchema = db.Schema({
     uid: Number,
     username: String,
     userheadimg: String,
-    istop: false,
-    isgood: false,
+    istop: Boolean,
+    isgood: Boolean,
     updatetime: Date,
     review: Array,
 },{collection:"topic"})

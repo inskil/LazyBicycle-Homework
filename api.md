@@ -246,12 +246,10 @@ topicmsg:{
 //get 添加topic 的 review
 /topic/addreview
 {
-    gid:
     tid:
     review{
     uid:
     text:
-    title:
     userheadimg:
     username:
     }

@@ -51,6 +51,8 @@ export default app => {
     router.get('/topic/addtopic', app.client.topic.addtopic)
     router.get('/topic/getnewtid', app.client.topic.getnewtid)
     router.get('/topic/addreviewsreview', app.client.topic.addreviewsreview)
+    router.get('/topic/addreview', app.client.topic.addreview)
+
 
     /*----------------------search-----------------------------*/
     router.get('/search', app.client.search.search)

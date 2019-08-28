@@ -71,11 +71,13 @@ module.exports = {
             let json = JSON.parse(JSON.stringify(data));
             json.topicmax = max;
             await ctx.update(groupModel, {gid: predata.gid}, json);
+            max = max + data.gid;
             return ctx.send({"tid": max});
         } catch (e) {
             return ctx.sendError(e)
         }
     },
+	
     async addreviewsreview(ctx, next) {
         console.log('----------------增加新的楼中楼-----------------------');
         let {tid = '', reviewindex=0, reviewmsg = {}} = ctx.request.body;
@@ -93,9 +95,29 @@ module.exports = {
             }else return ctx.send("无此回复");
             await ctx.update(topicModel, {tid: tid}, data);
             return ctx.send("回复成功");
+
+    async addreview(ctx, next) {
+        console.log('----------------添加review-----------------------');
+        let predata = ctx.request.body;
+        let prejson = JSON.parse(JSON.stringify(predata));
+        try {
+            let data = await ctx.findOne(topicModel, {tid: predata.tid});
+            if (data) {
+                let json = JSON.parse(JSON.stringify(data));
+                json.updatetime = (new Date()).Format("yyyy-MM-dd HH:mm:ss");
+                prejson.review.createtime = (new Date()).Format("yyyy-MM-dd HH:mm:ss");
+                if (json["review"]) {
+                    json["review"].push(prejson["review"]);
+                } else {
+                    json["review"] = prejson["review"];
+                }
+                await ctx.update(topicModel, {tid: predata.tid}, json);
+                ctx.send('添加成功')
+            } else {
+                ctx.sendError("无此topic")
+            }
         } catch (e) {
             return ctx.sendError(e)
         }
     },
-
 }
