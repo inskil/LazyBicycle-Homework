@@ -250,12 +250,10 @@ topicmsg:{
 ```
 /topic/addreview
 {
-    gid:
     tid:
     review{
     uid:
     text:
-    title:
     userheadimg:
     username:
     }

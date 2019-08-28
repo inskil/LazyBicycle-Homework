@@ -50,8 +50,8 @@ module.exports = {
         let data = ctx.request.body;
         let json = JSON.parse(JSON.stringify(data))
         try {
-            json.createtime=(new Date()).Format("yyyy-MM-dd HH:mm:ss");
-            json.updatetime=json.createtime;
+            json.createtime = (new Date()).Format("yyyy-MM-dd HH:mm:ss");
+            json.updatetime = json.createtime;
             json.istop = false;
             json.isgood = false;
             let data = await ctx.add(topicModel, json);
@@ -64,16 +64,40 @@ module.exports = {
         console.log('----------------获取对应gid的新的tid-----------------------');
         let predata = ctx.request.body;
         try {
-            let data = await ctx.findOne(groupModel, {gid:predata.gid});
-            let max = data.topicmax+0.001;
+            let data = await ctx.findOne(groupModel, {gid: predata.gid});
+            let max = data.topicmax + 0.001;
             console.log(max);
             let json = JSON.parse(JSON.stringify(data));
             json.topicmax = max;
-            await ctx.update(groupModel,{gid:predata.gid},json);
-            return ctx.send({"tid":max});
+            await ctx.update(groupModel, {gid: predata.gid}, json);
+            max = max + data.gid;
+            return ctx.send({"tid": max});
         } catch (e) {
             return ctx.sendError(e)
         }
-    }
-
+    },
+    async addreview(ctx, next) {
+        console.log('----------------添加review-----------------------');
+        let predata = ctx.request.body;
+        let prejson = JSON.parse(JSON.stringify(predata));
+        try {
+            let data = await ctx.findOne(topicModel, {tid: predata.tid});
+            if (data) {
+                let json = JSON.parse(JSON.stringify(data));
+                json.updatetime = (new Date()).Format("yyyy-MM-dd HH:mm:ss");
+                prejson.review.createtime = (new Date()).Format("yyyy-MM-dd HH:mm:ss");
+                if (json["review"]) {
+                    json["review"].push(prejson["review"]);
+                } else {
+                    json["review"] = prejson["review"];
+                }
+                await ctx.update(topicModel, {tid: predata.tid}, json);
+                ctx.send('添加成功')
+            } else {
+                ctx.sendError("无此topic")
+            }
+        } catch (e) {
+            return ctx.sendError(e)
+        }
+    },
 }
