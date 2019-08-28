@@ -1,14 +1,17 @@
 import db from '../mongodb'
 
 let topicSchema = db.Schema({
-    tid: String,
-    createtime: String,
+    tid: Number,
+    createtime: Date,
     title: String,
     text: String,
-    gid: String,
-    uid: String,
+    gid: Number,
+    uid: Number,
     username: String,
-    userheaedimg: String,
+    userheadimg: String,
+    istop: false,
+    isgood: false,
+    updatetime: Date,
     review: Array,
 },{collection:"topic"})
 export default db.model('topic', topicSchema)

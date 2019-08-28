@@ -38,6 +38,8 @@ port:'8888'
 	count:$count
 	start:$startIndex
 }
+//post 获取新的bid
+/getnewbid
 ```
 ## movie
 ```
@@ -47,8 +49,6 @@ port:'8888'
 	count:$limit
 	start:$startIndex
 }
-
-```
 //get	返回指定ititle的详情信息
 /onemoviebykey
 {
@@ -61,6 +61,9 @@ port:'8888'
 	count:$count
 	start:$startIndex
 }
+
+//post 获取新的mid
+/getnewmid
 ```
 
 ## review
@@ -139,8 +142,8 @@ port:'8888'
         text:      //小组信息，界面里小组名下面的部分                                   
     }
 }                            
-// 在all maxgid中获取然后++  post
-/getnewgip
+//post 在all maxgid中获取然后++
+/getnewgid
 ```
 ### group admin
 ```
@@ -168,18 +171,18 @@ quitgroup
     uid:$
     gid:$
 }
-//返回用户所在所有小组id
+//get 返回用户所在所有小组id
 /usergroup
 {
     uid:$
 }
-//查询所给uid是否属于所给gid的小组
+//get 查询所给uid是否属于所给gid的小组 true or false
 isuserofgroup{
 {
     uid:$
     gid:$
 }
-//返回是否该uid能够管理gid
+//get 返回是否该uid能够管理gid  true or false
 isadminofgroup
 {
     uid:$
@@ -189,20 +192,17 @@ isadminofgroup
 
 ### topic
 ```
-//添加topic
+//get  添加topic
 /topic/addtopic{
     gid:$
     uid:
     userheadimg:
     username:
-    topicmsg:{
-        tid:
-        createTime
-        title:
-        text:
-    }
+    tid:
+    title:
+    text:
 } 
-//数据库返回一个无重复的id，原理是group里有个maxtid，return maxtid++
+//get 数据库返回一个无重复的id，原理是group里有个maxtid，return maxtid++
 /topic/getnewtid
  {
     gid:
@@ -247,7 +247,6 @@ topicmsg:{
     title:
     userheadimg:
     username:
-    createtime:
     }
 }
 /topic/addreviewsreview
@@ -264,5 +263,5 @@ topicmsg:{
 ```
 
 ## user
-//新用户注册获得新的id
-/getnewuid
+//post 新用户注册获得新的id
+/user/getnewuid

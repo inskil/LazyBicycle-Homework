@@ -1,5 +1,5 @@
 import movieModel from '../../models/movie'
-import path from 'path'
+import allmaxModel from "../../models/allmax";
 
 module.exports = {
     async list(ctx, next) {
@@ -36,5 +36,18 @@ module.exports = {
         } catch (e) {
             return ctx.sendError(e)
         }
-    }
+    },
+    async getnewmid(ctx, next) {
+        console.log('----------------获取新的mid-----------------------');
+
+        try {
+            let data = await ctx.findOne(allmaxModel, {"name":"midmax"});
+            let midmax = data.count+1;
+            console.log(midmax);
+            await ctx.update(allmaxModel,{name:"midmax"},{name:"midmax",count:midmax});
+            return ctx.send({"mid":midmax});
+        } catch (e) {
+            return ctx.sendError(e)
+        }
+    },
 }

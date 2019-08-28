@@ -1,5 +1,3 @@
-import fs from 'fs'
-import path from 'path'
 import koaRouter from 'koa-router'
 
 const router = koaRouter()
@@ -13,16 +11,21 @@ export default app => {
     router.post('/user/add', app.client.user.add)
     router.post('/user/update', app.client.user.update)
     router.get('/user/del', app.client.user.del)
-
+    router.post('/user/getnewuid',app.client.user.getnewuid)
+    router.get('/user/usergroup',app.client.user.usergroup)
+    router.get('/user/isuserofgroup',app.client.user.isuserofgroup)
+    router.get('/user/isadminofgroup',app.client.user.isadminofgroup)
     /*----------------------movie-------------------------------*/
     router.get('/movie', app.client.movie.list)
     router.get('/onemoviebykey', app.client.movie.OneInfoByKey)
     router.get("/moviesbykey", app.client.movie.moviesByKey)
+    router.post('/getnewmid',app.client.movie.getnewmid)
 
     /*----------------------book------------------------------*/
     router.get('/book', app.client.book.list)
     router.get('/onebookbykey', app.client.book.OneInfoByKey)
     router.get('/booksbykey', app.client.book.booksByKey)
+    router.post('/getnewbid',app.client.book.getnewbid)
     //router.get('/booklist', app.client.book.list)
     //router.get('/bookreview', app.client.book.review)
 
@@ -33,7 +36,7 @@ export default app => {
     /*----------------------group-----------------------------*/
     router.get('/group', app.client.group.list)
     router.post('/addgroup', app.client.group.addgroup)
-    router.post('/getnewgid')
+    router.post('/getnewgid',app.client.group.getnewgid)
     router.get('/onegroupbykey', app.client.group.OneInfoByKey)
     router.get('/groupsbykey', app.client.group.groupsByKey)
 
@@ -41,6 +44,8 @@ export default app => {
     router.get('/topic', app.client.topic.list)
     router.get('/onetopicbykey', app.client.topic.OneInfoByKey)
     router.get('/topicsbykey', app.client.topic.topicsByKey)
+    router.get('/topic/addtopic', app.client.topic.addtopic)
+    router.get('/topic/getnewtid', app.client.topic.getnewtid)
 
     /*----------------------search-----------------------------*/
     router.get('/search', app.client.search.search)

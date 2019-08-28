@@ -1,6 +1,5 @@
 import bookModel from '../../models/book'
-import movieModel from '../../models/movie'
-import path from 'path'
+import allmaxModel from "../../models/allmax";
 
 module.exports = {
     async list(ctx, next) {
@@ -37,5 +36,18 @@ module.exports = {
         } catch (e) {
             return ctx.sendError(e)
         }
-    }
+    },
+    async getnewbid(ctx, next) {
+        console.log('----------------获取新的bid-----------------------');
+
+        try {
+            let data = await ctx.findOne(allmaxModel, {"name":"bidmax"});
+            let bidmax = data.count+1;
+            console.log(bidmax);
+            await ctx.update(allmaxModel,{name:"bidmax"},{name:"bidmax",count:bidmax});
+            return ctx.send({"bid":bidmax});
+        } catch (e) {
+            return ctx.sendError(e)
+        }
+    },
 }

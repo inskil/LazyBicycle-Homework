@@ -1,6 +1,8 @@
 import jwt from 'jsonwebtoken'
 import conf from '../../config'
 import userModel from '../../models/user'
+import allmaxModel from "../../models/allmax";
+
 module.exports = {
     async login (ctx, next) {
         console.log('----------------登录接口 user/login-----------------------');
@@ -130,5 +132,66 @@ module.exports = {
         }catch(e){
             ctx.sendError(e)
         }
-    }
+    },
+    async getnewuid(ctx, next) {
+        console.log('----------------获取新的uid-----------------------');
+        try {
+            let data = await ctx.findOne(allmaxModel, {"name":"uidmax"});
+            let uidmax = data.count+1;
+            console.log(uidmax);
+            await ctx.update(allmaxModel,{name:"uidmax"},{name:"uidmax",count:uidmax});
+            return ctx.send({"uid":uidmax});
+        } catch (e) {
+            return ctx.sendError(e)
+        }
+    },
+    async usergroup(ctx, next) {
+        console.log('----------------返回用户所在所有小组id-----------------------');
+        let predata = ctx.request.body;
+        console.log(predata);
+        try {
+            let data = await ctx.findOne(userModel, {uid: predata.uid})
+            console.log(data);
+            return ctx.send(data.group);
+        } catch (e) {
+            return ctx.sendError(e)
+        }
+    },
+    async isuserofgroup(ctx, next) {
+        console.log('----------------查询所给uid是否属于所给gid的小组-----------------------');
+        let predata = ctx.request.body;
+        console.log(predata);
+        try {
+            let data = await ctx.findOne(userModel, {uid: predata.uid});
+            console.log(data);
+            let count = data.group.indexOf(predata.gid);
+            if(count > -1){
+                return ctx.send(true);
+            }
+            else {
+                return ctx.send(false);
+            }
+        } catch (e) {
+            return ctx.sendError(e)
+        }
+    },
+    async isadminofgroup(ctx, next) {
+        console.log('----------------返回是否该uid能够管理gid-----------------------');
+        let predata = ctx.request.body;
+        console.log(predata);
+        try {
+            let data = await ctx.findOne(userModel, {uid: predata.uid});
+            console.log(data);
+            let count = data.admingroup.indexOf(predata.gid);
+            if(count > -1){
+                return ctx.send(true);
+            }
+            else {
+                return ctx.send(false);
+            }
+        } catch (e) {
+            return ctx.sendError(e)
+        }
+    },
 }
+

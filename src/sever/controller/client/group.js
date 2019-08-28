@@ -1,5 +1,6 @@
 import groupModel from '../../models/group'
 import userModel from '../../models/user'
+import allmaxModel from '../../models/allmax'
 import {jsonjoin} from "./json";
 
 module.exports = {
@@ -8,7 +9,7 @@ module.exports = {
         let {start = 1, count = 0} = ctx.request.query;
         console.log('conut:' + count)
         try {
-            let data = await ctx.find(topicModel, null, null, {
+            let data = await ctx.find(groupModel, null, null, {
                 limit: count,
                 skip: (start - 1) * count,
                 sort: {level: -1, createTime: -1}
@@ -74,27 +75,27 @@ module.exports = {
                         }
                     ],
                     "creator": {
-                            "uid": json["uid"],
-                            "username": json["username"],
-                            "userheadimg": json["userheadimg"]
-                        },
+                        "uid": json["uid"],
+                        "username": json["username"],
+                        "userheadimg": json["userheadimg"]
+                    },
                     "topicmax": 0,
                     "tid": []
                 }
-                let groupdata = jsonjoin(groupmsg,groupaddinfo)
+                let groupdata = jsonjoin(groupmsg, groupaddinfo)
                 console.log(groupdata)
                 let data = await ctx.add(groupModel, groupdata);
-                let user = await ctx.findOne(userModel,{"uid":json["uid"]});
+                let user = await ctx.findOne(userModel, {"uid": json["uid"]});
                 console.log(user)
-                if(user["admingroup"]){
+                if (user["admingroup"]) {
                     user["admingroup"].push(groupmsg["gid"])
-                }else {
-                    user["admingroup"] =[groupmsg["gid"]]
+                } else {
+                    user["admingroup"] = [groupmsg["gid"]]
                 }
-                if(user["group"]){
+                if (user["group"]) {
                     user["group"].push(groupmsg["gid"])
-                }else {
-                    user["group"] =[groupmsg["gid"]]
+                } else {
+                    user["group"] = [groupmsg["gid"]]
                 }
                 console.log(user)
                 await ctx.add(userModel, user);
@@ -105,11 +106,14 @@ module.exports = {
         }
     },
     async getnewgid(ctx, next) {
-        console.log('----------------获取指定一条指定title的info-----------------------');
-        let {title = ""} = ctx.request.query;
+        console.log('----------------获取新的gid-----------------------');
+
         try {
-            let data = await ctx.findOne(topicModel, {"groupname": {$regex: title}});
-            return ctx.send(data);
+            let data = await ctx.findOne(allmaxModel, {"name": "gidmax"});
+            let gidmax = data.count + 1;
+            console.log(gidmax);
+            await ctx.update(allmaxModel, {name: "gidmax"}, {name: "gidmax", count: gidmax});
+            return ctx.send({"gid": gidmax});
         } catch (e) {
             return ctx.sendError(e)
         }
