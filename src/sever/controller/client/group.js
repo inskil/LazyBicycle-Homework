@@ -63,20 +63,20 @@ module.exports = {
                         {
                             "uid": json["uid"],
                             "username": json["username"],
-                            "userheading": json["userheading"]
+                            "userheadimg": json["userheadimg"]
                         }
                     ],
                     "admin": [
                         {
                             "uid": json["uid"],
                             "username": json["username"],
-                            "userheading": json["userheading"]
+                            "userheadimg": json["userheadimg"]
                         }
                     ],
                     "creator": {
                             "uid": json["uid"],
                             "username": json["username"],
-                            "userheading": json["userheading"]
+                            "userheadimg": json["userheadimg"]
                         },
                     "topicmax": 0,
                     "tid": []
@@ -98,7 +98,7 @@ module.exports = {
                 }
                 console.log(user)
                 await ctx.add(userModel, user);
-                ctx.send('添加成功' + jsonjoin(data,groupdata))
+                ctx.send('添加成功')
             }
         } catch (e) {
             return ctx.sendError(e)
