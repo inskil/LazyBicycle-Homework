@@ -77,25 +77,28 @@ module.exports = {
             return ctx.sendError(e)
         }
     },
-	
+
     async addreviewsreview(ctx, next) {
         console.log('----------------增加新的楼中楼-----------------------');
-        let {tid = '', reviewindex=0, reviewmsg = {}} = ctx.request.body;
-        console.log('tid=' + tid, 'reviewindex', reviewindex,'reviewmsg',reviewmsg)
+        let {tid = '', reviewindex = 0, reviewmsg = {}} = ctx.request.body;
+        console.log('tid=' + tid, 'reviewindex', reviewindex, 'reviewmsg', reviewmsg)
         try {
             let data = await ctx.findOne(topicModel, {"tid": tid});
             if (!data) return ctx.send("无此讨论");
-            if ( data.review[reviewindex]){
-                if (data.review[reviewindex].review){
+            if (data.review[reviewindex]) {
+                if (data.review[reviewindex].review) {
                     data.review[reviewindex].review.push(reviewmsg)
-                }else{
-                    data.review[reviewindex].review =[reviewmsg]
+                } else {
+                    data.review[reviewindex].review = [reviewmsg]
                 }
                 console.log(data)
-            }else return ctx.send("无此回复");
+            } else return ctx.send("无此回复");
             await ctx.update(topicModel, {tid: tid}, data);
             return ctx.send("回复成功");
-
+        } catch (e) {
+            return ctx.sendError(e)
+        }
+    },
     async addreview(ctx, next) {
         console.log('----------------添加review-----------------------');
         let predata = ctx.request.body;

@@ -24,7 +24,54 @@ module.exports = {
             console.log(e)
             return ctx.sendError(e)
         }
-    }
-
+    },
+    async addmoviereview(ctx, next) {
+        console.log('----------------增加新的review-----------------------');
+        let { mid="",review } = ctx.request.body;
+        try {
+            let data = await ctx.findOne(reviewModel,{"start" :mid});
+            if (!data){ //如果没有这本书的任何review
+                let newreview ={
+                    "count":1,
+                    "comments":[review],
+                    "start":mid,
+                }
+                let redata = await ctx.add(reviewModel,newreview)
+                return ctx.send("添加成功")
+            }else{  //如果有这本书的review，add
+                data.comments.push(review)
+                data.count++
+                let redata = await ctx.update(reviewModel,{"start" :mid},data)
+                return ctx.send("添加成功")
+            }
+        }catch (e){
+            console.log(e)
+            return ctx.sendError(e)
+        }
+    },
+    async addbookreview(ctx, next) {
+        console.log('----------------增加新的review-----------------------');
+        let { bid="",review } = ctx.request.body;
+        try {
+            let data = await ctx.findOne(bookreviewModel,{"start" :bid});
+            if (!data){ //如果没有这本书的任何review
+                let newreview ={
+                    "count":1,
+                    "comments":[review],
+                    "start":bid,
+                }
+                let redata = await ctx.add(bookreviewModel,newreview)
+                return ctx.send("添加成功")
+            }else{  //如果有这本书的review，add
+                data.comments.push(review)
+                data.count++
+                let redata = await ctx.update(bookreviewModel,{"start":bid},data)
+                return ctx.send("添加成功")
+            }
+        }catch (e){
+            console.log(e)
+            return ctx.sendError(e)
+        }
+    },
 
 }

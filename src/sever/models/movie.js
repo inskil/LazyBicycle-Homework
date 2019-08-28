@@ -25,5 +25,6 @@ let movieSchema = db.Schema({
     series:Array,
     pages:Number,
     alt:String,
+    likes:Number
 },{collection:"movie"})
 export default db.model('movie', movieSchema)

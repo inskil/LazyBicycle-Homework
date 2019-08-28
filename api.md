@@ -75,6 +75,24 @@ port:'8888'
 	count:$count
 	start:$startIndex
 }
+//post	对书本添加新的书评
+/addmoviereview
+{
+	mid：	//movieid
+	review:{
+      "rating" : {    
+        "value" : 5.0,
+      },
+      "useful_count" : 13251,
+      "author" : {
+        "id" : "1041052",
+        "name" : "犀牛"
+      },
+      "content" : "当年的奥斯卡颁奖礼上，被如日中天的《阿甘正传》掩盖了它的光彩，而随着时间的推移，这部电影在越来越多的人们心中的地位已超越了《阿甘》。每当现实令我疲惫得产生无力感，翻出这张碟，就重获力量。毫无疑问，本片位列男人必看的电影前三名！回顾那一段经典台词：“有的人的羽翼是如此光辉，即使世界上最黑暗的牢狱，也无法长久地将他围困！”",
+      "created_at" : "2005-10-28 00:28:07",
+    }
+}
+
 //get	返回固定条数的指定电影/书籍评论信息，0则all
 /moviereview
 {
@@ -82,6 +100,7 @@ port:'8888'
 	count:$count
 	start:$startIndex
 }
+
 ```
 
 ## search

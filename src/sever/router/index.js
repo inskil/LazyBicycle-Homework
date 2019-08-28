@@ -32,6 +32,8 @@ export default app => {
     /*----------------------review-----------------------------*/
     router.get('/bookreview', app.client.review.bookreview)
     router.get('/moviereview', app.client.review.moviereview)
+    router.post('/addmoviereview', app.client.review.addmoviereview)
+    router.post('/addbookreview', app.client.review.addbookreview)
 
     /*----------------------group-----------------------------*/
     router.get('/group', app.client.group.list)
@@ -60,6 +62,9 @@ export default app => {
     router.get('/search/book',app.client.book.booksByKey)
     router.get('/search/topic',app.client.topic.topicsByKey)
     router.get('/search/group',app.client.group.groupsByKey)
+
+    /*----------------------imgs-----------------------------*/
+    router.post('/upload', app.client.img.upload)
 
     app.use(router.routes()).use(router.allowedMethods());
 }

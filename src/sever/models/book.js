@@ -25,6 +25,7 @@ let bookSchema = db.Schema({
     series:Array,
     pages:Number,
     alt:String,
+    likes:Number
 },{collection:"book"})
 
 export default db.model('book', bookSchema)

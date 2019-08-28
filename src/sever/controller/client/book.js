@@ -50,4 +50,16 @@ module.exports = {
             return ctx.sendError(e)
         }
     },
+
+    async addnewbook(ctx, next) {
+        console.log('----------------获取指定一条指定title的info-----------------------');
+        let { title="" } = ctx.request.query;
+        try{
+            let data = await ctx.findOne(bookModel,{"title" : {$regex:title}});
+            return ctx.send(data);
+        } catch (e) {
+            return ctx.sendError(e)
+        }
+    },
+
 }
