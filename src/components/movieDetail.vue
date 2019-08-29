@@ -44,8 +44,12 @@
                 你的评价：
                 <Rate :value.sync="value"></Rate>
             </div>
-            <div style="float: right;width: 30%;height: 100%">
+            <div style="float: right;width: 5%;height: 100%">
                 <i-button @click="heart_success(true)" icon="ios-heart">收藏</i-button>
+            </div>
+            <div style="float: right;width: 10%;height: 100%">
+                <div v-if='ismanager'><Button type="primary">删除电影</Button></div>
+                <div v-else><Button type="primary" disabled>删除电影</Button></div>
             </div>
         </div>
 
@@ -117,9 +121,10 @@
     export default {
 
         name: "movieDetail",
+
         data() {
             return {
-
+                ismanager:true,
                 value: 0,
                 summary_value: "",
 

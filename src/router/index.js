@@ -68,6 +68,16 @@ const router = new Router({
             path: '/addGroup',
             name: 'addGroup',
             component: _import_('addGroupPage'),
+        },
+        {
+            path:'/submitpost',
+            name:'submitpost',
+            component:_import_('postPage'),
+        },
+        {
+            path:'/publishbookPage',
+            name:'publishbookPage',
+            component:_import_('publishbookPage'),
         }
     ]
 })

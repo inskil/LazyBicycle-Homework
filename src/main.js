@@ -10,6 +10,7 @@ import 'iview/dist/styles/iview.css';
 import axios from 'axios'
 
 Vue.use(iView)
+Vue.use(ElementUI)
 
 Vue.prototype.$axios = axios
 
