@@ -26,7 +26,9 @@ export default app => {
     router.get('/onemoviebykey', app.client.movie.OneInfoByKey)
     router.get("/moviesbykey", app.client.movie.moviesByKey)
     router.post('/getnewmid',app.client.movie.getnewmid)
-
+    router.post('/removeMovie',app.client.movie.removeMovie)
+    router.get('/addmovie',app.client.movie.addmovie)
+    router.post('/updatemovierate',app.client.movie.updatemovierate)
     /*----------------------book------------------------------*/
     router.get('/book', app.client.book.list)
     router.get('/onebookbykey', app.client.book.OneInfoByKey)
@@ -34,6 +36,10 @@ export default app => {
     router.post('/getnewbid',app.client.book.getnewbid)
     //router.get('/booklist', app.client.book.list)
     //router.get('/bookreview', app.client.book.review)
+    router.post('/removeBook',app.client.book.removeBook)
+    router.get('/addbook',app.client.book.addbook)
+    router.post('/updatebookrate',app.client.book.updatebookrate)
+
 
     /*----------------------review-----------------------------*/
     router.get('/bookreview', app.client.review.bookreview)
@@ -50,7 +56,7 @@ export default app => {
     router.post('/quitgroup',app.client.group.quitgroup)
     router.get('/onegroupbykey', app.client.group.OneInfoByKey)
     router.get('/groupsbykey', app.client.group.groupsByKey)
-
+    router.post('/removeGroup',app.client.group.removeGroup)
 
     /*----------------------topic-----------------------------*/
     router.get('/topic', app.client.topic.list)
@@ -64,6 +70,7 @@ export default app => {
     router.post('/topic/togood', app.client.topic.togood)
     router.post('/topic/nottop', app.client.topic.nottop)
     router.post('/topic/notgood', app.client.topic.notgood)
+    router.post('/topic/removeTopic', app.client.topic.removeTopic)
 
     /*----------------------search-----------------------------*/
     router.get('/search', app.client.search.search)
@@ -74,6 +81,12 @@ export default app => {
 
     /*----------------------imgs-----------------------------*/
     router.post('/upload', app.client.img.upload)
+    /*----------------------apply-----------------------------*/
+    router.post('/notice/newapply', app.client.notice.newapply)
+    router.get('/notice/listapply', app.client.notice.listapply)
+    router.get('/notice/agreeapply', app.client.notice.agreeapply)
+    router.get('/notice/disagreeapply', app.client.notice.disagreeapply)
+
 
     app.use(router.routes()).use(router.allowedMethods());
 }

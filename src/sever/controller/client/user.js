@@ -308,7 +308,6 @@ module.exports = {
         console.log(predata);
         try {
             let data = await ctx.findOne(userModel, {uid: predata.uid});
-
             let moviedata = await ctx.findOne(movieModel, {id: predata.mid});
             let likes = moviedata.likes - 1;
             if (!data.likemovies) {

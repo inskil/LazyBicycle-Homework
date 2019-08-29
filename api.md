@@ -22,10 +22,6 @@ port:'8888'
 	count:$limit
 	start:$startIndex
 }
-
-```
-
-```
 //get 	返回指定title的详情信息
 /onebogokbykey
 {
@@ -40,6 +36,41 @@ port:'8888'
 }
 //post 获取新的bid
 /getnewbid
+
+//post 删除书
+/removeBook
+{
+	bid:
+}
+//post
+/updatebookrate 更新书的评分
+{
+	bid:
+	rate:
+}
+//get 新建书籍
+/addbook
+{
+	bid:
+	uid:
+	username:
+	userheadimg:
+	bookmsg:{
+		
+		author: //用;和；隔开
+		publisher:  //出版社
+		isbn13：
+		pubdate:
+		title:
+		images:
+		author_intro://作者介绍
+		summary:	//摘要
+		catalog:	//目录
+		price:
+		pages:  	//页数
+		
+	}
+}
 ```
 ## movie
 ```
@@ -64,6 +95,41 @@ port:'8888'
 
 //post 获取新的mid
 /getnewmid
+
+//post 删除一个电影
+/removeMovie
+{
+	mid:
+}
+/updatemovierate 更新电影的评分
+{
+	mid:
+	rate:
+}
+//get 新建电影
+/addmovie
+{
+	mid:
+	uid:
+	username:
+	userheadimg:
+	moviemsg:{
+		title: String,
+		original_title:String,
+		casts: Array,		//演员
+		pubdates: Array,	//上映时间
+		genres: Array,		//tag 		
+		directors:Array,	//导演
+		images:Array,
+		year:String,
+		id:String,
+		url:String,
+		mainland_pubdate : String,
+		summary:String,
+		alt:String,
+	}
+}
+
 ```
 
 ## review
@@ -161,6 +227,15 @@ port:'8888'
 
 ```
 ## group
+```
+//get 
+/listgroup
+{         
+	uid:$uid
+	count:$count
+	start:$startIndex
+}
+```
 ### 小组的增删
 ```
 //post 增加一个新的小组
@@ -178,6 +253,12 @@ port:'8888'
 }                            
 //post 在all maxgid中获取然后++
 /getnewgid
+
+//post 删除小组
+/removeGroup
+{
+	gid:
+}
 ```
 ### group admin
 //此处需要与前端一起测试，先跳过
@@ -329,6 +410,12 @@ topicmsg:{
     uid:
     gid:
 }
+//post 删除帖子
+/topic/removeTopic
+{
+	tid:
+}
+
 ```
 
 ## user
@@ -371,3 +458,27 @@ topicmsg:{
     uid:
 }
 ```
+
+##notic
+//post 添加一个新申请
+/notice/newapply
+{
+	gid:
+	uid:
+	username:
+	userheadimg:
+}
+
+//get	返回固定条数和页数的发送给指定uid的所有申请
+/search/book
+{         
+	uid:$uid
+	count:$count
+	start:$startIndex
+}
+//post 同意申请
+/notice/agreeapply
+{
+	uid: //申请人uid
+	touid:	//同意人uid
+}

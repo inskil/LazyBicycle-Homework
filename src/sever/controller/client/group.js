@@ -12,7 +12,7 @@ module.exports = {
             let data = await ctx.find(groupModel, null, null, {
                 limit: count,
                 skip: (start - 1) * count,
-                sort: {level: -1, createTime: -1}
+                sort: {usercount: -1}
             });
             console.log(data)
             return ctx.send(data)
@@ -166,6 +166,18 @@ module.exports = {
             } else {
                 return ctx.send("本来就不在小组中");
             }
+        } catch (e) {
+            return ctx.sendError(e)
+        }
+    },
+    async removeGroup(ctx, next) {
+        console.log('----------------删除小组-----------------------');
+        let predata= ctx.request.body;
+        console.log(predata)
+        try {
+            let gid = predata.gid;
+            await ctx.remove(groupModel,{"gid": gid});
+            return ctx.send("success")
         } catch (e) {
             return ctx.sendError(e)
         }

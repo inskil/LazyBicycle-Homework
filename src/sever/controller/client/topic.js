@@ -216,4 +216,22 @@ module.exports = {
             return ctx.sendError(e)
         }
     },
+    async removeTopic(ctx, next) {
+        console.log('----------------删除帖子-----------------------');
+        let predata= ctx.request.body;
+        console.log(predata)
+        try {
+            let tid = predata.tid;
+            let tidstring = tid.toString();
+            let gid = tidstring.split('.')[0];
+            let data = await ctx.findOne(groupModel,  {"gid": gid});
+            console.log(data)
+            data.tid.remove(tid);
+            await ctx.update(groupModel,{"gid": gid},data)
+            await ctx.remove(topicModel,  {"tid": tid});
+            return ctx.send("success")
+        } catch (e) {
+            return ctx.sendError(e)
+        }
+    },
 }

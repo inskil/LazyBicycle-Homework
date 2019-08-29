@@ -50,4 +50,61 @@ module.exports = {
             return ctx.sendError(e)
         }
     },
+    async removeMovie(ctx, next) {
+        console.log('----------------删除一个电影-----------------------');
+        let predata= ctx.request.body;
+        console.log(predata)
+        try {
+            let mid = predata.mid;
+            let newmid = mid.toString();
+            await ctx.remove(movieModel,  {"id": newmid});
+            return ctx.send("success")
+        } catch (e) {
+            return ctx.sendError(e)
+        }
+    },
+
+    async updatemovierate(ctx, next) {
+        console.log('----------------更新movie的评分-----------------------');
+        let predata= ctx.request.body;
+        console.log(predata)
+        try {
+            let mid = predata.mid;
+            let moviedata = await ctx.findOne(movieModel,{id:mid});
+            let ave = 0 + moviedata.rating[0].average;
+            let num = 123 + moviedata.rating[0].numRaters;
+            let rate = ave * num;
+            rate = rate + predata.rate;
+            moviedata.rating[0].average = rate / (num + 1);
+            moviedata.rating[0].numRaters = num + 1;
+            await ctx.update(movieModel,{id:mid},moviedata)
+            return ctx.send({"rate":rate / (num + 1)})
+        } catch (e) {
+            return ctx.sendError(e)
+        }
+    },
+    async addmovie(ctx, next) {
+        console.log('----------------增加新的movie-----------------------');
+        let { mid = -1,moviemsg } = ctx.request.body;
+        try {
+            let data = await ctx.findOne(movieModel,{id :mid});
+            if(!data){
+                moviemsg.id = mid;
+                moviemsg.likes = 0;
+                moviemsg.rating = [{
+                    max : 10.0,
+                    numRaters : 0,
+                    average : 0,
+                    min : 0.0
+                }];
+                await ctx.add(movieModel,moviemsg);
+                return ctx.send(moviemsg);
+            }else{
+                return ctx.sendError("已有此书")
+            }
+        }catch (e){
+            console.log(e)
+            return ctx.sendError(e)
+        }
+    },
 }
