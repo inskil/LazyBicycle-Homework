@@ -1,20 +1,19 @@
 <template>
     <div id="app">
         <!--group-title/-->
-        <group-recommender/>
+<!--        <group-recommender/>-->
         <group-content/>
     </div>
 </template>
 
 <script>
     import GroupContent from "@/components/GroupContent";
-    import GroupRecommender from "../components/GroupRecommender";
     //import GroupTitle from "@/components/GroupTitle";
 
     export default {
         name: 'groupPage',
         components: {
-            GroupRecommender,
+            // GroupRecommender,
             GroupContent,
             //GroupTitle,
         }
