@@ -1,15 +1,16 @@
 <template>
     <div id="app">
-        <search-result/>
+        <discussion/>
     </div>
 </template>
 
 <script>
-    import SearchResult from "@/components/SearchResult";
+    import Discussion from "@/components/Discussion";
+
     export default {
-        name: "searchPage",
+        name: 'topicPage',
         components: {
-            SearchResult
+            Discussion
         }
     }
 </script>

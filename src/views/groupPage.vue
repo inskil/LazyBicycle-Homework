@@ -10,7 +10,7 @@
     import GroupTitle from "@/components/GroupTitle";
 
     export default {
-        name: 'movieDetailPage',
+        name: 'groupPage',
         components: {
             GroupContent,
             GroupTitle,

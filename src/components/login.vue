@@ -1,24 +1,23 @@
 <template>
-
-                <div style="text-align:center">
-                    <Divider style="margin-top:10%"><h1>登录</h1></Divider>
-                    <Form ref="formCustom" :model="formCustom" :rules="ruleCustom" :label-width="80" class="form">
-                        <FormItem label="用户名：" prop="name">
-                            <Input v-model="formCustom.name" placeholder="请输入用户名">
-                                <Icon type="ios-person-outline" slot="prepend"></Icon>
-                            </Input>
-                        </FormItem>
-                        <FormItem label="密码：" prop="passwd">
-                            <Input type="password" v-model="formCustom.passwd" placeholder="请输入密码">
-                                <Icon type="ios-lock-outline" slot="prepend"></Icon>
-                            </Input>
-                        </FormItem>
-                        <FormItem>
-                            <Button type="primary" @click="handleSubmit('ruleCustom')">提交</Button>
-                            <Button @click="handleReset('ruleCustom')" style="margin-left: 8px">重置</Button>
-                        </FormItem>
-                    </Form>
-                </div>
+    <div style="text-align:center">
+        <Divider style="margin-top:10%"><h1>登录</h1></Divider>
+        <Form ref="formCustom" :model="formCustom" :rules="ruleCustom" :label-width="80" class="form">
+            <FormItem label="用户名：" prop="name">
+                <Input v-model="formCustom.name" placeholder="请输入用户名">
+                    <Icon type="ios-person-outline" slot="prepend"></Icon>
+                </Input>
+            </FormItem>
+            <FormItem label="密码：" prop="passwd">
+                <Input type="password" v-model="formCustom.passwd" placeholder="请输入密码">
+                    <Icon type="ios-lock-outline" slot="prepend"></Icon>
+                </Input>
+            </FormItem>
+            <FormItem>
+                <Button type="primary" @click="handleSubmit('ruleCustom')">提交</Button>
+                <Button @click="handleReset('ruleCustom')" style="margin-left: 8px">重置</Button>
+            </FormItem>
+        </Form>
+    </div>
 </template>
 <style>
     .form {

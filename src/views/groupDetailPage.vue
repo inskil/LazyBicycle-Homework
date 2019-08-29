@@ -1,15 +1,15 @@
 <template>
     <div id="app">
-        <search-result/>
+        <group-detail/>
     </div>
 </template>
 
 <script>
-    import SearchResult from "@/components/SearchResult";
+    import GroupDetail from "../components/GroupDetail";
     export default {
-        name: "searchPage",
-        components: {
-            SearchResult
+        name: "groupDetailPage",
+        components:{
+            GroupDetail
         }
     }
 </script>
