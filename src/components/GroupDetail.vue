@@ -107,6 +107,10 @@
                     </div>
                 </Col>
             </Row>
+            <div style="float: left;width: 10%;height: 100%; margin-top: 10%">
+                <div v-if='ismanager'><Button type="primary">删除该小组</Button></div>
+                <div v-else><Button type="primary" disabled>删除该小组</Button></div>
+            </div>
         </div>
     </div>
 </template>
@@ -120,6 +124,7 @@
         },
         data(){
             return{
+                ismanager:true,
                 isMember:true,
                 isAdmin:true,
                 group:{

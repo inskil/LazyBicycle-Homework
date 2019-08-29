@@ -97,8 +97,19 @@ export const constantRouterMap =[
         path: '/addGroup',
         name: 'addGroup',
         component: _import_('addGroupPage'),
-    }
-]
+    },
+    {
+            path:'/submitpost',
+            name:'submitpost',
+            component:_import_('postPage'),
+        },
+        {
+            path:'/publishbookPage',
+            name:'publishbookPage',
+            component:_import_('publishbookPage'),
+        }
+        ]
+
 const router = new Router({
     mode: 'history',
     routes: constantRouterMap
