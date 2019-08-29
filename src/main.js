@@ -2,14 +2,14 @@ import Vue from 'vue'
 import App from './App.vue'
 import iView from 'iview'
 import router from "@/router";
-import store from "@/store";
-import 'iview/dist/styles/iview.css';
-import axios from 'axios';
 import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
 
-Vue.use(iView);
-Vue.use(ElementUI);
+import store from "@/store";
+import 'iview/dist/styles/iview.css';
+import axios from 'axios'
+
+Vue.use(iView)
 
 Vue.prototype.$axios = axios
 

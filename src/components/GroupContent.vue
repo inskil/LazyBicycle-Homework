@@ -3,7 +3,7 @@
         <div class="content">
             <h1>
                 <div class="head-nav" style="padding-left: 150px ">
-                    <span class="head-title">讨论精选</span>
+                    <span class="head-title" style="margin-top:10%">讨论精选</span>
                     <p></p>
                 </div>
             </h1>
@@ -33,10 +33,10 @@
                         </div>
 
                         <!--页数-->
-                        <div class="paginator">
-                        <span class="prev">
-                            &lt;前页
-                        </span>
+                        <!--div class="paginator">
+                            <span class="prev">
+                                &lt;前页
+                            </span>
                             <span class="thispage" data-total-page="336">1</span>
                             <a href="?start=30">2</a>
                             <a href="?start=60">3</a>
@@ -53,16 +53,16 @@
                             <link rel="next" href="?start=30">
                             <a href="?start=30">后页&gt;</a>
                         </span>
-                        </div>
+                        </div-->
                     </div>
                 </Col>
                 <Col span="8">
-                    <!--推荐小组-->
+                    <!--小组排行-->
                     <div class="aside">
                         <div id="dale_group_explore_top_right" ad-status="loaded"></div>
                         <div class="mod channel-group-rec">
                             <div class="hd">
-                                <h2>值得加入的小组</h2>
+                                <h2>热门小组排行</h2>
                             </div>
                             <div class="bd" v-for="group in groups" v-bind:key="group.title">
                                 <ul>
@@ -74,16 +74,14 @@
                                             <div class="title">
                                                 <a href="https://www.douban.com/group/230893/" class="">{{group.title}}</a>
                                             </div>
-                                            <span class="num">{{group.number}}个有为小青年</span>
-                                            <span class="join">
-                            <a href="https://www.douban.com/group/230893/?action=join&amp;ck=" class="j a_show_login lnk-join"><i>+</i>加入小组</a>
-                        </span>
+                                            <span class="num">{{group.pernum}}个有为小青年</span>
+                                            <span class="join">{{group.postnum}}篇有趣帖子</span>
                                         </div>
                                     </li>
                                 </ul>
                             </div>
                         </div>
-                    </div>
+                     </div>
                 </Col>
             </div>
         </div>
@@ -101,42 +99,62 @@
                         images:{
                             large:"https://images.weserv.nl/?url=https://img3.doubanio.com/icon/g18454-3.jpg"
                         },
-                        number:"38263",
+                        pernum:"38263",
+                        postnum:"2593",
                     },
                     {
                         title:"吃喝在武汉",
                         images:{
                             large:"https://images.weserv.nl/?url=https://img3.doubanio.com/icon/g18454-3.jpg"
                         },
-                        number:"38263",
+                        pernum:"38263",
+                        postnum:"2593",
                     },
                     {
                         title:"吃喝在武汉",
                         images:{
                             large:"https://images.weserv.nl/?url=https://img3.doubanio.com/icon/g18454-3.jpg"
                         },
-                        number:"38263",
+                        pernum:"38263",
+                        postnum:"2593",
                     },
                     {
                         title:"吃喝在武汉",
                         images:{
                             large:"https://images.weserv.nl/?url=https://img3.doubanio.com/icon/g18454-3.jpg"
                         },
-                        number:"38263",
+                        pernum:"38263",
+                        postnum:"2593",
                     },
                     {
                         title:"吃喝在武汉",
                         images:{
                             large:"https://images.weserv.nl/?url=https://img3.doubanio.com/icon/g18454-3.jpg"
                         },
-                        number:"38263",
+                        pernum:"38263",
+                        postnum:"2593",
+                    },{
+                        title:"吃喝在武汉",
+                        images:{
+                            large:"https://images.weserv.nl/?url=https://img3.doubanio.com/icon/g18454-3.jpg"
+                        },
+                        pernum:"38263",
+                        postnum:"2593",
+                    },{
+                        title:"吃喝在武汉",
+                        images:{
+                            large:"https://images.weserv.nl/?url=https://img3.doubanio.com/icon/g18454-3.jpg"
+                        },
+                        pernum:"38263",
+                        postnum:"2593",
                     },
                     {
                         title:"吃喝在武汉",
                         images:{
                             large:"https://images.weserv.nl/?url=https://img3.doubanio.com/icon/g18454-3.jpg"
                         },
-                        number:"38263",
+                        pernum:"38263",
+                        postnum:"2593",
                     }
                 ],
                 articles:[
@@ -184,10 +202,16 @@
 </script>
 
 <style scoped>
+    @import '../assets/css/6361ae61fa71bf01.css';
+
     .wrapper{
         text-align:left;
         background-color:white;
         width: 100%;
         height: 100%;
+    }
+    .aside{
+        position:relative;
+        left: 101px;
     }
 </style>
