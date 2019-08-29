@@ -58,11 +58,17 @@ const router = new Router({
             path: '/topic',
             name:'topicDetail',
             component: _import_('topicPage'),
+        },
+        {
+            path: '/groupDetail',
+            name: 'groupDetail',
+            component: _import_('groupDetailPage'),
+        },
+        {
+            path: '/addGroup',
+            name: 'addGroup',
+            component: _import_('addGroupPage'),
         }
-        // {
-        //     path: '/article/:id',
-        //     component: _import_('Article/index')
-        // }
     ]
 })
 

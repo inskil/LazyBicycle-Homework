@@ -19,6 +19,7 @@
             </div>
         </Card>
         <Card>
+            <Button v-if="isAdmin" class="delete" type="error" ghost style="float: right">删帖</Button>
             <div class="content" align="left">
                 <h1>{{topicmsg.title}}</h1>
                 <br>
@@ -72,6 +73,7 @@
         name: "Discussion",
         data() {
             return{
+                isAdmin:true,
                 topicmsg:{
                     tid: 34919095,
                     createtime: "2012-12-07 00:12:16",
@@ -218,7 +220,7 @@
     }
     .text{
         font-size: large;
-        white-space: pre-wrap;
+        white-space: pre-line;
     }
     .review_text{
         padding: 1rem;
@@ -237,6 +239,6 @@
         -webkit-box-orient: vertical;
         word-break: break-all;
         -webkit-line-clamp: 5;
-        white-space: pre-wrap;
+        white-space: pre-line;
     }
 </style>
