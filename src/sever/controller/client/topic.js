@@ -1,6 +1,7 @@
 import topicModel from '../../models/topic'
 import groupModel from "../../models/group";
 import userModel from "../../models/user";
+import noticeModel from "../../models/notice";
 
 module.exports = {
     async list(ctx, next) {
@@ -81,20 +82,35 @@ module.exports = {
 
     async addreviewsreview(ctx, next) {
         console.log('----------------增加新的楼中楼-----------------------');
-        let {tid = '', reviewindex = 0, reviewmsg = {}} = ctx.request.body;
-        console.log('tid=' + tid, 'reviewindex', reviewindex, 'reviewmsg', reviewmsg)
+        let predata = ctx.request.body;
+        console.log('tid=' + predata.tid, 'reviewindex', predata.reviewindex, 'reviewmsg', predata.reviewmsg)
         try {
-            let data = await ctx.findOne(topicModel, {"tid": tid});
+            let data = await ctx.findOne(topicModel, {"tid": predata.tid});
             if (!data) return ctx.send("无此讨论");
-            if (data.review[reviewindex]) {
-                if (data.review[reviewindex].review) {
-                    data.review[reviewindex].review.push(reviewmsg)
+            if (data.review[predata.reviewindex]) {
+                if (data.review[predata.reviewindex].review) {
+                    data.review[predata.reviewindex].review.push(predata.reviewmsg)
                 } else {
-                    data.review[reviewindex].review = [reviewmsg]
+                    data.review[predata.reviewindex].review = [predata.reviewmsg]
                 }
                 console.log(data)
             } else return ctx.send("无此回复");
-            await ctx.update(topicModel, {tid: tid}, data);
+            await ctx.update(topicModel, {tid: predata.tid}, data);
+            //添加通知
+            let tid = predata.tid;
+            let tidstring = tid.toString();
+            let gid = tidstring.split('.')[0];
+            let noticedata = {
+                gid : gid,
+                uid : predata.reviewmsg.uid,
+                username: predata.reviewmsg.username,
+                userheadimg: predata.reviewmsg.userheadimg,
+                touid: data.review[predata.reviewindex].uid,
+                createtime: (new Date()).Format("yyyy-MM-dd HH:mm:ss"),
+                type: "notice",
+            }
+            await ctx.add(noticeModel,noticedata)
+
             return ctx.send("回复成功");
         } catch (e) {
             return ctx.sendError(e)
@@ -115,6 +131,22 @@ module.exports = {
                 } else {
                     json["review"] = prejson["review"];
                 }
+
+                //添加通知
+                let tid = predata.tid;
+                let tidstring = tid.toString();
+                let gid = tidstring.split('.')[0];
+                let noticedata = {
+                    gid : gid,
+                    uid : prejson.review.uid,
+                    username: prejson.review.username,
+                    userheadimg: prejson.review.userheadimg,
+                    touid: data.uid,
+                    createtime: (new Date()).Format("yyyy-MM-dd HH:mm:ss"),
+                    type: "notice",
+                }
+                await ctx.add(noticeModel,noticedata)
+
                 await ctx.update(topicModel, {tid: predata.tid}, json);
                 ctx.send('添加成功')
             } else {

@@ -1,4 +1,4 @@
-import applyModel from '../../models/apply'
+import noticeModel from '../../models/notice'
 import groupModel from '../../models/group'
 import userModel from '../../models/user'
 
@@ -9,23 +9,24 @@ module.exports = {
         try {
             let groupdata = await ctx.findOne(groupModel, {gid:predata.gid});
             predata.touid = groupdata.creator.uid;
-            predata.applytime = (new Date()).Format("yyyy-MM-dd HH:mm:ss");
-            await ctx.add(applyModel,predata)
+            predata.createtime = (new Date()).Format("yyyy-MM-dd HH:mm:ss");
+            predata.type = "apply";
+            await ctx.add(noticeModel,predata);
             return ctx.send("success");
         }catch (e){
             console.log(e)
             return ctx.sendError(e)
         }
     },
-    async listapply(ctx, next) {
-        console.log('----------------按照所给数量分配固定条数applylist,0则all-----------------------');
+    async listnotice(ctx, next) {
+        console.log('----------------按照所给数量分配固定条数noticelist,0则all-----------------------');
         let {start = 1, count = 0,uid = -1}= ctx.request.body;
         console.log('count:' + count)
         try {
-            let data = await ctx.find(applyModel, {touid :uid}, null, {
+            let data = await ctx.find(noticeModel, {touid :uid}, null, {
                 limit: count,
                 skip: (start - 1) * count,
-                sort: {applytime:-1}
+                sort: {createtime:-1}
             });
             console.log(data)
             return ctx.send(data)
@@ -38,13 +39,13 @@ module.exports = {
         console.log('----------------同意申请-----------------------');
         let predata = ctx.request.body;
         try {
-            let applydata = await ctx.findOne(applyModel, {uid:predata.uid,touid:predata.touid});
-            console.log(applydata);
-            let gid = applydata.gid;
+            let noticedata = await ctx.findOne(noticeModel, {uid:predata.uid,touid:predata.touid});
+            console.log(noticedata);
+            let gid = noticedata.gid;
             let usermsg = {
-                uid : applydata.uid,
-                username : applydata.username,
-                userheadimg : applydata.userheadimg,
+                uid : noticedata.uid,
+                username : noticedata.username,
+                userheadimg : noticedata.userheadimg,
             }
             console.log(userdata);
             let userdata = await ctx.findOne(userModel, {uid:predata.uid});
@@ -62,9 +63,22 @@ module.exports = {
             } else {
                 groupdata["admin"] = [usermsg]
             }
+
+            //下面是添加通知
+            let newnoticedata = {
+                gid : gid,
+                uid : noticedata.touid,
+                username: groupdata.creator.username,
+                userheadimg: groupdata.creator.userheadimg,
+                touid: noticedata.uid,
+                createtime: (new Date()).Format("yyyy-MM-dd HH:mm:ss"),
+                type: "success",
+            };
+            await ctx.add(noticeModel,newnoticedata);
+
             await ctx.update(groupModel,{gid:gid},groupdata);
             await ctx.update(userModel,{uid:predata.uid},userdata);
-            await ctx.remove(applyModel, {uid:predata.uid,touid:predata.touid});
+            await ctx.remove(noticeModel, {_id:predata._id,uid:predata.uid,touid:predata.touid});
             return ctx.send("success");
         }catch (e){
             console.log(e)
@@ -75,9 +89,35 @@ module.exports = {
         console.log('----------------不同意申请-----------------------');
         let predata = ctx.request.body;
         try {
-            let applydata = await ctx.findOne(applyModel, {uid:predata.uid,touid:predata.touid});
-            console.log(applydata);
-            await ctx.remove(applyModel, {uid:predata.uid,touid:predata.touid});
+            let noticedata = await ctx.findOne(noticeModel, {_id:predata._id,uid:predata.uid,touid:predata.touid});
+            console.log(noticedata);
+            await ctx.remove(noticeModel, {uid:predata.uid,touid:predata.touid});
+            return ctx.send("success");
+        }catch (e){
+            console.log(e)
+            return ctx.sendError(e)
+        }
+    },
+    async readnotice(ctx, next) {
+        console.log('----------------已读消息-----------------------');
+        let predata = ctx.request.body;
+        try {
+            let noticedata = await ctx.findOne(noticeModel, {_id:predata._id,uid:predata.uid,touid:predata.touid});
+            console.log(noticedata);
+            await ctx.remove(noticeModel, {uid:predata.uid,touid:predata.touid});
+            return ctx.send("success");
+        }catch (e){
+            console.log(e)
+            return ctx.sendError(e)
+        }
+    },
+    async readsuccess(ctx, next) {
+        console.log('----------------已读success-----------------------');
+        let predata = ctx.request.body;
+        try {
+            let noticedata = await ctx.findOne(noticeModel, {_id:predata._id,uid:predata.uid,touid:predata.touid});
+            console.log(noticedata);
+            await ctx.remove(noticeModel, {uid:predata.uid,touid:predata.touid});
             return ctx.send("success");
         }catch (e){
             console.log(e)

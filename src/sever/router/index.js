@@ -81,11 +81,13 @@ export default app => {
 
     /*----------------------imgs-----------------------------*/
     router.post('/upload', app.client.img.upload)
-    /*----------------------apply-----------------------------*/
+    /*----------------------notice-----------------------------*/
     router.post('/notice/newapply', app.client.notice.newapply)
-    router.get('/notice/listapply', app.client.notice.listapply)
+    router.get('/notice/listnotice', app.client.notice.listnotice)
     router.get('/notice/agreeapply', app.client.notice.agreeapply)
-    router.get('/notice/disagreeapply', app.client.notice.disagreeapply)
+    router.post('/notice/disagreeapply', app.client.notice.disagreeapply)
+    router.post('/notice/readnotice', app.client.notice.readnotice)
+    router.post('/notice/readsuccess', app.client.notice.readsuccess)
 
 
     app.use(router.routes()).use(router.allowedMethods());

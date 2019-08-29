@@ -379,6 +379,7 @@ topicmsg:{
     reviewmsg:{
         uid:
         username:
+		userheadimg:
         text:
     }  
 }
@@ -470,15 +471,37 @@ topicmsg:{
 }
 
 //get	返回固定条数和页数的发送给指定uid的所有申请
-/search/book
+/notice/listnotice
 {         
 	uid:$uid
 	count:$count
 	start:$startIndex
 }
-//post 同意申请
+//get 同意申请
 /notice/agreeapply
 {
+	_id:
+	uid: //申请人uid
+	touid:	//同意人uid
+}
+/post 不同意申请
+/notice/disagreeapply
+{
+	_id:
+	uid: //申请人uid
+	touid:	//同意人uid
+}
+/post 已读消息
+/notice/readnotice
+{
+	_id:
+	uid: //申请人uid
+	touid:	//同意人uid
+}
+/post 已读success
+/notice/readsuccess
+{
+	_id:
 	uid: //申请人uid
 	touid:	//同意人uid
 }
