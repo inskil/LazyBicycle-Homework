@@ -1,12 +1,17 @@
 <template>
     <div class="body">
-        <div class="headtitle">
-            <h1 style="text-align: left">
-                <span property="v:itemreviewed">{{title}}</span>
-                <div class="clear"></div>
-            </h1>
-        </div>
-        <div class="main_body; width: 100%">
+        <Card class="main_body">
+            <div style="position: absolute; right: 1rem; top:1rem">
+                <Button v-if='ismanager' type="error" ghost style="margin-right: 1rem">删除书籍</Button>
+                <i-button v-if="!iscollected" @click="heart_success" icon="md-heart-outline">收藏</i-button>
+                <i-button v-else @click="heart_cancel" icon="md-heart" type="primary" ghost>已收藏</i-button>
+            </div>
+            <div class="headtitle">
+                <h1 style="text-align: left">
+                    <span property="v:itemreviewed">{{title}}</span>
+                    <div class="clear"></div>
+                </h1>
+            </div>
             <div class="infomations">
                 <div id="mainpic">
                     <a class="nbg" v-bind:href="bigimg"
@@ -15,7 +20,7 @@
                              style="width: 135px;max-height: 200px;">
                     </a>
                 </div>
-                <div id="maininfo">
+                <div class="maininfo" align="left" style="left: 3rem; position: relative; height: 12rem;">
                     <span class="pl">作者: {{author}}</span><br>
                     <span class="pl">出版社: {{printer}}</span><br>
                     <span class="pl">出版年: {{year}}</span><br>
@@ -24,10 +29,9 @@
                     <span class="pl">ISBN: {{isbn}}</span><br>
                 </div>
             </div>
-            <div id="little_margin"></div>
-            <div id="votes">
+            <div class="votes">
                 <div>
-                    <span class="rl">评分:<br> <strong>{{average}}</strong></span><br>
+                    <span class="rl">评分<br> <strong>{{average}}</strong></span><br>
                 </div>
                 <div>
                     <Rate disabled allow-half v-model="stars" />
@@ -36,121 +40,92 @@
                 <div>
                     <span class="rl">评价人数: {{numRaters}}</span>
                 </div>
+                <div>
+                    你的评价：
+                    <Rate :value.sync="value"></Rate>
+                </div>
             </div>
-            <div class="related_info">
-            </div>
-        </div>
-        <div style="height: 50px; width: 100%"></div>
-        <div style="height: 70px;width: 100%;">
-            <div style="float: left;width: 15%;height: 100%">
-                你的评价：
-                <Rate :value.sync="value"></Rate>
-            </div>
-            <div style="float: right;width: 5%;height: 100%">
-                <i-button @click="heart_success(true)" icon="ios-heart">收藏</i-button>
-            </div>
-            <div style="float: right;width: 10%;height: 100%">
-                <div v-if='ismanager'><Button type="primary">删除书籍</Button></div>
-                <div v-else><Button type="primary" disabled>删除书籍</Button></div>
-            </div>
-        </div>
 
+        </Card>
 
         <div class="summary_body">
             <div id="summary_title">
-                <h1 style="text-align: left">
-                    <span property="v:itemreviewed">内容简介  · · · · · ·</span>
-                    <div class="clear"></div>
-                </h1>
+                <Divider orientation="left" property="v:itemreviewed"><h2>内容简介</h2></Divider>
             </div>
             <div id="summary_summary">
                 <p class="p2" style="text-align: left">{{summary}}</p>
             </div>
         </div>
-        <div style="height: 50px"></div>
         <div class="author_body">
             <div id="author_title">
-                <h1 style="text-align: left">
-                    <span property="v:itemreviewed">作者简介  · · · · · ·</span>
-                    <div class="clear"></div>
-                </h1>
+                <Divider orientation="left" property="v:itemreviewed"><h2>作者简介</h2></Divider>
             </div>
             <div id="author_summary">
                 <p class="p2" style="text-align: left">{{author_intro}}</p>
             </div>
         </div>
-        <div style="height: 50px"></div>
         <div class="catalog_body">
             <div id="catalog_title">
-                <h1 style="text-align: left">
-                    <span property="v:itemreviewed">目录  · · · · · ·</span>
-                    <div class="clear"></div>
-                </h1>
+                <Divider orientation="left" property="v:itemreviewed"><h2>目录</h2></Divider>
             </div>
             <div id="catalog_summary">
                 <pre class="p3" style="text-align: left">{{catalog}}</pre>
             </div>
-
         </div>
-        <div style="height: 50px"></div>
         <div id="review_body">
             <div id="review_title">
-                <h1 style="text-align: left">
-                    <span property="v:itemreviewed">本书评论  · · · · · ·</span>
-                    <div class="clear"></div>
-                </h1>
+                <Divider orientation="left" property="v:itemreviewed"><h2>本书评论</h2></Divider>
             </div>
-            <div style="height: 20px; width: 100%"></div>
             <div id="review_review">
-                <div v-for="review in reviews" v-bind:key="review.id" id="review_author">
-                    <div style="width: 70%;float: left;height: 25px">
-                        <p class="p4" style="text-align: left; color: #666666">{{review.author.name}} ·
-                            {{review.published}} </p>
-                    </div>
-                    <div style="width: 30%;float: right; height: 25px">
+                <div v-for="review in reviews" v-bind:key="review.id" class="review_author" align="left">
+                    <span style="color: #666666">
+                        {{review.author.name}} · {{review.published}}
+                    </span>
+                    <span style="left: 45rem; position:relative;">
                         <Rate disabled allow-half v-model="review.rating.value"/>
+                    </span>
+                    <div class="cell_dashed">
+                        <p class="review_summary">{{review.summary}}</p>
                     </div>
-
-                    <div>
-                        <p class="p2" style="text-align: left">{{review.summary}}</p>
-                    </div>
-                    <div><p class="p4" style="width:100%; text-align: right;float: right;height: 30px">
-                        {{review.votes}}人认为有用</p></div>
-                    <div class="cell_dashed"></div>
                 </div>
                 <div style="height: 15px; width: 100%"></div>
             </div>
-            <div id="review_new" style="width: 100%;">
-                <div id="review_kuang" style="width: 79%; float:left">
-                    <Input v-model="summary_value" type="textarea" :autosize="{minRows: 3,maxRows: 5}" placeholder="Enter something..." />
-                </div>
-                <div id="review_buttom" style="width: 20%;float: right">
-                    <div style="float:top;height:40px" ></div>
-                    <div style="float:left;">
-                        <i-button @click="review_success(true)">发表评论</i-button>
-                    </div>
-                </div>
+            <div>
+                <Divider orientation="left" property="v:itemreviewed"><h2>发表评论</h2></Divider>
             </div>
-
+            <Form ref="formValidate" :model="formValidate" :rules="ruleValidate" style="width: 100%; margin-top: 1rem">
+                <FormItem prop="comment">
+                    <Input v-model="formValidate.comment" type="textarea" :rows="5" placeholder="在这里发表你的评论" />
+                </FormItem>
+                <FormItem class="review_buttom" align="right" style="position: relative; right: 1rem">
+                    <Button @click="handleSubmit('formValidate')" icon="md-send">发送</Button>
+                </FormItem>
+            </Form>
         </div>
-        <div style="height: 200px"></div>
         <Back-top></Back-top>
     </div>
 
 </template>
 
 <script>
-
-
     export default {
-
         name: "detailinfo",
         data() {
             return {
-                ismanager:false,
+                formValidate:{
+                    comment:''
+                },
+                ruleValidate:{
+                    comment:[
+                        { required: true, message: '评论不能为空', trigger: 'blur' },
+                        { type: 'string', min: 25, message: '评论不能少于25个字', trigger: 'blur' },
+                        { type: 'string', max: 1000, message: '评论不能多于1000个字', trigger: 'blur' }
+                    ]
+                },
+                ismanager:true,
+                iscollected:false,
                 value: 0,
-                summary_value: "",
-
+                summary_value: '',
                 id: 1234567,
                 title: 'balala',
                 bigimg: 'https://img3.doubanio.com/view/subject/l/public/s33446751.jpg',
@@ -207,18 +182,23 @@
             }
         },
         methods: {
-            review_success(nodesc) {
-                this.$Notice.success({
-                    title: '评价发表成功',
-                    desc: nodesc ? '' : ''
-                });
-                this.summary_value = ""
+            handleSubmit (name) {
+                this.$refs[name].validate((valid) => {
+                    if (valid) {
+                        this.$Message.success('评价发表成功');
+                        this.summary_value = this.formValidate.comment;
+                    } else {
+                        this.$Message.error('评价发表失败');
+                    }
+                })
             },
-            heart_success(nodesc) {
-                this.$Notice.success({
-                    title: '收藏成功',
-                    desc: nodesc ? '' : ''
-                });
+            heart_success() {
+                this.iscollected=true;
+                this.$Message.success('收藏成功');
+            },
+            heart_cancel() {
+                this.iscollected=false;
+                this.$Message.success('收藏取消');
             },
         }
     }

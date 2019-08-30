@@ -99,15 +99,25 @@ export const constantRouterMap =[
         component: _import_('addGroupPage'),
     },
     {
-            path:'/submitpost',
-            name:'submitpost',
-            component:_import_('postPage'),
-        },
-        {
-            path:'/publishbookPage',
-            name:'publishbookPage',
-            component:_import_('publishbookPage'),
-        }
+        path:'/submitpost',
+        name:'submitpost',
+        component:_import_('postPage'),
+    },
+    {
+        path:'/publishbookPage',
+        name:'publishbookPage',
+        component:_import_('publishbookPage'),
+    },
+    {
+        path:'/mine',
+        name:'mine',
+        component:_import_('personalPage'),
+    },
+    {
+        path:'/publishmoviePage',
+        name:'publishmoviePage',
+        component:_import_('publishmoviePage'),
+    }
         ]
 
 const router = new Router({

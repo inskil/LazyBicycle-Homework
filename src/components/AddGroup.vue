@@ -50,7 +50,7 @@
                     ],
                     desc: [
                         { required: true, message: '小组介绍不能为空', trigger: 'blur' },
-                        { type: 'string', max: 250, message: '最多250个汉字', trigger: 'blur' }
+                        { type: 'string', max: 250, message: '小组介绍不能超过250个字', trigger: 'blur' }
                     ],
                     imageUrl: [
                         { required: true, message: '小组头像不能为空', trigger: 'blur' },
@@ -62,9 +62,9 @@
             handleSubmit (name) {
                 this.$refs[name].validate((valid) => {
                     if (valid) {
-                        this.$Message.success('创建成功!');
+                        this.$Message.success('创建成功');
                     } else {
-                        this.$Message.error('创建失败!');
+                        this.$Message.error('创建失败');
                     }
                 })
             },
