@@ -112,6 +112,11 @@ export const constantRouterMap =[
         path:'/mine',
         name:'mine',
         component:_import_('personalPage'),
+    },
+    {
+        path:'/publishmoviePage',
+        name:'publishmoviePage',
+        component:_import_('publishmoviePage'),
     }
         ]
 
