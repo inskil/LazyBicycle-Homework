@@ -21,6 +21,14 @@ const getters = {
     //movie
     movieList:state => state.movie.list,
 
+    //group
+    groupList:state =>state.group.list,
+    hotGroupList:state =>state.group.hotGroup,
+
+    //topic
+    topicList:state =>state.topic.list,
+    hotTopicList:state =>state.topic.hotTopic,
+
 
 }
 export default getters

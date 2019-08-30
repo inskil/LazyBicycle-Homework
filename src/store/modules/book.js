@@ -1,6 +1,5 @@
 import axios from '../../utils/fetch'
 import {bookTypes} from './classify'
-
 const book = {
     state: {
         types: bookTypes,
@@ -35,7 +34,7 @@ const book = {
                     //if (params.count> 1) {
                     //    commit('BOOKLIST', state.list.concat(res.data))
                     //} else {
-                        commit('BOOKLIST', res.data)
+                    commit('BOOKLIST', res.data)
                     //}
                     if (res.data.length >= state.count) {
                         state.loadingBol = true;
@@ -74,3 +73,4 @@ const book = {
     }
 }
 export default book
+

@@ -1,7 +1,7 @@
 import axios from 'axios'
 import qs from 'qs'
 import {Message} from 'element-ui'
-
+/* eslint-disable */
 
 axios.defaults.withCredentials = true
 axios.defaults.baseURL="/api"
@@ -18,7 +18,7 @@ axios.interceptors.response.use(response => response, err => Promise.resolve(err
 
 // 检查状态码
 function checkStatus(res) {
-    console.log(res)
+    //console.log('res in checkstatus',res)
     if (res.status === 200 || res.status === 304) {
        return res.data
     }
@@ -33,6 +33,7 @@ function checkStatus(res) {
 
 // 检查CODE值
 function checkCode(res) {
+    //console.log('res in checkcode',res)
     if (res.code === 0) {
         Message({
           message: res.msg,

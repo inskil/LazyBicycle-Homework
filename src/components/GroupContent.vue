@@ -11,49 +11,28 @@
                 <Col span="12" offset="2">
                     <div class="article">
                         <!--讨论精选-->
-                        <div class="" v-for="article in articles" v-bind:key="article.title">
+                        <div class="" v-for="article in hotTopicList" v-bind:key="article.title">
                             <div class="channel-item">
-                                <div class="likes">{{article.like}}<br>喜欢</div>
+                                <div class="likes">{{article.review.length}}<br>喜欢</div>
                                 <div class="bd">
-                                    <h3><a href="https://www.douban.com/group/topic/149297974/">{{article.title}}</a></h3>
+                                    <h3><router-link :to="tid_url(article.tid)" >{{article.title}}</router-link></h3>
+                                    <router-link :to="tid_url(article.tid)" >
                                     <div class="block">
                                         <div class="pic">
                                             <div class="pic-wrap">
-                                                <img v-bind:src="article.images.large">
+                                                <img v-bind:src="article.userheadimg">
                                             </div>
                                         </div>
-                                        <p>{{article.summary}}</p>
+                                        <p>{{article.text}}</p>
                                     </div>
+                                    </router-link>
                                     <div class="source">
-                                        <span class="from">来自<a href="https://www.douban.com/group/blabla/">{{article.comefrom}}</a></span>
-                                        <span class="pubtime">{{article.time}}</span>
+                                        <span class="from">来自{{article.username}}</span>
+                                        <span class="pubtime">{{article.createtime}}</span>
                                     </div>
                                 </div>
                             </div>
                         </div>
-
-                        <!--页数-->
-                        <!--div class="paginator">
-                            <span class="prev">
-                                &lt;前页
-                            </span>
-                            <span class="thispage" data-total-page="336">1</span>
-                            <a href="?start=30">2</a>
-                            <a href="?start=60">3</a>
-                            <a href="?start=90">4</a>
-                            <a href="?start=120">5</a>
-                            <a href="?start=150">6</a>
-                            <a href="?start=180">7</a>
-                            <a href="?start=210">8</a>
-                            <a href="?start=240">9</a>
-                            <span class="break">...</span>
-                            <a href="?start=10020">335</a>
-                            <a href="?start=10050">336</a>
-                            <span class="next">
-                            <link rel="next" href="?start=30">
-                            <a href="?start=30">后页&gt;</a>
-                        </span>
-                        </div-->
                     </div>
                 </Col>
                 <Col span="8">
@@ -64,24 +43,25 @@
                             <div class="hd">
                                 <h2>热门小组排行</h2>
                             </div>
-                            <div class="bd" v-for="group in groups" v-bind:key="group.title">
+                            <div class="bd" v-for="group in groupList" v-bind:key="group.groupname">
                                 <ul>
                                     <li class="">
                                         <div class="pic">
-                                            <a href="https://www.douban.com/group/230893/"><img v-bind:src="group.images.large" class=""></a>
+                                            <router-link :to="gid_url(group.gid)"><img
+                                                    v-bind:src="group.grouphead"></router-link>
                                         </div>
                                         <div class="info">
                                             <div class="title">
-                                                <a href="https://www.douban.com/group/230893/" class="">{{group.title}}</a>
+                                                <router-link :to="gid_url(group.gid)" >{{group.groupname}}</router-link>
                                             </div>
-                                            <span class="num">{{group.pernum}}个有为小青年</span>
-                                            <span class="join">{{group.postnum}}篇有趣帖子</span>
+                                            <span class="num">{{group.usercount}}个有为小青年</span>
+                                            <span class="join">{{group.tid.length}}篇有趣帖子</span>
                                         </div>
                                     </li>
                                 </ul>
                             </div>
                         </div>
-                     </div>
+                    </div>
                 </Col>
             </div>
         </div>
@@ -89,114 +69,57 @@
 </template>
 
 <script>
+    import {mapGetters} from "vuex";
+
     export default {
         name: "GroupContent",
-        data(){
-            return{
-                groups:[
-                    {
-                        title:"吃喝在武汉",
-                        images:{
-                            large:"https://images.weserv.nl/?url=https://img3.doubanio.com/icon/g18454-3.jpg"
-                        },
-                        pernum:"38263",
-                        postnum:"2593",
-                    },
-                    {
-                        title:"吃喝在武汉",
-                        images:{
-                            large:"https://images.weserv.nl/?url=https://img3.doubanio.com/icon/g18454-3.jpg"
-                        },
-                        pernum:"38263",
-                        postnum:"2593",
-                    },
-                    {
-                        title:"吃喝在武汉",
-                        images:{
-                            large:"https://images.weserv.nl/?url=https://img3.doubanio.com/icon/g18454-3.jpg"
-                        },
-                        pernum:"38263",
-                        postnum:"2593",
-                    },
-                    {
-                        title:"吃喝在武汉",
-                        images:{
-                            large:"https://images.weserv.nl/?url=https://img3.doubanio.com/icon/g18454-3.jpg"
-                        },
-                        pernum:"38263",
-                        postnum:"2593",
-                    },
-                    {
-                        title:"吃喝在武汉",
-                        images:{
-                            large:"https://images.weserv.nl/?url=https://img3.doubanio.com/icon/g18454-3.jpg"
-                        },
-                        pernum:"38263",
-                        postnum:"2593",
-                    },{
-                        title:"吃喝在武汉",
-                        images:{
-                            large:"https://images.weserv.nl/?url=https://img3.doubanio.com/icon/g18454-3.jpg"
-                        },
-                        pernum:"38263",
-                        postnum:"2593",
-                    },{
-                        title:"吃喝在武汉",
-                        images:{
-                            large:"https://images.weserv.nl/?url=https://img3.doubanio.com/icon/g18454-3.jpg"
-                        },
-                        pernum:"38263",
-                        postnum:"2593",
-                    },
-                    {
-                        title:"吃喝在武汉",
-                        images:{
-                            large:"https://images.weserv.nl/?url=https://img3.doubanio.com/icon/g18454-3.jpg"
-                        },
-                        pernum:"38263",
-                        postnum:"2593",
-                    }
-                ],
-                articles:[
-                    {
-                        like:"590",
-                        title:"只有雪山荒漠羊群的冬日青海",
-                        images:{
-                            large:"https://images.weserv.nl/?url=https://img1.doubanio.com/view/group_topic/small/public/p200063059.webp"
-                        },
-                        comefrom:"鹅组小组",
-                        time:"昨天02:11",
-                        summary:"没有油菜花和人潮的淡季青海，可能才是真正意义上的青海。面对壮阔的美景，有时候连相机都来不及拿出。包车路线西宁青海湖茶卡盐湖祁连山脉.还有哦我是一月底去的，冬季不建议自驾，冰雪..."
-                    },{
-                        like:"590",
-                        title:"只有雪山荒漠羊群的冬日青海",
-                        images:{
-                            large:"https://images.weserv.nl/?url=https://img1.doubanio.com/view/group_topic/small/public/p200063059.webp"
-                        },
-                        comefrom:"鹅组小组",
-                        time:"昨天02:11",
-                        summary:"没有油菜花和人潮的淡季青海，可能才是真正意义上的青海。面对壮阔的美景，有时候连相机都来不及拿出。包车路线西宁青海湖茶卡盐湖祁连山脉.还有哦我是一月底去的，冬季不建议自驾，冰雪..."
-                    },{
-                        like:"590",
-                        title:"只有雪山荒漠羊群的冬日青海",
-                        images:{
-                            large:"https://images.weserv.nl/?url=https://img1.doubanio.com/view/group_topic/small/public/p200063059.webp"
-                        },
-                        comefrom:"鹅组小组",
-                        time:"昨天02:11",
-                        summary:"没有油菜花和人潮的淡季青海，可能才是真正意义上的青海。面对壮阔的美景，有时候连相机都来不及拿出。包车路线西宁青海湖茶卡盐湖祁连山脉.还有哦我是一月底去的，冬季不建议自驾，冰雪..."
-                    },{
-                        like:"590",
-                        title:"只有雪山荒漠羊群的冬日青海",
-                        images:{
-                            large:"https://images.weserv.nl/?url=https://img1.doubanio.com/view/group_topic/small/public/p200063059.webp"
-                        },
-                        comefrom:"鹅组小组",
-                        time:"昨天02:11",
-                        summary:"没有油菜花和人潮的淡季青海，可能才是真正意义上的青海。面对壮阔的美景，有时候连相机都来不及拿出。包车路线西宁青海湖茶卡盐湖祁连山脉.还有哦我是一月底去的，冬季不建议自驾，冰雪..."
-                    },
-                ]
+        data() {
+            return {
+                url: '/',
             }
+        },
+        computed: {
+            ...mapGetters([
+                'topicList',
+                'groupList',
+                'hotTopicList',
+            ]),
+        },
+        watch: {
+            // 如果路由有变化，会再次执行该方法
+            '$router': 'updateAll'
+        },
+        methods: {
+            gid_url(id) {
+                return "/groupDetail/" + id
+            },
+            tid_url(id) {
+                return "/topic/" + id
+            },
+            StringLenFix: function (text) {
+                return text.slice(0, 14)
+            },
+            updatePage: function () {
+                const {fullPath} = this.$route
+                this.$router.replace({
+                    path: '/redirect' + fullPath
+                })
+            }
+            ,
+            updateAll() {
+                this.getTopic()
+                this.updatePage()
+            }
+            ,
+            getTopic() {
+                this.loading = true
+                this.$store.dispatch('getTopicList')
+                this.loading = false
+            },
+        },
+        created() {
+            // Getting books data on created
+            this.getTopic()
         }
     }
 </script>
@@ -204,14 +127,15 @@
 <style scoped>
     @import '../assets/css/6361ae61fa71bf01.css';
 
-    .wrapper{
-        text-align:left;
-        background-color:white;
+    .wrapper {
+        text-align: left;
+        background-color: white;
         width: 100%;
         height: 100%;
     }
-    .aside{
-        position:relative;
+
+    .aside {
+        position: relative;
         left: 101px;
     }
 </style>

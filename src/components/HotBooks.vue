@@ -45,7 +45,6 @@
         },
         methods: {
             fetchDate: function () {
-                console.log("tooooooooooooooooooooooooooooooooo")
                 const {fullPath} = this.$route
                 this.$router.replace({
                     path: '/redirect' + fullPath
@@ -57,7 +56,6 @@
                     //type: this.$route.params.classify,
                     count: 8
                 })
-
             },
         },
         created() {

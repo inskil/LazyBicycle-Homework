@@ -84,12 +84,12 @@ export const constantRouterMap =[
         component: _import_('bookDetailPage'),
     },
     {
-        path: '/topic',
+        path: '/topic/:id',
         name:'topicDetail',
         component: _import_('topicPage'),
     },
     {
-        path: '/groupDetail',
+        path: '/groupDetail/:id',
         name: 'groupDetail',
         component: _import_('groupDetailPage'),
     },

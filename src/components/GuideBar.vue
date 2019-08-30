@@ -9,19 +9,11 @@
                     书籍
                 </MenuItem>
             </router-link>
-            <Submenu name="3">
-                <template slot="title">
+            <router-link :to="{name:'book'}">
+                <MenuItem name="3" style="font-size: large">
                     影视
-                </template>
-                <MenuGroup title="影视">
-                    <router-link :to="{name:'drama'}">
-                        <MenuItem name="3-1">电视剧</MenuItem>
-                    </router-link>
-                    <router-link :to="{name:'movie'}">
-                        <MenuItem name="3-2">电影</MenuItem>
-                    </router-link>
-                </MenuGroup>
-            </Submenu>
+                </MenuItem>
+            </router-link>
             <router-link :to="{name:'group'}">
                 <MenuItem name="4" style="font-size: large">
                     小组
@@ -34,7 +26,7 @@
                            @on-enter="search_some()"/>
                 </div>
                 <div style="float: left">
-                    <router-link :to="{name:'search'}"><MenuItem><i-button type="ghost" shape="circle" icon="ios-search"/></MenuItem></router-link>
+                    <router-link :to="{name:'search'}"><MenuItem name="search"><Button type="ghost" shape="circle" icon="ios-search"/></MenuItem></router-link>
                 </div>
             </div>
 
@@ -57,13 +49,13 @@
                 </div>
                 <Menu v-else mode="horizontal" :theme="theme1">
                     <router-link :to="{name:'login'}">
-                        <MenuItem style="font-size: large">
+                        <MenuItem name="5" style="font-size: large">
                             <Icon type="md-person"/>
                             登录
                         </MenuItem>
                     </router-link>
                     <router-link :to="{name:'register'}">
-                        <MenuItem style="font-size: large">
+                        <MenuItem name="6" style="font-size: large">
                             <Icon type="md-person-add"/>
                             注册
                         </MenuItem>

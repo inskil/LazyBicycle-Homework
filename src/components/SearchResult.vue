@@ -39,6 +39,9 @@
         name: "SearchResult",
         data(){
             return{
+                key:"",
+                books,
+                alllist:[],
                 books:[
                     {
                         title:"追风筝的人",
@@ -154,6 +157,14 @@
                     },
                 ]
             }
+        },
+        methods:{
+            uodate(){
+                this,=
+            }
+        },
+        created() {
+            this.getlist()
         }
     }
 </script>
