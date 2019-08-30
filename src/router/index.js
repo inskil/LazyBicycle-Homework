@@ -102,12 +102,17 @@ export const constantRouterMap =[
             path:'/submitpost',
             name:'submitpost',
             component:_import_('postPage'),
-        },
-        {
+    },
+    {
             path:'/publishbookPage',
             name:'publishbookPage',
             component:_import_('publishbookPage'),
-        }
+    },
+    {
+        path:'/mine',
+        name:'mine',
+        component:_import_('personalPage'),
+    }
         ]
 
 const router = new Router({
