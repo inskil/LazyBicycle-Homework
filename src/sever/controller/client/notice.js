@@ -20,7 +20,7 @@ module.exports = {
     },
     async listnotice(ctx, next) {
         console.log('----------------按照所给数量分配固定条数noticelist,0则all-----------------------');
-        let {start = 1, count = 0,uid = -1}= ctx.request.body;
+        let {start = 1, count = 0,uid = -1}= ctx.request.query;
         console.log('count:' + count)
         try {
             let data = await ctx.find(noticeModel, {touid :uid}, null, {
