@@ -166,9 +166,13 @@ module.exports = {
         try {
             let data = await ctx.findOne(userModel, {uid: predata.uid});
             console.log(data);
-            let count = data.group.indexOf(predata.gid);
-            if (count > -1) {
-                return ctx.send(true);
+            if (data) {
+                let count = data.group.indexOf(predata.gid);
+                if (count > -1) {
+                    return ctx.send(true);
+                } else {
+                    return ctx.send(false);
+                }
             } else {
                 return ctx.send(false);
             }
@@ -183,12 +187,17 @@ module.exports = {
         try {
             let data = await ctx.findOne(userModel, {uid: predata.uid});
             console.log(data);
-            let count = data.admingroup.indexOf(predata.gid);
-            if (count > -1) {
-                return ctx.send(true);
+            if (data) {
+                let count = data.admingroup.indexOf(predata.gid);
+                if (count > -1) {
+                    return ctx.send(true);
+                } else {
+                    return ctx.send(false);
+                }
             } else {
                 return ctx.send(false);
             }
+
         } catch (e) {
             return ctx.sendError(e)
         }
@@ -213,7 +222,7 @@ module.exports = {
             }
             await ctx.update(userModel, {uid: predata.uid}, json);
             await ctx.update(bookModel, {id: predata.bid}, {$set: {likes: likes}});
-            return ctx.send({bid: predata.bid,likes:likes})
+            return ctx.send({bid: predata.bid, likes: likes})
         } catch (e) {
             return ctx.sendError(e)
         }
@@ -238,7 +247,7 @@ module.exports = {
             }
             await ctx.update(userModel, {uid: predata.uid}, json);
             await ctx.update(movieModel, {id: predata.mid}, {$set: {likes: likes}});
-            return ctx.send({mid: predata.mid,likes:likes})
+            return ctx.send({mid: predata.mid, likes: likes})
         } catch (e) {
             return ctx.sendError(e)
         }
@@ -297,7 +306,7 @@ module.exports = {
                     return ctx.sendError("该书籍未被收藏");
                 }
             }
-            return ctx.send({bid: predata.bid,likes:likes})
+            return ctx.send({bid: predata.bid, likes: likes})
         } catch (e) {
             return ctx.sendError(e)
         }
@@ -322,7 +331,7 @@ module.exports = {
                     return ctx.sendError("该书籍未被收藏");
                 }
             }
-            return ctx.send({mid: predata.mid,likes:likes})
+            return ctx.send({mid: predata.mid, likes: likes})
         } catch (e) {
             return ctx.sendError(e)
         }
