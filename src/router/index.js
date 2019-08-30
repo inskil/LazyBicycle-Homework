@@ -99,14 +99,14 @@ export const constantRouterMap =[
         component: _import_('addGroupPage'),
     },
     {
-            path:'/submitpost',
-            name:'submitpost',
-            component:_import_('postPage'),
+        path:'/submitpost',
+        name:'submitpost',
+        component:_import_('postPage'),
     },
     {
-            path:'/publishbookPage',
-            name:'publishbookPage',
-            component:_import_('publishbookPage'),
+        path:'/publishbookPage',
+        name:'publishbookPage',
+        component:_import_('publishbookPage'),
     },
     {
         path:'/mine',
