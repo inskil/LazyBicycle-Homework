@@ -122,11 +122,9 @@ port:'8888'
 		directors:Array,	//导演
 		images:Array,
 		year:String,
-		id:String,
 		url:String,
 		mainland_pubdate : String,
 		summary:String,
-		alt:String,
 	}
 }
 

@@ -169,12 +169,12 @@ module.exports = {
             if (data) {
                 let count = data.group.indexOf(predata.gid);
                 if (count > -1) {
-                    return ctx.send(true);
+                    return ctx.send({result:true});
                 } else {
-                    return ctx.send(false);
+                    return ctx.send({result:false});
                 }
             } else {
-                return ctx.send(false);
+                return ctx.send({result:false});
             }
         } catch (e) {
             return ctx.sendError(e)
@@ -190,12 +190,12 @@ module.exports = {
             if (data) {
                 let count = data.admingroup.indexOf(predata.gid);
                 if (count > -1) {
-                    return ctx.send(true);
+                    return ctx.send({result:true});
                 } else {
-                    return ctx.send(false);
+                    return ctx.send({result:false});
                 }
             } else {
-                return ctx.send(false);
+                return ctx.send({result:false});
             }
 
         } catch (e) {
@@ -261,12 +261,12 @@ module.exports = {
             let data = await ctx.findOne(userModel, {uid: predata.uid});
             console.log(data);
             if (data.likebooks.indexOf(predata.bid) > -1) {
-                return ctx.send(true);
+                return ctx.send({result:true});
             } else {
-                return ctx.send(false);
+                return ctx.send({result:false});
             }
         } catch (e) {
-            return ctx.send(false);
+            return ctx.send({result:false});
         }
     },
     async isuserlikemovie(ctx, next) {
@@ -277,12 +277,12 @@ module.exports = {
             let data = await ctx.findOne(userModel, {uid: predata.uid});
             console.log(data);
             if (data.likemovies.indexOf(predata.mid) > -1) {
-                return ctx.send(true);
+                return ctx.send({result:true});
             } else {
-                return ctx.send(false);
+                return ctx.send({result:false});
             }
         } catch (e) {
-            return ctx.send(false);
+            return ctx.send({result:false});
         }
     },
     async unlikebook(ctx, next) {
