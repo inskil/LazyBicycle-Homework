@@ -6,6 +6,7 @@ let userSchema = db.Schema({
     name: String,
     avatar: String,
     ismanager: Boolean,
+    roles: Array,
     createTime: { type: Date, default: Date.now},
     loginTime: Date,
     likebooks:Array,

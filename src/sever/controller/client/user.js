@@ -24,9 +24,10 @@ module.exports = {
             await ctx.update(userModel, {_id: data._id}, {$set: {loginTime: new Date()}}) //更新登陆时间
 
             let payload = {
-                uid: data.uid,
-                userheadimg:data.userheadimg,
                 username: data.username,
+                name: data.name,
+                _id: data._id,
+                roles: data.roles
             }
             let token = jwt.sign(payload, conf.auth.admin_secret, {expiresIn: '24h'})  //token签名 有效期为24小时
             ctx.cookies.set(conf.auth.tokenKey, token, {
