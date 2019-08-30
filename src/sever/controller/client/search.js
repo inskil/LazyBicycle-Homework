@@ -1,6 +1,5 @@
 import bookModel from '../../models/book'
 import movieModel from '../../models/movie'
-import path from 'path'
 import topicModel from "../../models/topic";
 import groupModel from "../../models/group";
 
@@ -11,10 +10,10 @@ module.exports = {
         console.log('title:'+title+'  count:'+count+'  start='+start);
         try {
             let searchkey = {"title" : {$regex:title}};
-            let bookdata = await ctx.find(bookModel,searchkey,null,{limit: count, skip: (start-1)*count, sort: {level: -1, createTime: -1}});
-            let moviedata = await ctx.find(movieModel,searchkey,null,{limit: count, skip: (start-1)*count, sort: {level: -1, createTime: -1}});
-            let topicdata = await ctx.find(topicModel,searchkey,null,{limit: count, skip: (start-1)*count, sort: {level: -1, createTime: -1}});
-            let groupdata = await ctx.find(groupModel,{"groupname" : {$regex:title}},null,{limit: count, skip: (start-1)*count, sort: {level: -1, createTime: -1}});
+            let bookdata = await ctx.find(bookModel,searchkey,null,{limit: count, skip: (start-1)*count});
+            let moviedata = await ctx.find(movieModel,searchkey,null,{limit: count, skip: (start-1)*count});
+            let topicdata = await ctx.find(topicModel,searchkey,null,{limit: count, skip: (start-1)*count});
+            let groupdata = await ctx.find(groupModel,{"groupname" : {$regex:title}},null,{limit: count, skip: (start-1)*count});
             let data = {
                 'book':bookdata,
                 'movie':moviedata,
