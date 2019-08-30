@@ -1,10 +1,11 @@
 import db from '../mongodb'
+
 let userSchema = db.Schema({
     username: String,
     pwd: String,
     name: String,
     avatar: String,
-    roles: Array,
+    ismanager: Boolean,
     createTime: { type: Date, default: Date.now},
     loginTime: Date,
     likebooks:Array,
