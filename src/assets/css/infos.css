@@ -5,24 +5,19 @@
 .headtitle{
     font: 22px Arial, Helvetica, sans-serif;
     line-height: 275%;
-
-    float: left;
     width: 100%;
-
 }
 .main_body {
     word-break: break-all;
-    float: left;
     width: 100%;
+    top: 1rem;
+    padding: 1rem 1rem 2rem 3rem;
+    position: relative;
 }
 .infomations {
-    float: left;
-    width: 500px
-}
-.maininfo {
-    float: left;
-    max-width: 300px;
-    word-wrap: break-word
+    width: 33rem;
+    word-wrap: break-word;
+    border-right: rgba(0, 0, 0, 0.05) 1px solid;
 }
 .pl {
     font: 15px Arial, Helvetica, sans-serif;
@@ -31,17 +26,14 @@
 
 }
 .votes{
-    padding-top: 50px;
-    margin-top: 50px;
-    float: right;
+    position: absolute;
+    right: 6rem;
+    top: 5rem;
 }
 .rl{
     font: 18px Arial, Helvetica, sans-serif;
     line-height: 250%;
     color:#000000;
-}
-.little_margin{
-
 }
 #wrapper {
     width: 950px;
@@ -53,10 +45,8 @@
 }
 
 #mainpic {
-    margin: 3px 0 0 0;
     float: left;
     text-align: center;
-    margin: 3px 12px 0 0;
     max-width: 155px;
     overflow: hidden
 }
@@ -66,72 +56,65 @@
 }
 
 .summary_body{
-    margin-outside: 20px;
+    top:1rem;
+    position: relative;
+    margin-bottom: 2rem;
 }
 .summary_title{
     font: 18px Arial, Helvetica, sans-serif;
     line-height: 275%;
-    padding-left:50px;
-    float: left;
     width: 100%;
 }
 .summary_summary{
-    float: left;
 }
 .p2{
     text-indent:2em;
     font: 14px Arial;
     line-height: 150%;
 }
-
 .author_body{
-     margin-outside: 20px;
+    margin-bottom: 2rem;
  }
 .author_title{
     font: 18px Arial, Helvetica, sans-serif;
     line-height: 275%;
     padding-left:50px;
-    float: left;
     width: 100%;
 }
 .author_summary{
-    float: left;
 }
 .catalog_body{
-    margin-outside: 20px;
+    margin-bottom: 2rem;
 }
 .catalog_title{
     font: 18px Arial, Helvetica, sans-serif;
     line-height: 275%;
     padding-left:50px;
-    float: left;
     width: 100%;
 }
 .catalog_summary{
-    float: left;
 }
 .p3{
-     font: 14px Arial;
-     line-height: 150%;
-    height: 440px;
+    padding-left: 1rem;
+    font: 14px Arial;
+    line-height: 150%;
     overflow : hidden;
     text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    word-break: break-all;
+    -webkit-line-clamp: 20;
  }
 .review_body{
-    margin-outside: 20px;
-    float: left;
 }
 .review_title{
     font: 18px Arial, Helvetica, sans-serif;
     line-height: 275%;
     padding-left:50px;
-    float: left;
     width: 100%;
 }
 .review_author{
-    text-align: left;
 }
-
 .p4{
     font: 14px Arial;
     line-height: 150%;
@@ -139,7 +122,17 @@
 }
 .cell_dashed{
     border-bottom:1px dashed #999999;
-    height: 2rem;
-    margin-left: 1rem;
-    margin-right: 1rem;
+    padding-bottom: 1rem;
+    margin-bottom: 1rem;
+}
+.review_summary{
+    text-indent:2em;
+    font: 14px Arial;
+    line-height: 150%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    word-break: break-all;
+    -webkit-line-clamp: 3;
 }
