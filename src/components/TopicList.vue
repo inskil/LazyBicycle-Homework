@@ -7,7 +7,7 @@
             <td align="right" style="width: 25%; padding-right: 1rem">最后回应</td>
         </tr>
         <tr v-for="topic in newList" v-if="topic.istop">
-            <td align="left"><img src="https://img3.doubanio.com/pics/stick.gif">{{topic.title}}</td>
+            <td align="left"><img src="https://img3.doubanio.com/pics/stick.gif"><router-link class="hotlink" :to="'/topic/'+topic.tid">{{topic.title}}</router-link></td>
             <td>{{topic.username}}</td>
             <td>{{topic.review.length}}</td>
             <td align="right">
@@ -17,7 +17,7 @@
             </td>
         </tr>
         <tr v-for="topic in newList" v-if="!topic.istop">
-            <td align="left">{{topic.title}}</td>
+            <td align="left"><router-link class="link" :to="'/topic/'+topic.tid">{{topic.title}}</router-link></td>
             <td>{{topic.username}}</td>
             <td>{{topic.review.length}}</td>
             <td align="right">
@@ -76,5 +76,21 @@
     td {
         border-bottom: 1px dashed #DDDDDD;
         padding: 0.3rem;
+    }
+
+    .link{
+        color: black;
+    }
+
+    .link:hover{
+        color: #2b85e4;
+    }
+
+    .hotlink{
+        color: #e45659;
+    }
+
+    .hotlink:hover{
+        color: #e40811;
     }
 </style>

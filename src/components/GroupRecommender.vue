@@ -2,13 +2,12 @@
     <div class="r-top-sec">
 
         <!--推荐小组标题-->
-        <h1 style="text-align: left ">
+        <h1 style="text-align: left">
             <div class="head-nav" style="padding-left: 150px">
                 <span class="head-title" style="margin-top:10%">推荐小组</span>
-                <router-link to="/addGroup">
-                    <Button type="primary" style="margin-right:60rem ;float: right ">创建一个新的小组</Button>
-                </router-link>
-
+                <span>
+                    <router-link to="/addGroup" class="create">创建一个新的小组</router-link>
+                </span>
             </div>
         </h1>
         <div class="forum_recommend" alog-alias="forum_recommend" style="background-color: #f5ece0">
@@ -170,5 +169,14 @@
     .gr_f_list clearfix {
         width: 168px;
         height: 69px;
+    }
+    .create{
+        font-size: small;
+        font-weight: lighter;
+        color: #e45659;
+        margin-left: 1rem;
+    }
+    .create:hover{
+        color: #e40811;
     }
 </style>
