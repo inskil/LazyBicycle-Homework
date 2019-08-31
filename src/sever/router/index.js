@@ -27,7 +27,7 @@ export default app => {
     router.get("/moviesbykey", app.client.movie.moviesByKey)
     router.post('/getnewmid',app.client.movie.getnewmid)
     router.post('/removeMovie',app.client.movie.removeMovie)
-    router.get('/addmovie',app.client.movie.addmovie)
+    router.post('/addmovie',app.client.movie.addmovie)
     router.post('/updatemovierate',app.client.movie.updatemovierate)
     /*----------------------book------------------------------*/
     router.get('/book', app.client.book.list)
