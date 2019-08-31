@@ -6,7 +6,7 @@
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
-    "server": "cross-env NODE_ENV=development nodemon src/sever/index.js",
+    "server": " nodemon src/sever/index.js",
     "start": "cross-env NODE_ENV=development pm2 start src/sever/index.js"
   },
   "dependencies": {
@@ -66,7 +66,7 @@
     "koa-bodyparser": "^4.2.1",
     "log4js": "^2.11.0",
     "node-notifier": "^5.1.2",
-    "nodemon": "^1.12.1",
+    "nodemon": "^1.19.1",
     "optimize-css-assets-webpack-plugin": "^3.2.0",
     "ora": "^1.3.0",
     "postcss-loader": "^2.0.10",

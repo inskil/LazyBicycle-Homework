@@ -47,8 +47,8 @@ module.exports = {
     },
     async addgroup(ctx, next) {
         console.log('----------------添加新的小组-----------------------');
-        let data = ctx.request.body;
-        let json = JSON.parse(JSON.stringify(data))
+        let data = ctx.request.query;
+        let json = data
         try {
             let groupmsg = json["groupmsg"]
             let data = await ctx.findOne(groupModel, {"groupname": {$regex: groupmsg["groupname"]}});
