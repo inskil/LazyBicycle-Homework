@@ -2,7 +2,7 @@
     <div class="body">
         <Card class="main_body">
             <div style="position: absolute; right: 1rem; top:1rem">
-                <Button v-if='ismanager' type="error" ghost style="margin-right: 1rem">删除书籍</Button>
+                <Button v-if='ismanager' @click="delbook" type="error" ghost style="margin-right: 1rem">删除书籍</Button>
                 <i-button v-if="!iscollected" @click="heart_success" icon="md-heart-outline">收藏</i-button>
                 <i-button v-else @click="heart_cancel" icon="md-heart" type="primary" ghost>已收藏</i-button>
             </div>
@@ -34,7 +34,7 @@
                     <span class="rl">评分<br> <strong>{{book.rating[0].average}}</strong></span><br>
                 </div>
                 <div>
-                    <my-rate :message=book.rating[0].average></my-rate>
+                    <my-rate :message="book.rating[0].average"></my-rate>
                     <br>
                 </div>
                 <div>
@@ -109,6 +109,7 @@
 <script>
     import {mapGetters} from "vuex";
     import myRate from "@/components/myRate";
+
     export default {
         name: "detailinfo",
         components: {
@@ -118,7 +119,7 @@
             return {
                 formValidate: {
                     comment: '',
-                    value:''
+                    value: ''
                 },
                 ruleValidate: {
                     comment: [
@@ -130,7 +131,6 @@
                         {required: true, message: '评分不能为空', trigger: 'blur'}
                     ]
                 },
-                ismanager: true,
                 iscollected: false,     //是否已收藏
                 value: 0,
                 summary_value: ''
@@ -141,14 +141,12 @@
                 'bookList',
                 'bookReviewList',
                 'userinfo',
+                'ismanager'
             ]),
             book() {
                 let books = this.bookList.filter(item => item.id == this.$route.params.id)
                 return books[0]
             },
-            iscollected() {
-                return false
-            }
         },
         methods: {
             handleSubmit(name) {
@@ -161,39 +159,96 @@
                     }
                 })
             },
-            async heart_success() {
-                console.log('hearttttttttttttt')
+            async getcollected() {
+                console.log('cccccccccccccollececetd')
                 let data = {
                     bid: this.book.id,
                     uid: this.userinfo.uid
                 }
-                await this.$axios.post('/user/likebook', data).then(res => {
-                    console.log(res)
-                    if (res.bid){
-                        this.$Message.success('收藏成功!');
-                        this.updatePage()
+                await this.$axios.post('/user/isuserlikebook', data).then(res => {
+                    console.log('res.data.result', res.data.result)
+                    if (res.data.result) {
+                        console.log('res.data.result', res.data.result)
+                        this.iscollected = res.data.result
+                    } else {
+                        this.iscollected = false
                     }
                 }).catch(err => {
                     console.log(err)
+                    this.iscollected = false
                 });
 
+            },
+            async heart_success() {
+                let data = {
+                    bid: this.book.id,
+                    uid: this.userinfo.uid
+                }
+                this.$axios.post('/user/likebook', data).then(res => {
+                    console.log(res)
+                    if (res.bid) {
+                        console.log('收藏')
+                    }
+                }).catch(err => {
+                    console.log(err)
+                    this.getcollected()
+                    this.$Message.error(err);
+                });
                 this.iscollected = true;
-                this.$Message.success('收藏成功');
+                this.$Message.success('收藏成功!');
             },
-            heart_cancel() {
+            async heart_cancel() {
+                let data = {
+                    bid: this.book.id,
+                    uid: this.userinfo.uid
+                }
+                this.$axios.post('/user/unlikebook', data).then(res => {
+                    console.log(res)
+                    if (res.bid) {
+                        console.log('取消')
+                    }
+                }).catch(err => {
+                    console.log(err)
+                    this.getcollected()
+                    this.$Message.error(err);
+                });
                 this.iscollected = false;
-                this.$Message.success('收藏取消');
+                this.$Message.success('收藏已取消!');
+            },
+            async delbook() {
+                let data = {
+                    bid: this.book.id,
+                }
+                this.$axios.post('/removeBook', data).then(res => {
+                    console.log(res)
+                    if (res.data == success) {
+                        console.log('删除成功')
+                        this.$Message.success('收藏已取消!');
+                    }
+                }).catch(err => {
+                    console.log(err)
+                    this.getcollected()
+                    this.$Message.error(err);
+                });
+
+            },
+            update() {
+                this.getcollected()
+
+            }
+        },
+        watch: {
+            '$route': 'update',
+            book: function () {
+                this.$store.dispatch('getbookreviewList', this.book.id)
+                this.update()
             },
         },
-        watch:{
-            '$route': 'book',
-            book:function () {
-                this.$store.dispatch('getbookreviewList',this.book.id)
-            },
-        },
+        created() {
+            this.update()
+        }
 
     }
-
 
 </script>
 

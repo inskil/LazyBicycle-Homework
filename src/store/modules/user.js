@@ -39,6 +39,9 @@ const user = {
         UPDATE_INFO(state, data) {
             state.userinfo = data;
             state.username = data.username;
+            for (let i = 0; i < state.userinfo.roles.length; i++) {
+                if ( state.userinfo.roles[i] =='admin') state.ismanager = true
+            }
             if (data.userheadimg) {
                 state.userheadimg = data.userheadimg
                 state.userinfo.userheadimg = data.userheadimg

@@ -109,7 +109,7 @@
                     </Col>
                 </Row>
             </TabPane>
-            <TabPane label="内容添加" icon="md-settings" class="messages">
+            <TabPane v-if="ismanager" label="内容添加" icon="md-settings" class="messages">
                 <Row>
                     <Col span="12">
                         <Card style="margin-left: 10%; margin-right: 5%; font-size: large; background-color: rgba(255,230,112,0.10)">
@@ -135,7 +135,6 @@
     export default {
         data() {
             return {
-                isAdmin:true,
                 changeName: false,
                 changeSignature: false,
                 nameForm: {
@@ -162,7 +161,8 @@
                 'bookList',
                 'movieList',
                 'userinfo',
-                'noticeList'
+                'noticeList',
+                'ismanager'
             ]),
             groups: function () {
                 let group = this.userinfo.group

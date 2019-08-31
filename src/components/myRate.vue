@@ -12,7 +12,7 @@
             }
         },
         created(){
-            this.star = this.message /2
+            this.star = parseInt(this.message) /2
         }
     }
 </script>
