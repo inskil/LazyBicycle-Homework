@@ -74,7 +74,7 @@
             </div>
             <Form ref="formValidate" :model="formValidate" :rules="ruleValidate" style="width: 100%; margin-top: 1rem">
                 <FormItem prop="value" style="width: 20%; left: 40%; position: relative">
-                    <Rate :value.sync="value" style="font-size: xx-large"></Rate>
+                    <Rate :value.sync="value" v-model="formValidate.value" style="font-size: xx-large"></Rate>
                 </FormItem>
                 <FormItem prop="comment">
                     <Input v-model="formValidate.comment" type="textarea" :rows="5" placeholder="在这里发表你的评论"/>
@@ -99,10 +99,18 @@
             myRate
         },
         data() {
+            const validateValue = (rule, value, callback) => {
+                if (value===0) {
+                    return callback(new Error('评分不能为空'));
+                }
+                else{
+                    callback();
+                }
+            };
             return {
                 formValidate: {
                     comment: '',
-                    value: ''
+                    value:0
                 },
                 ruleValidate: {
                     comment: [
@@ -111,7 +119,7 @@
                         {type: 'string', max: 1000, message: '评论不能多于1000个字', trigger: 'blur'}
                     ],
                     value: [
-                        {required: true, message: '评分不能为空', trigger: 'blur'}
+                        {validator: validateValue, trigger: 'blur'}
                     ]
                 },
                 iscollected: false,
@@ -234,4 +242,5 @@
 
 <style scoped>
     @import "../assets/css/infos.css";
+
 </style>
