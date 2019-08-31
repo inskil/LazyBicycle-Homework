@@ -63,11 +63,13 @@ module.exports = {
         }
     },
     async getnewtid(ctx, next) {
-
         console.log('----------------获取对应gid的新的tid-----------------------');
         let predata = ctx.request.body;
         try {
             let data = await ctx.findOne(groupModel, {gid: predata.gid});
+            if(!data.topicmax){
+                data.topicmax = 0;
+            }
             let max = data.topicmax + 0.001;
             console.log(max);
             let json = JSON.parse(JSON.stringify(data));
@@ -131,7 +133,6 @@ module.exports = {
                 } else {
                     json["review"] = prejson["review"];
                 }
-
                 //添加通知
                 let tid = predata.tid;
                 let tidstring = tid.toString();
