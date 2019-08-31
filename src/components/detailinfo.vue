@@ -131,20 +131,24 @@
                     ]
                 },
                 ismanager: true,
-                iscollected: false,
+                iscollected: false,     //是否已收藏
                 value: 0,
-                summary_value: '',
+                summary_value: ''
             }
         },
         computed: {
             ...mapGetters([
                 'bookList',
-                'bookReviewList'
+                'bookReviewList',
+                'userinfo',
             ]),
             book() {
                 let books = this.bookList.filter(item => item.id == this.$route.params.id)
                 return books[0]
             },
+            iscollected() {
+                return false
+            }
         },
         methods: {
             handleSubmit(name) {
@@ -157,7 +161,22 @@
                     }
                 })
             },
-            heart_success() {
+            async heart_success() {
+                console.log('hearttttttttttttt')
+                let data = {
+                    bid: this.book.id,
+                    uid: this.userinfo.uid
+                }
+                await this.$axios.post('/user/likebook', data).then(res => {
+                    console.log(res)
+                    if (res.bid){
+                        this.$Message.success('收藏成功!');
+                        this.updatePage()
+                    }
+                }).catch(err => {
+                    console.log(err)
+                });
+
                 this.iscollected = true;
                 this.$Message.success('收藏成功');
             },
