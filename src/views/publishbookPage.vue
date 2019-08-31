@@ -37,14 +37,15 @@
                 </el-row>
                 <row style="height: 550px">
                     <div style="width:35%;right:0;position: absolute;top:1rem">
-                        <el-form-item label="书籍封面" prop="images">
+                        <el-form-item label="书籍封面" prop="image">
                             <el-upload
+                                    v-model="ruleForm.image"
                                     class="avatar-uploader1"
                                     action="/api/upload"
                                     :show-file-list="false"
                                     :on-success="handleAvatarSuccess"
                                     :before-upload="beforeAvatarUpload">
-                                <img v-if="images" :src="images" class="avatar1">
+                                <img v-if="ruleForm.image" :src="ruleForm.image" class="avatar1">
                                 <i v-else class="el-icon-plus avatar-uploader1-icon"></i>
                             </el-upload>
                         </el-form-item>
@@ -62,7 +63,7 @@
                             </el-form-item>
                         </div>
                         <div style="height: 80px; margin-bottom: 22px">
-                            <el-form-item label="isbn13" prop="isbn13">
+                            <el-form-item label="ISBN" prop="isbn13">
                                 <el-input v-model="ruleForm.isbn13"></el-input>
                             </el-form-item>
                         </div>
@@ -104,7 +105,6 @@
             return {
                 disabled: false,
                 // userheadimg:'',
-                images: '',
                 img:'',
                 ruleForm: {
                     // username: '',
@@ -117,13 +117,15 @@
                     pages: '',
                     author_intro: '',
                     summary: '',
-                    catalog: ''
+                    catalog: '',
+                    image:''
                 },
                 rules: {
-                    username: [
-                        {required: true, message: '请输入用户名', trigger: 'blur'}
-                    ],
+                    // username: [
+                    //     {required: true, message: '请输入用户名', trigger: 'blur'}
+                    // ],
                     isbn13: [
+                        {required: true, message: '请输入ISBN', trigger: 'blur'},
                         {min: 13, max: 13, message: '输入格式不正确', trigger: 'blur'}
                     ],
                     // userheadimg:[
@@ -133,9 +135,35 @@
                     //     { required: true, message: '请上传图片', trigger: 'blur'}
                     // ],
                     title: [
-                        {required: true, message: '请输入书名', trigger: 'blur'},
+                        {required: true, message: '请输入书名', trigger: 'blur'}
                     ],
-
+                    author: [
+                        {required: true, message: '请输入作者', trigger: 'blur'}
+                    ],
+                    publisher:[
+                        {required: true, message: '请输入出版社', trigger: 'blur'}
+                    ],
+                    pages:[
+                        {required: true, message: '请输入页数', trigger: 'blur'}
+                    ],
+                    author_intro:[
+                        {required: true, message: '请输入作者介绍', trigger: 'blur'}
+                    ],
+                    summary: [
+                        {required: true, message: '请输入摘要', trigger: 'blur'}
+                    ],
+                    catalog: [
+                        {required: true, message: '请输入目录', trigger: 'blur'}
+                    ],
+                    price:[
+                        {required: true, message: '请输入价格', trigger: 'blur'}
+                    ],
+                    pubdate:[
+                        {required: true, message: '请输入出版时间', trigger: 'blur'}
+                    ],
+                    image:[
+                        {required: true, message: '请上传封面', trigger: 'blur'}
+                    ]
                 }
             };
         },
@@ -184,7 +212,7 @@
             //     this.userheadimg = URL.createObjectURL(file.raw);
             // },
             handleAvatarSuccess(res, file) {
-                this.images = URL.createObjectURL(file.raw);
+                this.ruleForm.image = URL.createObjectURL(file.raw);
                 this.img =  res.data.file
             },
             beforeAvatarUpload(file) {
