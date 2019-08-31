@@ -38,10 +38,6 @@
                 <div>
                     <span class="rl">评价人数: {{numRaters}}</span>
                 </div>
-                <div>
-                    你的评价：
-                    <Rate :value.sync="value"></Rate>
-                </div>
             </div>
 
         </Card>
@@ -63,7 +59,7 @@
                     <span style="color: #666666">
                         {{review.author.name}} · {{review.created_at}}
                     </span>
-                    <span style="left: 45rem; position:relative;">
+                    <span style="right: 18%; position:absolute;">
                         <Rate disabled allow-half v-model="review.rating.value"/>
                     </span>
                     <div class="cell_dashed">
@@ -76,6 +72,9 @@
                 <Divider orientation="left" property="v:itemreviewed"><h2>发表评论</h2></Divider>
             </div>
             <Form ref="formValidate" :model="formValidate" :rules="ruleValidate" style="width: 100%; margin-top: 1rem">
+                <FormItem prop="value" style="width: 20%; left: 40%; position: relative">
+                    <Rate :value.sync="value" style="font-size: xx-large"></Rate>
+                </FormItem>
                 <FormItem prop="comment">
                     <Input v-model="formValidate.comment" type="textarea" :rows="5" placeholder="在这里发表你的评论" />
                 </FormItem>
@@ -94,14 +93,18 @@
         name: "detailinfo",
         data() {
             return {
-                formValidate:{
-                    comment:''
+                formValidate: {
+                    comment: '',
+                    value:''
                 },
-                ruleValidate:{
-                    comment:[
-                        { required: true, message: '评论不能为空', trigger: 'blur' },
-                        { type: 'string', min: 25, message: '评论不能少于25个字', trigger: 'blur' },
-                        { type: 'string', max: 1000, message: '评论不能多于1000个字', trigger: 'blur' }
+                ruleValidate: {
+                    comment: [
+                        {required: true, message: '评论不能为空', trigger: 'blur'},
+                        {type: 'string', min: 25, message: '评论不能少于25个字', trigger: 'blur'},
+                        {type: 'string', max: 1000, message: '评论不能多于1000个字', trigger: 'blur'}
+                    ],
+                    value: [
+                        {required: true, message: '评分不能为空', trigger: 'blur'}
                     ]
                 },
                 ismanager:true,
