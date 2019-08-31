@@ -19,7 +19,11 @@
             </div>
         </Card>
         <Card>
-            <Button v-if="isAdmin" class="delete" type="error" ghost style="float: right">删帖</Button>
+            <Button v-if="isAdmin" type="error" ghost style="float: right" icon="ios-trash" @click="delete_success">删帖</Button>
+            <Button v-if="isAdmin&&!topicmsg.isgood" type="error" ghost style="float: right; margin-right: 1rem" icon="ios-arrow-dropup" @click="good_success">置顶</Button>
+            <Button v-if="isAdmin&&topicmsg.isgood" type="error" ghost style="float: right; margin-right: 1rem" icon="ios-arrow-dropup-circle" @click="good_cancel">取消置顶</Button>
+            <Button v-if="isAdmin&&!topicmsg.istop" type="error" ghost style="float: right; margin-right: 1rem" icon="ios-star-outline" @click="top_success">加精</Button>
+            <Button v-if="isAdmin&&topicmsg.istop" type="error" ghost style="float: right; margin-right: 1rem" icon="ios-star" @click="top_cancel">取消精品</Button>
             <div class="content" align="left">
                 <h1>{{topicmsg.title}}</h1>
                 <br>
@@ -76,6 +80,8 @@
                 isAdmin:true,
                 topicmsg:{
                     tid: 34919095,
+                    isgood:false,
+                    istop:false,
                     createtime: "2012-12-07 00:12:16",
                     title: "煮字为药。",
                     text:"看到这几个字觉得很合适。\n" +
@@ -203,6 +209,27 @@
                         username:"你的小祖宗",
                     }
                 ]
+            }
+        },
+        methods:{
+            good_success() {
+                this.topicmsg.isgood=true;
+                this.$Message.success('收藏成功');
+            },
+            good_cancel() {
+                this.topicmsg.isgood=false;
+                this.$Message.success('收藏取消');
+            },
+            top_success() {
+                this.topicmsg.istop=true;
+                this.$Message.success('收藏成功');
+            },
+            top_cancel() {
+                this.topicmsg.istop=false;
+                this.$Message.success('收藏取消');
+            },
+            delete_success() {
+                this.$Message.success('删除成功');
             }
         }
     }

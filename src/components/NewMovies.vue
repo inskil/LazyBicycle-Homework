@@ -1,9 +1,11 @@
 <template>
     <Row class="book_list" justify="center" type="flex">
         <Col v-for="book in movieList" v-bind:key="book.id" span="6" class="book_col" align="center">
-            <div class="book_card material-card material-shadow-5 material-hover">
-                <img class="pic" :src="book.images[0].large  ">
-            </div>
+            <router-link :to="'/movieDetail/'+book.id">
+                <div class="book_card material-card material-shadow-5 material-hover">
+                    <img class="pic" :src="book.images[0].large  ">
+                </div>
+            </router-link>
             <h3>{{book.title}}</h3>
             <myRate :message=book.rating[0].average  />
             {{book.rating[0].average}}

@@ -107,11 +107,13 @@
             <br>
             <Row style="margin-top: 1rem">
                 <Col span="6" v-for="group in recommendList">
-                    <div align="center">
-                        <Avatar v-bind:src="group.grouphead" size="large" shape="square"/>
-                        <br>
-                        <div class="name">{{group.groupname}}</div>
-                    </div>
+                    <router-link :to="'/groupDetail/'+group.gid" class="link">
+                        <div align="center">
+                            <Avatar v-bind:src="group.grouphead" size="large" shape="square"/>
+                            <br>
+                            <div class="name">{{group.groupname}}</div>
+                        </div>
+                    </router-link>
                 </Col>
             </Row>
             <div v-if='isAdmin' style="float: left;width: 10%;height: 100%; margin-top: 10%">

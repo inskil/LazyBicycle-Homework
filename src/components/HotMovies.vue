@@ -3,14 +3,16 @@
         <Carousel autoplay v-model="value2" :dots="setting.dots" :radius-dot="setting.radiusDot" loop>
             <CarouselItem v-for="book in movieList" v-bind:key="book.id">
                 <div class="demo-carousel" align="center">
-                    <div class="material-card material-shadow-2 material-hover">
-                        <img class="pic" :src="book.images[0].large">
-                        <div class="text">
-                            <h1>{{book.title}}</h1>
-                            <br><br>
-                            <p>{{book.summary}}</p>
+                    <router-link :to="'/movieDetail/'+book.id">
+                        <div class="material-card material-shadow-2 material-hover">
+                            <img class="pic" :src="book.images[0].large">
+                            <div class="text">
+                                <h1>{{book.title}}</h1>
+                                <br><br>
+                                <p>{{book.summary}}</p>
+                            </div>
                         </div>
-                    </div>
+                    </router-link>
                 </div>
             </CarouselItem>
         </Carousel>
@@ -110,6 +112,7 @@
         height: 20rem;
         padding: 2rem;
         position: relative;
+        color: black;
     }
 
     p {
