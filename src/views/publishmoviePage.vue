@@ -29,23 +29,24 @@
                             <el-input v-model="ruleForm.title"></el-input>
                         </el-form-item>
                     </div>
-                    <div style="height: 80px; margin-bottom: 22px;width: 50%; margin-right: 5%">
-                        <el-form-item label="又名" prop="original_title" class="el-form-item__content">
-                            <el-input v-model="ruleForm.original_title"></el-input>
-                        </el-form-item>
-                    </div>
+<!--                    <div style="height: 80px; margin-bottom: 22px;width: 50%; margin-right: 5%">-->
+<!--                        <el-form-item label="又名" prop="original_title" class="el-form-item__content">-->
+<!--                            <el-input v-model="ruleForm.original_title"></el-input>-->
+<!--                        </el-form-item>-->
+<!--                    </div>-->
                 </el-row>
                 <row style="height: 620px">
                     <div style="width:35%;right:0;position: absolute;top:1rem">
-                        <el-form-item label="电影海报" prop="images">
+                        <el-form-item label="电影海报" prop="image">
                             <div style="margin-top: 15%;float: left" class="el-upload">
                                 <el-upload
+                                        v-model="ruleForm.image"
                                         class="avatar-uploader1"
                                         action="/api/upload"
                                         :show-file-list="false"
                                         :on-success="handleAvatarSuccess1"
                                         :before-upload="beforeAvatarUpload">
-                                    <img v-if="images" :src="images" class="avatar1">
+                                    <img v-if="ruleForm.image" :src="ruleForm.image" class="avatar1">
                                     <i v-else class="el-icon-plus avatar-uploader1-icon"></i>
                                 </el-upload>
                             </div>
@@ -74,8 +75,8 @@
                             </el-form-item>
                         </div>
                         <div style="height: 80px; margin-bottom: 22px">
-                            <el-form-item label="内地上映时间" prop="mainland_pubdate">
-                                <el-input v-model="ruleForm.mainland_pubdate" placeholder="请按XXXX(年)-XX(月)-XX(日)格式输入"></el-input>
+                            <el-form-item label="时长" prop="durations">
+                                <el-input v-model="ruleForm.durations"></el-input>
                             </el-form-item>
                         </div>
                         <div style="height: 80px; margin-bottom: 22px">
@@ -104,34 +105,49 @@
             return {
                 // disabled: false,
                 // userheadimg:'',
-                images:'',
                 img:'',
                 ruleForm: {
                     // username: '',
                     title: '',
-                    original_title: '',
+                    // original_title: '',
                     directors: '',
                     casts: '',
                     genres: '',
-                    pubdates: '',
+                    // pubdates: '',
                     mainland_pubdate: '',
+                    durations: '',
                     year: '',
-                    summary: ''
+                    summary: '',
+                    image:''
                 },
                 rules: {
                     // username: [
                     //     { required: true, message: '请输入用户名',trigger: 'blur' }
                     // ],
-                    genres: [
-                        { required: true, message: '请输入类型',trigger: 'blur' }
-                    ],
+                    // genres: [
+                    //     { required: true, message: '请输入类型',trigger: 'blur' }
+                    // ],
                     // userheadimg:[
                     //     { required: true, message: '请上传图片', trigger: 'blur'}
                     // ],
                     title: [
                         { required: true, message: '请输入电影名', trigger: 'blur' },
                     ],
-
+                    image:[
+                        {required: true, message: '请上传电影海报', trigger: 'blur'}
+                    ],
+                    directors: [
+                        {required: true, message: '请输入导演', trigger: 'blur'}
+                    ],
+                    year: [
+                        {required: true, message: '请输入年份', trigger: 'blur'}
+                    ],
+                    durations:[
+                        {required: true, message: '请输入时长', trigger: 'blur'}
+                    ],
+                    summary: [
+                        {required: true, message: '请输入剧情简介', trigger: 'blur'}
+                    ]
                 }
             };
         },
@@ -179,7 +195,8 @@
             //     this.userheadimg = URL.createObjectURL(file.raw);
             // },
             handleAvatarSuccess1(res, file) {
-                this.images = URL.createObjectURL(file.raw);
+                this.img = res.data.file
+                this.ruleForm.image = URL.createObjectURL(file.raw);
                 this.img = res.data.file
             },
             beforeAvatarUpload(file) {
