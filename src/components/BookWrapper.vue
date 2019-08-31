@@ -1,7 +1,7 @@
 <template>
     <div class="wrapper">
         <div class="cols">
-            <div v-for="book in bookList"   v-bind:key="book.id" class="col"
+            <div v-for="book in newbooks"   v-bind:key="book.id" class="col"
                  ontouchstart="this.classList.toggle('hover');">
                 <div class="container">
                     <div class="front" v-bind:style="{backgroundImage:'url(' + book.images[0].large + ')'}">
@@ -34,6 +34,10 @@
             ...mapGetters([
                 'bookList'
             ]),
+            newbooks(){
+                console.log("bookwapper")
+                return this.bookList.slice(0,8);
+            },
         },
         watch: {
             // 如果路由有变化，会再次执行该方法

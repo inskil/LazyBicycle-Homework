@@ -1,7 +1,7 @@
 <template>
     <div class="carousel">
         <Carousel autoplay v-model="value2" :dots="setting.dots" :radius-dot="setting.radiusDot" loop>
-            <CarouselItem v-for="book in bookList" v-bind:key="book.id">
+            <CarouselItem v-for="book in newbooks" v-bind:key="book.id">
                 <div class="demo-carousel" align="center">
                     <div class="material-card material-shadow-2 material-hover">
                         <img class="pic" :src="book.images[0].large">
@@ -38,6 +38,10 @@
             ...mapGetters([
                 'bookList'
             ]),
+            newbooks(){
+                //console.log("newbooks" , this.bookList.slice(0,4))
+                return this.bookList.slice(0,8);
+            },
         },
         watch: {
             // 如果路由有变化，会再次执行该方法
@@ -59,7 +63,7 @@
         },
         created() {
             // Getting books data on created
-            this.getBook()
+            //this.getBook()
         },
 
     }

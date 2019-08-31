@@ -1,6 +1,6 @@
 <template>
     <Row class="book_list" justify="center" type="flex">
-        <Col v-for="book in movieList" v-bind:key="book.id" span="6" class="book_col" align="center">
+        <Col v-for="book in newmovies" v-bind:key="book.id" span="6" class="book_col" align="center">
             <div class="book_card material-card material-shadow-5 material-hover">
                 <img class="pic" :src="book.images[0].large  ">
             </div>
@@ -40,6 +40,10 @@
             ...mapGetters([
                 'movieList'
             ]),
+            newmovies(){
+                // console.log("newmovies" , this.movieList.slice(0,4))
+                return this.movieList.slice(0,8);
+            }
         },
         watch: {
             // 如果路由有变化，会再次执行该方法
@@ -59,7 +63,7 @@
         },
         created() {
             // Getting books data on created
-            this.fetchDate()
+            // this.fetchDate()
         }
     }
 </script>

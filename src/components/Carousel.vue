@@ -1,13 +1,13 @@
 <template>
     <div class="carousel" style="width: 100%;max-height: 40%">
         <div class="slider slider-for">
-            <div v-for="book in bookList" v-bind:key="book.id" class="item"
+            <div v-for="book in newbooks" v-bind:key="book.id" class="item"
                  v-bind:style="{backgroundImage:'url(' + book.images[0].large + ')'}"></div>
-            <div v-for="movie in movieList" v-bind:key="movie.id" class="item"
+            <div v-for="movie in newmovies" v-bind:key="movie.id" class="item"
                  v-bind:style="{backgroundImage:'url(' + movie.images[0].large + ')'}"></div>
         </div>
         <div class="slider slider-nav">
-            <div v-for="book in bookList" v-bind:key="book.id" class="nav-item">
+            <div v-for="book in newbooks" v-bind:key="book.id" class="nav-item">
                 <div class="content" v-bind:style="{backgroundImage:'url(' + book.images[0].large + ')'}">
                     <div class="number">书籍</div>
                     <div class="body">
@@ -22,7 +22,7 @@
                 </div>
             </div>
 
-            <div v-for="movie in movieList" v-bind:key="movie.id" class="nav-item">
+            <div v-for="movie in newmovies" v-bind:key="movie.id" class="nav-item">
                 <div class="content" v-bind:style="{backgroundImage:'url(' + movie.images[0].large + ')'}">
                     <div class="number">影视</div>
                     <div class="body">
@@ -53,8 +53,7 @@
         },
         data() {
             return {
-                loading: false,
-                //bookList:[]
+                loading: true,
             }
         },
         computed: {
@@ -62,6 +61,15 @@
                 'bookList',
                 'movieList'
             ]),
+            newbooks(){
+                //console.log("newbooks" , this.bookList.slice(0,4))
+                return this.bookList.slice(0,4);
+            },
+            newmovies(){
+                // console.log("newmovies" , this.movieList.slice(0,4))
+                return this.movieList.slice(0,4);
+            }
+
         },
         watch: {
             // 如果路由有变化，会再次执行该方法
@@ -69,8 +77,8 @@
         },
         methods: {
             fetchDate: function () {
-                this.getBook()
-                this.getMovie()
+                // this.getBook()
+                // this.getMovie()
                 setTimeout(this.slick,500)
             },
             getBook() {
@@ -132,7 +140,7 @@
         },
        created() {
             // Getting books data on created
-            this.fetchDate()
+            this.fetchDate();
         },
 
     }

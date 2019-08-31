@@ -1,7 +1,7 @@
 <template>
     <div class="wrapper">
         <div class="cols">
-            <div v-for="movie in movieList" v-bind:key="movie.id" class="col" ontouchstart="this.classList.toggle('hover');">
+            <div v-for="movie in newmovies" v-bind:key="movie.id" class="col" ontouchstart="this.classList.toggle('hover');">
                 <div class="container">
                     <div class="front" v-bind:style="{backgroundImage:'url(' + movie.images[0].large + ')'}">
                         <div class="inner">
@@ -32,6 +32,10 @@
             ...mapGetters([
                 'movieList'
             ]),
+            newmovies(){
+                // console.log("newmovies" , this.movieList.slice(0,4))
+                return this.movieList.slice(0,8);
+            }
         },
         watch: {
             // 如果路由有变化，会再次执行该方法
