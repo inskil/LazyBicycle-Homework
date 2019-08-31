@@ -5,7 +5,7 @@
         </div>
         <div style="width: 80%; margin-left: 10%">
             <el-form :model="ruleForm" :rules="rules" ref="ruleForm" class="pb_list">
-<!--                <el-row>-->
+                <el-row>
 <!--                    <div style="width:35%;position: absolute;right:0;top:7rem">-->
 <!--                        <el-form-item label="上传头像" prop="userheadimg">-->
 <!--                            <el-upload-->
@@ -24,8 +24,6 @@
 <!--                            <el-input v-model="ruleForm.username"></el-input>-->
 <!--                        </el-form-item>-->
 <!--                    </div>-->
-<!--                </el-row>-->
-                <row style="height: 510px">
                     <div style="height: 80px; margin-bottom: 22px;width: 50%; margin-right: 5%">
                         <el-form-item label="电影名" prop="title" class="el-form-item__content">
                             <el-input v-model="ruleForm.title"></el-input>
@@ -36,9 +34,11 @@
                             <el-input v-model="ruleForm.original_title"></el-input>
                         </el-form-item>
                     </div>
-                    <div style="width:35%;right:0;position: absolute;top:7rem">
+                </el-row>
+                <row style="height: 620px">
+                    <div style="width:35%;right:0;position: absolute;top:1rem">
                         <el-form-item label="电影海报" prop="image">
-                            <div class="el-upload">
+                            <div style="margin-top: 15%;float: left" class="el-upload">
                                 <el-upload
                                         v-model="ruleForm.image"
                                         class="avatar-uploader1"
@@ -69,23 +69,23 @@
                                 <el-input v-model="ruleForm.genres" placeholder="若有多个类型，中间请用；隔开"></el-input>
                             </el-form-item>
                         </div>
-<!--                        <div style="height: 80px; margin-bottom: 22px">-->
-<!--                            <el-form-item label="上映时间" prop="pubdates">-->
-<!--                                <el-input v-model="ruleForm.pubdates" placeholder="请按XXXX(年)-XX(月)-XX(日)格式输入"></el-input>-->
-<!--                            </el-form-item>-->
-<!--                        </div>-->
+                        <div style="height: 80px; margin-bottom: 22px">
+                            <el-form-item label="上映时间" prop="pubdates">
+                                <el-input v-model="ruleForm.pubdates" placeholder="请按XXXX(年)-XX(月)-XX(日)格式输入"></el-input>
+                            </el-form-item>
+                        </div>
+                        <div style="height: 80px; margin-bottom: 22px">
+                            <el-form-item label="内地上映时间" prop="mainland_pubdate">
+                                <el-input v-model="ruleForm.mainland_pubdate" placeholder="请按XXXX(年)-XX(月)-XX(日)格式输入"></el-input>
+                            </el-form-item>
+                        </div>
+                        <div style="height: 80px; margin-bottom: 22px">
+                            <el-form-item label="年份" prop="year">
+                                <el-input v-model="ruleForm.year"></el-input>
+                            </el-form-item>
+                        </div>
                     </div>
                 </row>
-                <div style="height: 80px; margin-bottom: 22px">
-                    <el-form-item label="时长" prop="durations">
-                        <el-input v-model="ruleForm.durations"></el-input>
-                    </el-form-item>
-                </div>
-                <div style="height: 80px; margin-bottom: 22px">
-                    <el-form-item label="年份" prop="year">
-                        <el-input v-model="ruleForm.year"></el-input>
-                    </el-form-item>
-                </div>
                 <el-form-item label="剧情简介" prop="summary">
                     <el-input type="textarea" v-model="ruleForm.summary" :rows="5"></el-input>
                 </el-form-item>
@@ -105,7 +105,7 @@
             return {
                 // disabled: false,
                 // userheadimg:'',
-                // images:'',
+                img:'',
                 ruleForm: {
                     // username: '',
                     title: '',
@@ -152,9 +152,35 @@
         },
         methods: {
             submitForm(formName) {
-                this.$refs[formName].validate((valid) => {
+                this.$refs[formName].validate(async (valid) => {
                     if (valid) {
-                        alert('submit!');
+                        try {
+                            let mid = 0
+                            await this.$axios.post('/getnewmid').then(res => {
+                                console.log(res)
+                                mid = res.data.mid
+                            }).catch(err => {
+                                console.log(err)
+                            })
+                            let msg = this.ruleForm
+                            msg.images = {
+                                large: this.img
+                            }
+                            let data = {
+                                mid:mid,
+                                moviemsg: msg
+                            }
+                            await this.$axios.post('/addmovie', data).then(res => {
+                                console.log('addmovie', res)
+                                if (res.data.id >0) {
+                                    this.$Message.success('创建成功');
+                                    this.$router.push('/movieDetail/'+res.data.id)
+                                }
+                            })
+                        } catch (e) {
+                            console.log(e)
+                            this.$Message.error(e);
+                        }
                     } else {
                         return false;
                     }
@@ -169,6 +195,7 @@
             },
             handleAvatarSuccess1(res, file) {
                 this.ruleForm.image = URL.createObjectURL(file.raw);
+                this.img = res.data.file
             },
             beforeAvatarUpload(file) {
                 const isJPG = file.type === 'image/jpeg';
