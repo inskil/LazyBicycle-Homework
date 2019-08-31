@@ -15,7 +15,7 @@
             </div>
             <div v-for="topic in topiclist_gid" align="left">
                 <Divider v-if="topic !== topicList[0]" dashed style="margin: 0.2rem"></Divider>
-                <router-link  :to="'/topic/' +topic.tid +'/'+topic.gid" >{{topic.title}}（{{topic.username}}）</router-link>
+                <router-link  :to="'/topic/'+topic.gid+'/'+topic.tid">{{topic.title}}（{{topic.username}}）</router-link>
             </div>
         </Card>
         <Card>

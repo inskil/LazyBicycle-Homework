@@ -31,7 +31,9 @@
                 <tr v-for="book in alllist.book" v-bind:key="book._id" style="padding: 1rem">
                     <th align="left"
                         style="font-weight: normal; width: 80%; border-bottom: dashed 1px #5cadff; padding: 1rem 1rem 1rem 0rem">
-                        <h3>[图书] {{book.title}}</h3>
+                        <router-link :to="'/bookDetail/'+book.id">
+                            <h3>[图书] {{book.title}}</h3>
+                        </router-link>
                         <div>
                             <div class="author">作者：{{book.author[0]}}</div>
                             <div class="rate">评分：</div>
@@ -41,15 +43,19 @@
                         <div class="summary">{{book.summary}}</div>
                     </th>
                     <th style="border-bottom: dashed 1px #5cadff">
-                        <div class="pic_div material-card material-shadow-2 material-hover">
-                            <img class="pic" :src="book.images[0].large">
-                        </div>
+                        <router-link :to="'/bookDetail/'+book.id">
+                            <div class="pic_div material-card material-shadow-2 material-hover">
+                                <img class="pic" :src="book.images[0].large">
+                            </div>
+                        </router-link>
                     </th>
                 </tr>
                 <tr v-for="book in alllist.movie" v-bind:key="book._id" style="padding: 1rem">
                     <th align="left"
                         style="font-weight: normal; width: 80%; border-bottom: dashed 1px #5cadff; padding: 1rem 1rem 1rem 0rem">
-                        <h3>[电影] {{book.title}}</h3>
+                        <router-link :to="'/movieDetail/'+book.id">
+                            <h3>[电影] {{book.title}}</h3>
+                        </router-link>
                         <div>
                             <div class="author">导演：{{book.directors[0].name}}</div>
                             <div class="rate">评分：</div>
@@ -59,16 +65,20 @@
                         <div class="summary">{{book.summary}}</div>
                     </th>
                     <th style="border-bottom: dashed 1px #5cadff">
-                        <div class="pic_div material-card material-shadow-2 material-hover">
-                            <img class="pic" :src="book.images[0].large">
-                        </div>
+                        <router-link :to="'/movieDetail/'+book.id">
+                            <div class="pic_div material-card material-shadow-2 material-hover">
+                                <img class="pic" :src="book.images[0].large">
+                            </div>
+                        </router-link>
                     </th>
                 </tr>
                 <tr v-for="book in alllist.topic" v-bind:key="book._id" style="padding: 1rem">
                     <th align="left"
                         style="font-weight: normal; width: 60%; border-bottom: dashed 1px #5cadff; padding: 1rem 1rem 1rem 0rem"
                         colspan="2">
-                        <h3>[话题] {{book.title}}</h3>
+                        <router-link :to="'/topic/'+book.gid+'/'+book.tid">
+                            <h3>[话题] {{book.title}}</h3>
+                        </router-link>
                         <div>
                             <div class="author">作者：{{book.username}}</div>
                         </div>
@@ -79,8 +89,9 @@
                     <th align="left"
                         style="font-weight: normal; width: 60%; border-bottom: dashed 1px #5cadff; padding: 1rem 1rem 1rem 0rem"
                         colspan="2">
-                        <h3>[小组] {{book.groupname}}</h3>
-
+                        <router-link :to="'/groupDetail/'+book.gid">
+                            <h3>[小组] {{book.groupname}}</h3>
+                        </router-link>
                         <div class="summary2">{{book.text}}</div>
                     </th>
                 </tr>

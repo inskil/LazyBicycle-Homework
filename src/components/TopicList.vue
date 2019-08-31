@@ -8,7 +8,7 @@
         </tr>
         <tr v-for="topic in newList" v-if="topic.istop">
             <td align="left"><img src="https://img3.doubanio.com/pics/stick.gif">
-                <router-link class="hotlink" :to="'/topic/'+topic.tid">{{topic.title}}</router-link>
+                <router-link class="hotlink" :to="'/topic/'+topic.gid+'/'+topic.tid">{{topic.title}}</router-link>
             </td>
             <td>{{topic.username}}</td>
             <td>{{topic.review.length}}</td>
@@ -20,7 +20,7 @@
         </tr>
         <tr v-for="topic in newList" v-if="!topic.istop">
             <td align="left">
-                <router-link class="link" :to="'/topic/'+topic.tid">{{topic.title}}</router-link>
+                <router-link class="link" :to="'/topic/'+topic.gid+'/'+topic.tid">{{topic.title}}</router-link>
             </td>
             <td>{{topic.username}}</td>
             <td>{{topic.review.length}}</td>

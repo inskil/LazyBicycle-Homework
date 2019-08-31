@@ -38,7 +38,7 @@
                                 <td align="right" style="width: 25%; padding-right: 1rem">最后回应</td>
                             </tr>
                             <tr v-for="topic in hotList">
-                                <td align="left"><router-link class="link" :to="'/topic/'+topic.tid">{{topic.title}}</router-link></td>
+                                <td align="left"><router-link class="link" :to="'/topic/'+topic.gid+'/'+topic.tid">{{topic.title}}</router-link></td>
                                 <td>{{topic.username}}</td>
                                 <td>{{topic.review.length}}</td>
                                 <td align="right">
@@ -58,7 +58,7 @@
                                 <td align="right" style="width: 25%; padding-right: 1rem">最后回应</td>
                             </tr>
                             <tr v-for="topic in topiclist_gid" v-if="topic.isgood">
-                                <td align="left"><router-link class="link" :to="'/topic/'+topic.tid">{{topic.title}}</router-link></td>
+                                <td align="left"><router-link class="link" :to="'/topic/'+topic.gid+'/'+topic.tid">{{topic.title}}</router-link></td>
                                 <td>{{topic.username}}</td>
                                 <td>{{topic.review.length}}</td>
                                 <td align="right">
