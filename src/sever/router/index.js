@@ -37,7 +37,7 @@ export default app => {
     //router.get('/booklist', app.client.book.list)
     //router.get('/bookreview', app.client.book.review)
     router.post('/removeBook',app.client.book.removeBook)
-    router.get('/addbook',app.client.book.addbook)
+    router.post('/addbook',app.client.book.addbook)
     router.post('/updatebookrate',app.client.book.updatebookrate)
 
 
