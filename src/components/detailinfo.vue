@@ -14,31 +14,31 @@
             </div>
             <div class="infomations">
                 <div id="mainpic">
-                    <a class="nbg" v-bind:href="bigimg"
-                       v-bind:title="title">
-                        <img v-bind:src="bigimg" v-bind:alt="title" rel="v:photo"
+                    <a class="nbg" v-bind:href="book.images[0].large"
+                       v-bind:title="book.title">
+                        <img v-bind:src="book.images[0].large" v-bind:alt="title" rel="v:photo"
                              style="width: 135px;max-height: 200px;">
                     </a>
                 </div>
                 <div class="maininfo" align="left" style="left: 3rem; position: relative; height: 12rem;">
-                    <span class="pl">作者: {{book.author}}</span><br>
-                    <span class="pl">出版社: {{book.printer}}</span><br>
-                    <span class="pl">出版年: {{book.year}}</span><br>
+                    <span class="pl">作者: {{book.author[0]}}</span><br>
+                    <span class="pl">出版社: {{book.publisher}}</span><br>
+                    <span class="pl">出版时间: {{book.pubdate}}</span><br>
                     <span class="pl">页数: {{book.pages}}</span><br>
                     <span class="pl">定价: {{book.price}}</span><br>
-                    <span class="pl">ISBN: {{book.isbn}}</span><br>
+                    <span class="pl">ISBN: {{book.isbn13}}</span><br>
                 </div>
             </div>
             <div class="votes">
                 <div>
-                    <span class="rl">评分<br> <strong>{{average}}</strong></span><br>
+                    <span class="rl">评分<br> <strong>{{book.rating[0].average}}</strong></span><br>
                 </div>
                 <div>
-                    <Rate disabled allow-half v-model="stars"/>
+                    <my-rate :message=book.rating[0].average></my-rate>
                     <br>
                 </div>
                 <div>
-                    <span class="rl">评价人数: {{numRaters}}</span>
+                    <span class="rl">评价人数: {{book.rating[0].numRaters}}</span>
                 </div>
                 <div>
                     你的评价：
@@ -53,7 +53,7 @@
                 <Divider orientation="left" property="v:itemreviewed"><h2>内容简介</h2></Divider>
             </div>
             <div id="summary_summary">
-                <p class="p2" style="text-align: left">{{summary}}</p>
+                <p class="p2" style="text-align: left">{{book.summary}}</p>
             </div>
         </div>
         <div class="author_body">
@@ -61,7 +61,7 @@
                 <Divider orientation="left" property="v:itemreviewed"><h2>作者简介</h2></Divider>
             </div>
             <div id="author_summary">
-                <p class="p2" style="text-align: left">{{author_intro}}</p>
+                <p class="p2" style="text-align: left">{{book.author_intro}}</p>
             </div>
         </div>
         <div class="catalog_body">
@@ -69,7 +69,7 @@
                 <Divider orientation="left" property="v:itemreviewed"><h2>目录</h2></Divider>
             </div>
             <div id="catalog_summary">
-                <pre class="p3" style="text-align: left">{{catalog}}</pre>
+                <pre class="p3" style="text-align: left">{{book.catalog}}</pre>
             </div>
         </div>
         <div id="review_body">
@@ -109,9 +109,12 @@
 
 <script>
     import {mapGetters} from "vuex";
-
+    import myRate from "@/components/myRate";
     export default {
         name: "detailinfo",
+        components: {
+            myRate
+        },
         data() {
             return {
                 formValidate: {
@@ -156,7 +159,7 @@
                 })
             },
             async heart_success() {
-                console.log('bbbbbbbbbbbbbbbb')
+                console.log('hearttttttttttttt')
                 let data = {
                     bid: this.book.id,
                     uid: this.userinfo.uid
@@ -178,12 +181,11 @@
                 this.iscollected = false;
                 this.$Message.success('收藏取消');
             },
-
         },
-        watch: {
+        watch:{
             '$route': 'book',
-            book: function () {
-                this.$store.dispatch('getbookreviewList', this.book.id)
+            book:function () {
+                this.$store.dispatch('getbookreviewList',this.book.id)
             },
         },
 
