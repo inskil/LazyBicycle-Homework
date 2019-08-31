@@ -66,7 +66,7 @@
             ]),
         },
         methods: {
-            handleSubmit(name) {
+            async handleSubmit(name) {
                 this.$refs[name].validate(async (valid) => {
                     if (valid) {
                         try {
@@ -89,9 +89,13 @@
                                         "text": this.formValidate.desc
                                     }
                             }
-                            await this.$store.dispatch('addgroup', msg)
-                            this.$Message.success('创建成功');
-                            //this.$router.push('/group')
+                            await this.$axios.post('/addgroup ',msg).then(res => {
+                                console.log('addgroup',res)
+                                if (res.data == '添加成功'){
+                                    this.$Message.success('创建成功');
+                                    this.$router.push('/group')
+                                }
+                            })
                         } catch (e) {
                             console.log(e)
                             this.$Message.error(e);

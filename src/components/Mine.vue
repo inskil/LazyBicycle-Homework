@@ -112,16 +112,20 @@
             <TabPane v-if="ismanager" label="内容添加" icon="md-settings" class="messages">
                 <Row>
                     <Col span="12">
-                        <Card style="margin-left: 10%; margin-right: 5%; font-size: large; background-color: rgba(255,230,112,0.10)">
+                        <router-link :to="{name:'publishbookPage'}" >
+                        <Card  style="margin-left: 10%; margin-right: 5%; font-size: large; background-color: rgba(255,230,112,0.10)">
                             <Avatar icon="ios-book" size="large"  style="background-color: #ffe670"/>
                             添加书籍
                         </Card>
+                        </router-link>
                     </Col>
                     <Col span="12">
-                        <Card style="margin-left: 5%; margin-right: 10%; font-size: large; background-color: rgba(255,159,93,0.10)">
+                        <router-link :to="{name:'publishmoviePage'}" >
+                        <Card   style="margin-left: 5%; margin-right: 10%; font-size: large; background-color: rgba(255,159,93,0.10)">
                             <Avatar icon="ios-film" size="large"  style="background-color: #ff9f5d"/>
                             添加电影
                         </Card>
+                        </router-link>
                     </Col>
                 </Row>
             </TabPane>
@@ -222,7 +226,7 @@
                         this.$Message.error('修改失败');
                     }
                 })
-            }
+            },
         },
         created(){
             let data = {

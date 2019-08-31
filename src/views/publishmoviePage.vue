@@ -10,7 +10,7 @@
                         <el-form-item label="上传头像" prop="userheadimg">
                             <el-upload
                                     class="avatar-uploader"
-                                    action="https://jsonplaceholder.typicode.com/posts/"
+                                    action="/api/upload"
                                     :show-file-list="false"
                                     :on-success="handleAvatarSuccess"
                                     :before-upload="beforeAvatarUpload">
@@ -41,7 +41,7 @@
                             <div style="margin-top: 15%" class="el-upload">
                                 <el-upload
                                         class="avatar-uploader1"
-                                        action="https://jsonplaceholder.typicode.com/posts/"
+                                        action="/api/upload"
                                         :show-file-list="false"
                                         :on-success="handleAvatarSuccess1"
                                         :before-upload="beforeAvatarUpload">

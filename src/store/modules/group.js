@@ -73,17 +73,6 @@ const group = {
                 })
             })
         },
-        async addgroup({commit}, params){
-            return new Promise((resolve, reject) => {
-                axios.post('/addgroup ', params).then(res => {
-                    resolve(res)
-                    console.log('addgroup',res)
-                }).catch(err => {
-                    // console.log(err)
-                    reject(err)
-                })
-            })
-        },
         delGroup({commit},data) {
             console.log('delllllllllllllllllllllllllllllllllll in gourp.js')
             let {uid,gid} = data
