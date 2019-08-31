@@ -16,7 +16,7 @@
                 <div id="mainpic">
                     <a class="nbg" v-bind:href="book.images[0].large"
                        v-bind:title="book.title">
-                        <img v-bind:src="book.images[0].large" v-bind:alt="title" rel="v:photo"
+                        <img v-bind:src="book.images[0].large" v-bind:alt="book.title" rel="v:photo"
                              style="width: 135px;max-height: 200px;">
                     </a>
                 </div>
@@ -69,7 +69,7 @@
             </div>
         </div>
         <div id="review_body">
-            <div id="review_title">
+            <div id="review_title"  v-if="bookReviewList.length>0">
                 <Divider orientation="left" property="v:itemreviewed"><h2>本书评论</h2></Divider>
             </div>
             <div id="review_review">

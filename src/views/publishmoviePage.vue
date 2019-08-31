@@ -6,24 +6,24 @@
         <div style="width: 80%; margin-left: 10%">
             <el-form :model="ruleForm" :rules="rules" ref="ruleForm" class="pb_list">
                 <el-row>
-                    <div style="width:35%;position: absolute;right:0;top:7rem">
-                        <el-form-item label="上传头像" prop="userheadimg">
-                            <el-upload
-                                    class="avatar-uploader"
-                                    action="/api/upload"
-                                    :show-file-list="false"
-                                    :on-success="handleAvatarSuccess"
-                                    :before-upload="beforeAvatarUpload">
-                                <img v-if="userheadimg" :src="userheadimg" class="avatar">
-                                <i v-else class="el-icon-plus avatar-uploader-icon"></i>
-                            </el-upload>
-                        </el-form-item>
-                    </div>
-                    <div style="width: 50%; margin-right: 5%">
-                        <el-form-item label="用户名"  prop="username" style="height: 80px">
-                            <el-input v-model="ruleForm.username"></el-input>
-                        </el-form-item>
-                    </div>
+<!--                    <div style="width:35%;position: absolute;right:0;top:7rem">-->
+<!--                        <el-form-item label="上传头像" prop="userheadimg">-->
+<!--                            <el-upload-->
+<!--                                    class="avatar-uploader"-->
+<!--                                    action="/api/upload"-->
+<!--                                    :show-file-list="false"-->
+<!--                                    :on-success="handleAvatarSuccess"-->
+<!--                                    :before-upload="beforeAvatarUpload">-->
+<!--                                <img v-if="userheadimg" :src="userheadimg" class="avatar">-->
+<!--                                <i v-else class="el-icon-plus avatar-uploader-icon"></i>-->
+<!--                            </el-upload>-->
+<!--                        </el-form-item>-->
+<!--                    </div>-->
+<!--                    <div style="width: 50%; margin-right: 5%">-->
+<!--                        <el-form-item label="用户名"  prop="username" style="height: 80px">-->
+<!--                            <el-input v-model="ruleForm.username"></el-input>-->
+<!--                        </el-form-item>-->
+<!--                    </div>-->
                     <div style="height: 80px; margin-bottom: 22px;width: 50%; margin-right: 5%">
                         <el-form-item label="电影名" prop="title" class="el-form-item__content">
                             <el-input v-model="ruleForm.title"></el-input>
@@ -36,9 +36,9 @@
                     </div>
                 </el-row>
                 <row style="height: 620px">
-                    <div style="width:35%;right:0;position: absolute;top:7rem">
+                    <div style="width:35%;right:0;position: absolute;top:1rem">
                         <el-form-item label="电影海报" prop="images">
-                            <div style="margin-top: 15%" class="el-upload">
+                            <div style="margin-top: 15%;float: left" class="el-upload">
                                 <el-upload
                                         class="avatar-uploader1"
                                         action="/api/upload"
@@ -85,7 +85,6 @@
                         </div>
                     </div>
                 </row>
-
                 <el-form-item label="剧情简介" prop="summary">
                     <el-input type="textarea" v-model="ruleForm.summary" :rows="5"></el-input>
                 </el-form-item>
@@ -104,10 +103,11 @@
         data() {
             return {
                 // disabled: false,
-                userheadimg:'',
+                // userheadimg:'',
                 images:'',
+                img:'',
                 ruleForm: {
-                    username: '',
+                    // username: '',
                     title: '',
                     original_title: '',
                     directors: '',
@@ -119,15 +119,15 @@
                     summary: ''
                 },
                 rules: {
-                    username: [
-                        { required: true, message: '请输入用户名',trigger: 'blur' }
-                    ],
+                    // username: [
+                    //     { required: true, message: '请输入用户名',trigger: 'blur' }
+                    // ],
                     genres: [
                         { required: true, message: '请输入类型',trigger: 'blur' }
                     ],
-                    userheadimg:[
-                        { required: true, message: '请上传图片', trigger: 'blur'}
-                    ],
+                    // userheadimg:[
+                    //     { required: true, message: '请上传图片', trigger: 'blur'}
+                    // ],
                     title: [
                         { required: true, message: '请输入电影名', trigger: 'blur' },
                     ],
@@ -137,9 +137,35 @@
         },
         methods: {
             submitForm(formName) {
-                this.$refs[formName].validate((valid) => {
+                this.$refs[formName].validate(async (valid) => {
                     if (valid) {
-                        alert('submit!');
+                        try {
+                            let mid = 0
+                            await this.$axios.post('/getnewmid').then(res => {
+                                console.log(res)
+                                mid = res.data.mid
+                            }).catch(err => {
+                                console.log(err)
+                            })
+                            let msg = this.ruleForm
+                            msg.images = {
+                                large: this.img
+                            }
+                            let data = {
+                                mid:mid,
+                                moviemsg: msg
+                            }
+                            await this.$axios.post('/addmovie', data).then(res => {
+                                console.log('addmovie', res)
+                                if (res.data.id >0) {
+                                    this.$Message.success('创建成功');
+                                    this.$router.push('/movieDetail/'+res.data.id)
+                                }
+                            })
+                        } catch (e) {
+                            console.log(e)
+                            this.$Message.error(e);
+                        }
                     } else {
                         return false;
                     }
@@ -149,11 +175,12 @@
                 this.$refs[formName].resetFields();
             },
 
-            handleAvatarSuccess(res, file) {
-                this.userheadimg = URL.createObjectURL(file.raw);
-            },
+            // handleAvatarSuccess(res, file) {
+            //     this.userheadimg = URL.createObjectURL(file.raw);
+            // },
             handleAvatarSuccess1(res, file) {
                 this.images = URL.createObjectURL(file.raw);
+                this.img = res.data.file
             },
             beforeAvatarUpload(file) {
                 const isJPG = file.type === 'image/jpeg';
