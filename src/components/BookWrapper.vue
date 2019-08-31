@@ -3,20 +3,22 @@
         <div class="cols">
             <div v-for="book in newbooks"   v-bind:key="book.id" class="col"
                  ontouchstart="this.classList.toggle('hover');">
-                <div class="container">
-                    <div class="front" v-bind:style="{backgroundImage:'url(' + book.images[0].large + ')'}">
-                        <div class="inner">
-                            <span><h2>{{book.title}}</h2></span>
-                            <br>
-                            <h3>{{book.author[0]}}</h3>
+                <router-link :to="'/bookDetail/'+book.id">
+                    <div class="container">
+                        <div class="front" v-bind:style="{backgroundImage:'url(' + book.images[0].large + ')'}">
+                            <div class="inner">
+                                <span><h2>{{book.title}}</h2></span>
+                                <br>
+                                <h3>{{book.author[0]}}</h3>
+                            </div>
+                        </div>
+                        <div class="back" v-bind:style="{backgroundImage:'url(' + book.images[0].large + ')'}">
+                            <div class="inner">
+                                <p>{{book.summary}}</p>
+                            </div>
                         </div>
                     </div>
-                    <div class="back" v-bind:style="{backgroundImage:'url(' + book.images[0].large + ')'}">
-                        <div class="inner">
-                            <p>{{book.summary}}</p>
-                        </div>
-                    </div>
-                </div>
+                </router-link>
             </div>
         </div>
     </div>

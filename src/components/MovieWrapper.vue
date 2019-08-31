@@ -2,20 +2,22 @@
     <div class="wrapper">
         <div class="cols">
             <div v-for="movie in newmovies" v-bind:key="movie.id" class="col" ontouchstart="this.classList.toggle('hover');">
-                <div class="container">
-                    <div class="front" v-bind:style="{backgroundImage:'url(' + movie.images[0].large + ')'}">
-                        <div class="inner">
-                            <span><h2>{{movie.title}}</h2></span>
-                            <br>
-                            <h3>{{movie.directors[0].name}}</h3>
+                <router-link :to="'/movieDetail/'+movie.id">
+                    <div class="container">
+                        <div class="front" v-bind:style="{backgroundImage:'url(' + movie.images[0].large + ')'}">
+                            <div class="inner">
+                                <span><h2>{{movie.title}}</h2></span>
+                                <br>
+                                <h3>{{movie.directors[0].name}}</h3>
+                            </div>
+                        </div>
+                        <div class="back" v-bind:style="{backgroundImage:'url(' + movie.images[0].large + ')'}">
+                            <div class="inner">
+                                <p>{{movie.summary}}</p>
+                            </div>
                         </div>
                     </div>
-                    <div class="back" v-bind:style="{backgroundImage:'url(' + movie.images[0].large + ')'}">
-                        <div class="inner">
-                            <p>{{movie.summary}}</p>
-                        </div>
-                    </div>
-                </div>
+                </router-link>
             </div>
         </div>
     </div>

@@ -15,7 +15,7 @@
                             <my-rate :message=book.rating[0].average></my-rate>
                         </div>
                         <div class="headline">{{book.title}}</div>
-                        <router-link :to="{name:'bookDetail'}">
+                        <router-link :to="'/bookDetail/'+book.id">
                             <div class="link">更多...</div>
                         </router-link>
                     </div>
@@ -30,7 +30,7 @@
                             <myRate :message=movie.rating[0].average  />
                         </div>
                         <div class="headline">{{movie.title}}</div>
-                        <router-link :to="{name:'movieDetail'}">
+                        <router-link :to="'/movieDetail/'+movie.id">
                             <div class="link">更多...</div>
                         </router-link>
                     </div>
@@ -79,7 +79,7 @@
             fetchDate: function () {
                 // this.getBook()
                 // this.getMovie()
-                setTimeout(this.slick,500)
+                setTimeout(this.slick,3000)
             },
             getBook() {
                 this.$store.dispatch('getBookList', {
