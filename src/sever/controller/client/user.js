@@ -111,7 +111,7 @@ module.exports = {
         let paramsData = ctx.request.body;
         console.log(paramsData)
         try {
-            let data = await ctx.findOne(userModel, {name: paramsData.name})
+            let data = await ctx.findOne(userModel, {uid: paramsData.uid})
             if (paramsData.old_pwd !== data.pwd) {
                 return ctx.sendError('密码不匹配!')
             }

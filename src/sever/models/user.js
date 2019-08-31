@@ -12,6 +12,7 @@ let userSchema = db.Schema({
     likebooks:Array,
     likemovies:Array,
     group:Array,
-    admingroup:Array
+    admingroup:Array,
+    text :String
 },{collection:"user"})
 export default db.model('user', userSchema);
