@@ -29,11 +29,11 @@
                             <el-input v-model="ruleForm.title"></el-input>
                         </el-form-item>
                     </div>
-                    <div style="height: 80px; margin-bottom: 22px;width: 50%; margin-right: 5%">
-                        <el-form-item label="又名" prop="original_title" class="el-form-item__content">
-                            <el-input v-model="ruleForm.original_title"></el-input>
-                        </el-form-item>
-                    </div>
+<!--                    <div style="height: 80px; margin-bottom: 22px;width: 50%; margin-right: 5%">-->
+<!--                        <el-form-item label="又名" prop="original_title" class="el-form-item__content">-->
+<!--                            <el-input v-model="ruleForm.original_title"></el-input>-->
+<!--                        </el-form-item>-->
+<!--                    </div>-->
                 </el-row>
                 <row style="height: 620px">
                     <div style="width:35%;right:0;position: absolute;top:1rem">
@@ -75,8 +75,8 @@
                             </el-form-item>
                         </div>
                         <div style="height: 80px; margin-bottom: 22px">
-                            <el-form-item label="内地上映时间" prop="mainland_pubdate">
-                                <el-input v-model="ruleForm.mainland_pubdate" placeholder="请按XXXX(年)-XX(月)-XX(日)格式输入"></el-input>
+                            <el-form-item label="时长" prop="durations">
+                                <el-input v-model="ruleForm.durations"></el-input>
                             </el-form-item>
                         </div>
                         <div style="height: 80px; margin-bottom: 22px">
@@ -109,11 +109,12 @@
                 ruleForm: {
                     // username: '',
                     title: '',
-                    original_title: '',
+                    // original_title: '',
                     directors: '',
                     casts: '',
                     genres: '',
                     // pubdates: '',
+                    mainland_pubdate: '',
                     durations: '',
                     year: '',
                     summary: '',
@@ -190,10 +191,11 @@
                 this.$refs[formName].resetFields();
             },
 
-            handleAvatarSuccess(res, file) {
-                this.userheadimg = URL.createObjectURL(file.raw);
-            },
+            // handleAvatarSuccess(res, file) {
+            //     this.userheadimg = URL.createObjectURL(file.raw);
+            // },
             handleAvatarSuccess1(res, file) {
+                this.img = res.data.file
                 this.ruleForm.image = URL.createObjectURL(file.raw);
                 this.img = res.data.file
             },
