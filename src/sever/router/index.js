@@ -62,7 +62,7 @@ export default app => {
     router.get('/topic', app.client.topic.list)
     router.get('/onetopicbykey', app.client.topic.OneInfoByKey)
     router.get('/topicsbykey', app.client.topic.topicsByKey)
-    router.get('/topic/addtopic', app.client.topic.addtopic)
+    router.post('/topic/addtopic', app.client.topic.addtopic)
     router.get('/topic/getnewtid', app.client.topic.getnewtid)
     router.get('/topic/addreviewsreview', app.client.topic.addreviewsreview)
     router.get('/topic/addreview', app.client.topic.addreview)

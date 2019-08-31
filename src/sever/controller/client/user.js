@@ -9,8 +9,8 @@ module.exports = {
     async login(ctx, next) {
         console.log('----------------登录接口 user/login-----------------------');
         console.log(ctx)
-        console.log(ctx.request)
-        let {username, pwd} = ctx.request.query;
+        console.log(ctx.request.body)
+        let {username, pwd} = ctx.request.body;
         console.log(username)
         try {
             let data = await ctx.findOne(userModel, {username: username});

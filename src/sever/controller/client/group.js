@@ -47,7 +47,9 @@ module.exports = {
     },
     async addgroup(ctx, next) {
         console.log('----------------添加新的小组-----------------------');
-        let data = ctx.request.query;
+        console.log(ctx)
+        let data = ctx.request.body;
+        console.log(data)
         let json = data
         try {
             let groupmsg = json["groupmsg"]

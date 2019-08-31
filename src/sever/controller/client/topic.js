@@ -47,16 +47,20 @@ module.exports = {
             return ctx.sendError(e)
         }
     },
-    async addtopic(ctx, next) {
+    addtopic(ctx, next) {
         console.log('----------------添加topic-----------------------');
-        let data = ctx.request.body;
-        let json = JSON.parse(JSON.stringify(data))
+        console.log(ctx.request.query)
+        console.log(ctx.request.body)
+        let json = ctx.request.body;
+        // let json = JSON.parse(data)
+        console.log(json)
         try {
             json.createtime = (new Date()).Format("yyyy-MM-dd HH:mm:ss");
             json.updatetime = json.createtime;
             json.istop = false;
             json.isgood = false;
-            let data = await ctx.add(topicModel, json);
+            let data = ctx.add(topicModel, json);
+            console.log(data)
             ctx.send('添加成功')
         } catch (e) {
             return ctx.sendError(e)
@@ -64,9 +68,11 @@ module.exports = {
     },
     async getnewtid(ctx, next) {
         console.log('----------------获取对应gid的新的tid-----------------------');
-        let predata = ctx.request.body;
+        let {gid} = ctx.request.query;
+        console.log(ctx.request.query)
+        console.log(ctx.request.body)
         try {
-            let data = await ctx.findOne(groupModel, {gid: predata.gid});
+            let data = await ctx.findOne(groupModel, {gid: gid});
             if(!data.topicmax){
                 data.topicmax = 0;
             }
@@ -74,7 +80,7 @@ module.exports = {
             console.log(max);
             let json = JSON.parse(JSON.stringify(data));
             json.topicmax = max;
-            await ctx.update(groupModel, {gid: predata.gid}, json);
+            await ctx.update(groupModel, {gid: gid}, json);
             max = max + data.gid;
             return ctx.send({"tid": max});
         } catch (e) {

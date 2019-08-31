@@ -19,6 +19,7 @@ export default () => {
             }
             console.log("鉴权成功");
         }
+        console.log("-------middle-auth---go-----");
         await next();
     }
 }
