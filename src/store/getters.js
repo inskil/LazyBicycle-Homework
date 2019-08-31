@@ -13,31 +13,34 @@ const getters = {
 
     // books
     bookTypes: state => state.book.types,
-    bookList:state => state.book.list,
+    bookList: state => state.book.list,
     bookInfo: state => state.book.info,
     bookLoadingMore: state => state.book.loadingMore,
     bokLoadingBol: state => state.book.loadingBol,
 
     //movie
-    movieList:state => state.movie.list,
+    movieList: state => state.movie.list,
 
     //group
-    groupList:state =>state.group.list,
-    hotGroupList:state =>state.group.hotGroup,
+    groupList: state => state.group.list,
+    hotGroupList: state => state.group.hotGroup,
 
     //topic
-    topicList:state =>state.topic.list,
-    hotTopicList:state =>state.topic.hotTopic,
+    topicList: state => state.topic.list,
+    hotTopicList: state => state.topic.hotTopic,
 
     //user
-    hasLogin: state =>state.user.hasLogin,
-    username: state =>state.user.username,
-    userheadimg: state =>state.user.userheadimg,
-    ismanager:state =>state.user.ismanager,
-    userinfo:state => state.user.userinfo,
+    hasLogin: state => state.user.hasLogin,
+    username: state => state.user.username,
+    userheadimg: state => state.user.userheadimg,
+    ismanager: state => state.user.ismanager,
+    userinfo: state => state.user.userinfo,
 
     //notice
-    noticeList:state =>state.notice.list,
+    noticeList: state => state.notice.list,
 
+    //reivew
+    bookReviewList: state => state.review.bookReviewList,
+    movieReviewList: state => state.review.movieReviewList,
 }
 export default getters

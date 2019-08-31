@@ -15,13 +15,13 @@ const review = {
     },
     actions: {
         // 获取列表
-        async getbookreviewList({commit, state},title) {
+        async getbookreviewList({commit, state},id) {
             //console.log("sssssssssssssssssssssssssssssss")
             //params.type = params.type === 'all' ? null : params.type
             state.loadingMore = true
             state.loadingBol = false
             return new Promise((resolve, reject) => {
-                axios.get('/bookreview', {title:title}).then(res => {
+                axios.get('/bookreview', {id:id}).then(res => {
                     state.loadingMore = false;
                     resolve(res)
                     //console.log("sssssgetsgettttsssssssssss")
@@ -29,8 +29,7 @@ const review = {
                     // res.data.sort(function (a, b) {
                     //     return b.review.length - a.review.length
                     // });
-                    commit('BREVIEWLIST', res.data)
-
+                    commit('BREVIEWLIST', res.data[0].comments)
                     //}
                     // if (res.data.length >= state.count) {
                     //     state.loadingBol = true;

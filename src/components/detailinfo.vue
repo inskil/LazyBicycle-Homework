@@ -8,7 +8,7 @@
             </div>
             <div class="headtitle">
                 <h1 style="text-align: left">
-                    <span property="v:itemreviewed">{{title}}</span>
+                    <span property="v:itemreviewed">{{book.title}}</span>
                     <div class="clear"></div>
                 </h1>
             </div>
@@ -77,7 +77,7 @@
                 <Divider orientation="left" property="v:itemreviewed"><h2>本书评论</h2></Divider>
             </div>
             <div id="review_review">
-                <div v-for="review in reviews" v-bind:key="review.id" class="review_author" align="left">
+                <div v-for="review in bookReviewList" v-bind:key="review.id" class="review_author" align="left">
                     <span style="color: #666666">
                         {{review.author.name}} · {{review.published}}
                     </span>
@@ -185,12 +185,13 @@
         },
         computed: {
             ...mapGetters([
-                'bookList'
+                'bookList',
+                'bookReviewList'
             ]),
             book() {
                 let books = this.bookList.filter(item => item.id == this.$route.params.id)
                 return books[0]
-            }
+            },
         },
         methods: {
             handleSubmit(name) {
@@ -213,8 +214,12 @@
             },
         },
         watch:{
-            '$route': 'book'
-        }
+            '$route': 'book',
+            book:function () {
+                this.$store.dispatch('getbookreviewList',this.book.id)
+            },
+        },
+
     }
 
 
