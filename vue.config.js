@@ -9,7 +9,7 @@ module.exports = {
         // 设置代理
         proxy: {
             '/api': {
-                target: 'http://114.116.32.137:8888',
+                target: 'http://6.1.1.1:8888',
                 changeOrigin: true,
                 pathRewrite: {
                     '^/api': ''

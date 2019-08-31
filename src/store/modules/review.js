@@ -1,40 +1,36 @@
 import axios from '../../utils/fetch'
 /* eslint-disable */
-const topic = {
+const review = {
     state: {
-        list: [],
-        count: 0,
-        loadingMore: false,
-        loadingBol: true,
-        hotTopic: []
+        movieReviewList: [],
+        bookReviewList: []
     },
     mutations: {
-        TOPICLIST(state, res) {
-            state.list = res;
+        MREVIEWLIST(state, res) {
+            state.movieReviewList = res;
         },
-        HOTTOPIC(state, res) {
-            state.hotTopic = res;
-        }
+        BREVIEWLIST(state, res) {
+            state.bookReviewList = res;
+        },
     },
     actions: {
         // 获取列表
-        async getTopicList({commit, state}) {
+        async getbookreviewList({commit, state},title) {
             //console.log("sssssssssssssssssssssssssssssss")
             //params.type = params.type === 'all' ? null : params.type
             state.loadingMore = true
             state.loadingBol = false
             return new Promise((resolve, reject) => {
-                axios.get('/topic', {"count": 0}).then(res => {
+                axios.get('/bookreview', {title:title}).then(res => {
                     state.loadingMore = false;
                     resolve(res)
                     //console.log("sssssgetsgettttsssssssssss")
-                    console.log(res.data)
-                    res.data.sort(function (a, b) {
-                        return b.review.length - a.review.length
-                    });
-                    commit('TOPICLIST', res.data)
-                    state.count = res.data.length
-                    commit('HOTTOPIC', res.data.slice(0, res.data.length >= 4 ? 4 : res.data.length))
+                     console.log(res.data)
+                    // res.data.sort(function (a, b) {
+                    //     return b.review.length - a.review.length
+                    // });
+                    commit('BREVIEWLIST', res.data)
+
                     //}
                     // if (res.data.length >= state.count) {
                     //     state.loadingBol = true;
@@ -45,11 +41,11 @@ const topic = {
                 })
             })
         },
-        async addtopic({commit}, params) {
+        async addbookreview({commit}, params) {
             return new Promise((resolve, reject) => {
-                axios.post('/topic/addtopic ', params).then(res => {
+                axios.post('/addbookreview ', params).then(res => {
                     resolve(res)
-                    console.log('/topic/addtopic', res)
+                    console.log('/addreview', res)
                 }).catch(err => {
                     // console.log(err)
                     reject(err)
@@ -58,4 +54,4 @@ const topic = {
         },
     }
 }
-export default topic
+export default review

@@ -113,9 +113,14 @@
             },
         },
         inject:['reload'],
+        methods:{
+            load(){
+                this.reload()
+            }
+        },
         watch:{
-            '$route':'reload',
-        }
+            '$route': 'load'
+        },
     }
 </script>
 

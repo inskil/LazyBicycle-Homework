@@ -55,8 +55,9 @@ export default {
             },
             method: 'get',
             url: url,
-            params: params, //原来的
-            //data:JSON.stringify(params), //测试的
+            // params: params, //原来的
+            params,
+            // data:params, //测试的
             timeout: 30000
         }).then(checkStatus).then(checkCode)
     },
@@ -72,8 +73,9 @@ export default {
         return axios({
             method: 'post',
             url: url,
-            params: data,
-            data:data1,
+            // params: data,
+            // data:data1,
+            data,
             timeout: 30000
         }).then(checkStatus).then(checkCode)
     }

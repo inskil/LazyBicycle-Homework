@@ -77,7 +77,7 @@
         </div>
         <div class="right_div" align="left">
             <h2 style="float: left">管理员</h2>
-            <Button v-if="isMember && !isAdmin" style="float:right;" type="text">申请管理员</Button>
+            <Button v-if="isMember && !isAdmin" @click="becomeAdmin" style="float:right;" type="text">申请管理员</Button>
             <br>
             <Row style="margin-top: 1rem">
                 <Col span="6" v-for="admin in group.admin">
@@ -138,6 +138,8 @@
         data() {
             return {
                 ismanager: false,
+                isAdmin: false,
+                isMember: false,
             }
         },
         computed: {
@@ -146,18 +148,6 @@
                 'topicList',
                 'userinfo'
             ]),
-            isAdmin: function () {
-                for (let use in this.group.admin) {
-                    if (use.uid == this.$store.state.uid) return true
-                }
-                return false
-            },
-            isMember: function () {
-                for (let use in this.group.user) {
-                    if (use.uid == this.$store.state.uid) return true
-                }
-                return false
-            },
             hotList: function () {
                 return this.sortKeyNum(this.topiclist_gid, 'review');
             },
@@ -175,7 +165,7 @@
                 return this.groupList
             }
         },
-        inject:['reload'],
+        inject: ['reload'],
         methods: {
             sortKeyNum(array, key) {
                 return array.sort(function (a, b) {
@@ -185,7 +175,8 @@
                 })
             },
             updatePage: function () {
-                this.reload()
+                // this.reload()
+                this.updateuserrole()
             }
             ,
             updateAll() {
@@ -256,16 +247,48 @@
                 }).catch(err => {
                     console.log(err)
                 })
+            },
+            updateuserrole() {
+                if (this.group) {
+                    console.log('sssssssssssssssssssssssssssssss')
+                    console.log('sssssssssssssssssssssssssssssss', this.group.admin[0].username)
+                    for (let i = 0; i < this.group.admin.length; i++) {
+                        if (this.group.admin[i].username == this.userinfo.username) this.isAdmin = true
+                    }
+                    for (let i = 0; i < this.group.user.length; i++) {
+                        if (this.group.user[i].username == this.userinfo.username) this.isMember = true
+                    }
+                }
+            },
+            async becomeAdmin() {
+                console.log('bbbbbbbbbbbbbbbb')
+                let data = {
+                    gid: this.gid,
+                    uid: this.userinfo.uid,
+                    username: this.userinfo.username,
+                    userheadimg: this.userinfo.userheadimg
+                }
+                await this.$axios.post('/notice/newapply', data).then(res => {
+                    console.log(res)
+                    this.$Message.success('申请成功！请耐心等待。!');
+                    this.updatePage()
+                }).catch(err => {
+                    console.log(err)
+                })
             }
         },
-        // created() {
-        //     // Getting books data on created
-        //     this.getGroup()
-        //     this.getTopic()
-        // },
+        created() {
+            setTimeout(this.updateuserrole(), 1000)
+            //     // Getting books data on created
+            //     this.getGroup()
+            //     this.getTopic()
+        },
         watch: {
             // 如果路由有变化，会再次执行该方法
-            '$route': 'updateAll'
+            '$route': 'updateAll',
+            group: function () {
+                this.updateuserrole()
+            }
         },
     }
 </script>

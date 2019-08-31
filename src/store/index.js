@@ -14,13 +14,12 @@ Vue.use(Vuex)
 const store = new Vuex.Store({
     modules: {
         movie,
-        // activities,
         book,
-        // subject,
         group,
         topic,
         notice,
         user,
+        review,
         app,
     },
     getters
