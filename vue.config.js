@@ -19,9 +19,7 @@ module.exports = {
     },
 
 
-// baseUrl: process.env.NODE_ENV === 'production'
-//     ? '//your_url'
-//     : '/',
+    publicPath: process.env.NODE_ENV === 'production' ? '/' : '/',
 //
 // outputDir: 'dist',
 //

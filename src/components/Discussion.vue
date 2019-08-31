@@ -13,20 +13,24 @@
                 <span style="font-size: larger; vertical-align: bottom">最新讨论</span>
                 <span style="vertical-align: bottom">（更多）</span>
             </div>
-            <div v-for="topic in topicList" align="left">
+            <div v-for="topic in topiclist_gid" align="left">
                 <Divider v-if="topic !== topicList[0]" dashed style="margin: 0.2rem"></Divider>
-                {{topic.title}}（{{topic.username}}）
+                <router-link  :to="'/topic/' +topic.tid +'/'+topic.gid" >{{topic.title}}（{{topic.username}}）</router-link>
             </div>
         </Card>
         <Card>
-            <Button v-if="isAdmin" class="delete" type="error" ghost style="float: right">删帖</Button>
+            <Button v-if="isAdmin" type="error" ghost style="float: right" icon="ios-trash" @click="delete_success">删帖</Button>
+            <Button v-if="isAdmin&&!topicmsg.isgood" type="error" ghost style="float: right; margin-right: 1rem" icon="ios-arrow-dropup" @click="good_success">置顶</Button>
+            <Button v-if="isAdmin&&topicmsg.isgood" type="error" ghost style="float: right; margin-right: 1rem" icon="ios-arrow-dropup-circle" @click="good_cancel">取消置顶</Button>
+            <Button v-if="isAdmin&&!topicmsg.istop" type="error" ghost style="float: right; margin-right: 1rem" icon="ios-star-outline" @click="top_success">加精</Button>
+            <Button v-if="isAdmin&&topicmsg.istop" type="error" ghost style="float: right; margin-right: 1rem" icon="ios-star" @click="top_cancel">取消精品</Button>
             <div class="content" align="left">
                 <h1>{{topicmsg.title}}</h1>
                 <br>
                 <Avatar v-bind:src="topicmsg.userheadimg" size="large"/>
                 {{topicmsg.username}}
-                <Divider type="vertical" />
-                {{topicmsg.createtime}}
+                <Divider type="vertical"/>
+                {{topicmsg.createtime  | parseTime}}
                 <br><br>
                 <div class="text">{{topicmsg.text}}</div>
             </div>
@@ -37,7 +41,7 @@
             <Card align="left">
                 <Avatar v-bind:src="review.userheadimg"/>
                 {{review.username}}
-                <Divider type="vertical" />
+                <Divider type="vertical"/>
                 {{review.createtime}}
                 <br>
                 <div class="review_text">
@@ -69,141 +73,48 @@
 </template>
 
 <script>
+    import {mapGetters} from "vuex";
+
     export default {
         name: "Discussion",
         data() {
-            return{
-                isAdmin:true,
-                topicmsg:{
-                    tid: 34919095,
-                    createtime: "2012-12-07 00:12:16",
-                    title: "煮字为药。",
-                    text:"看到这几个字觉得很合适。\n" +
-                        "悲伤的时候会写字。\n" +
-                        "也会看以前自己写的字。\n" +
-                        "\n" +
-                        "开此贴，以为记录。\n" +
-                        "煮字为药。\n" +
-                        "医自己。\n" +
-                        "念君安。\n" +
-                        "\n" +
-                        "愿你也能找到对症的药。\n" +
-                        "\n" +
-                        "多为摘抄，勿见怪。",
-                    username:"荏苒",
-                    gid:"juzimi",
-                    uid:"ren_ran",
-                    userheadimg:"https://img3.doubanio.com/icon/ul57495035-24.jpg",
-                    review:[
-                        {
-                            uid:"ren_ran",
-                            text:"你看到那数不清的街道吗？ \n" +
-                                "如何只选择其中一条去走？ \n" +
-                                "一个共度一生的女人， \n" +
-                                "一栋属于自己的房子， \n" +
-                                "一种生与死的方式。",
-                            userheadimg:"https://img3.doubanio.com/icon/ul57495035-24.jpg",
-                            username:"荏苒",
-                            createtime:"2012-12-07 00:17:14",
-                            review:[
-                                {
-                                    uid:"64813784",
-                                    username:"独省",
-                                    text:"1900",
-                                },
-                                {
-                                    uid:"66470122",
-                                    username:"孤独患者",
-                                    text:"人活着 \n" +
-                                        "也不就是为了 \n" +
-                                        "这虚无飘渺的 \n" +
-                                        "存在感 \n" +
-                                        "感觉自己很矫情 \n" +
-                                        "一行一行的",
-                                }
-                            ],
-                        },
-                        {
-                            uid:"62707945",
-                            text:"煮文为案，执笔为刃，剁鱼头，最喜清蒸。",
-                            userheadimg:"https://img3.doubanio.com/icon/ul62707945-13.jpg",
-                            username:"陈言冬",
-                            createtime:"2012-12-09 00:13:21",
-                            review:[
-                                {
-                                    uid:"ren_ran",
-                                    username:"荏苒",
-                                    text:"我怎么这么喜欢这句话呢。 \n" +
-                                        "谢谢^_^ \n" +
-                                        "祝你做个好梦〜",
-                                }
-                            ],
-                        },
-                        {
-                            uid:"illusion-sys",
-                            text:"煮字为药，熬文化丹。一心一意，悲无所继。",
-                            userheadimg:"https://img3.doubanio.com/icon/ul42989333-254.jpg",
-                            username:"YippeeH",
-                            createtime:"2012-12-09 00:19:55",
-                            review:[
-                                {
-                                    uid:"ren_ran",
-                                    username:"荏苒",
-                                    text:"亲们你们这让我完全接不上话呀(＞人＜;) ",
-                                }
-                            ],
-                        },
-                        {
-                            uid:"66034478",
-                            text:"有时候，会想要给你写封情书。贴上邮票，盖上邮戳，经邮差之手，揣着我的甜蜜与不安，寄到你的手里。尽管，你其实就在我身边。",
-                            userheadimg:"https://img3.doubanio.com/icon/ul66034478-2.jpg",
-                            username:"_不负相思引",
-                            createtime:"2012-12-29 17:23:44",
-                            review:[],
-                        }
-                    ],
-                },
-                group:{
-                    groupname:"句子迷",
-                    grouphead:"https://img3.doubanio.com/view/group/sqxs/public/4a62c83f688cbdd.webp",
-                    gid:"juzimi",
-                    text:"爱写字，爱摘抄，不爱平庸； \n" +
-                        "爱阅读，爱收藏，不爱遗忘。 \n" +
-                        "迷恋文字，崇尚共鸣， \n" +
-                        "有那么一点点执着，有那么一点点个性， \n" +
-                        "不是什么小众，也不是什么大流， \n" +
-                        "我们只为那一行行跳动的文字着迷。 \n" +
-                        "我们是自己精神世界的主人， \n" +
-                        "我们是句子迷。 \n"
-                },
-                topicList:[
-                    {
-                        tid: 150812881,
-                        title: "找一个可以互为树洞的聊友",
-                        username:"孤独的地球来客",
-                    },
-                    {
-                        tid: 34919095,
-                        title: "煮字为药。",
-                        username:"荏苒",
-                    },
-                    {
-                        tid: 48515223,
-                        title: "知命容易，改命难",
-                        username:"守心居士",
-                    },
-                    {
-                        tid: 147312704,
-                        title: "私喜",
-                        username:"我深知你是梦。",
-                    },
-                    {
-                        tid: 150798912,
-                        title: "建个楼记录一下那些戳到我心的句子",
-                        username:"你的小祖宗",
-                    }
-                ]
+            return {
+
             }
+        },
+        computed: {
+            ...mapGetters([
+                'groupList',
+                'topicList',
+                'userinfo'
+            ]),
+            gid(){
+                return this.$route.params.gid
+            },
+            tid(){
+                return this.$route.params.tid
+            },
+            isAdmin: function () {
+                for (let use in this.group.admin) {
+                    if (use.uid == this.$store.state.uid) return true
+                }
+                return false
+            },
+            topicmsg(){
+                let topic = this.topicList.filter(item => item.tid == this.tid)
+                return topic[0]
+            },
+            group: function () {
+                let groups = this.groupList.filter(item => item.gid == this.gid)
+                return groups[0]
+            },
+            topiclist_gid: function () {
+                return this.topicList.filter(item => item.gid == this.gid)
+            },
+        },
+        inject:['reload'],
+        watch:{
+            '$route':'reload',
         }
     }
 </script>

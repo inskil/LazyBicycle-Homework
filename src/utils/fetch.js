@@ -50,9 +50,13 @@ export default {
     get(url, params) {
         if (!url) return
         return axios({
+            headers:{
+                'content-type':'application/json'
+            },
             method: 'get',
             url: url,
-            params,
+            params: params, //原来的
+            //data:JSON.stringify(params), //测试的
             timeout: 30000
         }).then(checkStatus).then(checkCode)
     },
@@ -63,12 +67,13 @@ export default {
     post(url, data) {
         console.log("posting")
         console.log('data',data)
+        let data1 = qs.stringify(data)
         if (!url) return
         return axios({
             method: 'post',
             url: url,
-            data:data,
             params: data,
+            data:data1,
             timeout: 30000
         }).then(checkStatus).then(checkCode)
     }

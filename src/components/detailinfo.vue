@@ -21,12 +21,12 @@
                     </a>
                 </div>
                 <div class="maininfo" align="left" style="left: 3rem; position: relative; height: 12rem;">
-                    <span class="pl">作者: {{author}}</span><br>
-                    <span class="pl">出版社: {{printer}}</span><br>
-                    <span class="pl">出版年: {{year}}</span><br>
-                    <span class="pl">页数: {{pages}}</span><br>
-                    <span class="pl">定价: {{price}}</span><br>
-                    <span class="pl">ISBN: {{isbn}}</span><br>
+                    <span class="pl">作者: {{book.author}}</span><br>
+                    <span class="pl">出版社: {{book.printer}}</span><br>
+                    <span class="pl">出版年: {{book.year}}</span><br>
+                    <span class="pl">页数: {{book.pages}}</span><br>
+                    <span class="pl">定价: {{book.price}}</span><br>
+                    <span class="pl">ISBN: {{book.isbn}}</span><br>
                 </div>
             </div>
             <div class="votes">
@@ -34,7 +34,7 @@
                     <span class="rl">评分<br> <strong>{{average}}</strong></span><br>
                 </div>
                 <div>
-                    <Rate disabled allow-half v-model="stars" />
+                    <Rate disabled allow-half v-model="stars"/>
                     <br>
                 </div>
                 <div>
@@ -95,7 +95,7 @@
             </div>
             <Form ref="formValidate" :model="formValidate" :rules="ruleValidate" style="width: 100%; margin-top: 1rem">
                 <FormItem prop="comment">
-                    <Input v-model="formValidate.comment" type="textarea" :rows="5" placeholder="在这里发表你的评论" />
+                    <Input v-model="formValidate.comment" type="textarea" :rows="5" placeholder="在这里发表你的评论"/>
                 </FormItem>
                 <FormItem class="review_buttom" align="right" style="position: relative; right: 1rem">
                     <Button @click="handleSubmit('formValidate')" icon="md-send">发送</Button>
@@ -108,22 +108,24 @@
 </template>
 
 <script>
+    import {mapGetters} from "vuex";
+
     export default {
         name: "detailinfo",
         data() {
             return {
-                formValidate:{
-                    comment:''
+                formValidate: {
+                    comment: ''
                 },
-                ruleValidate:{
-                    comment:[
-                        { required: true, message: '评论不能为空', trigger: 'blur' },
-                        { type: 'string', min: 25, message: '评论不能少于25个字', trigger: 'blur' },
-                        { type: 'string', max: 1000, message: '评论不能多于1000个字', trigger: 'blur' }
+                ruleValidate: {
+                    comment: [
+                        {required: true, message: '评论不能为空', trigger: 'blur'},
+                        {type: 'string', min: 25, message: '评论不能少于25个字', trigger: 'blur'},
+                        {type: 'string', max: 1000, message: '评论不能多于1000个字', trigger: 'blur'}
                     ]
                 },
-                ismanager:true,
-                iscollected:false,
+                ismanager: true,
+                iscollected: false,
                 value: 0,
                 summary_value: '',
                 id: 1234567,
@@ -181,8 +183,17 @@
                 ]
             }
         },
+        computed: {
+            ...mapGetters([
+                'bookList'
+            ]),
+            book() {
+                let books = this.bookList.filter(item => item.id == this.$route.params.id)
+                return books[0]
+            }
+        },
         methods: {
-            handleSubmit (name) {
+            handleSubmit(name) {
                 this.$refs[name].validate((valid) => {
                     if (valid) {
                         this.$Message.success('评价发表成功');
@@ -193,13 +204,16 @@
                 })
             },
             heart_success() {
-                this.iscollected=true;
+                this.iscollected = true;
                 this.$Message.success('收藏成功');
             },
             heart_cancel() {
-                this.iscollected=false;
+                this.iscollected = false;
                 this.$Message.success('收藏取消');
             },
+        },
+        watch:{
+            '$route': 'book'
         }
     }
 

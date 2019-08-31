@@ -109,6 +109,22 @@
                     </Col>
                 </Row>
             </TabPane>
+            <TabPane label="内容添加" icon="md-settings" class="messages">
+                <Row>
+                    <Col span="12">
+                        <Card style="margin-left: 10%; margin-right: 5%; font-size: large; background-color: rgba(255,230,112,0.10)">
+                            <Avatar icon="ios-book" size="large"  style="background-color: #ffe670"/>
+                            添加书籍
+                        </Card>
+                    </Col>
+                    <Col span="12">
+                        <Card style="margin-left: 5%; margin-right: 10%; font-size: large; background-color: rgba(255,159,93,0.10)">
+                            <Avatar icon="ios-film" size="large"  style="background-color: #ff9f5d"/>
+                            添加电影
+                        </Card>
+                    </Col>
+                </Row>
+            </TabPane>
         </Tabs>
     </div>
 </template>
@@ -119,6 +135,7 @@
     export default {
         data() {
             return {
+                isAdmin:true,
                 changeName: false,
                 changeSignature: false,
                 nameForm: {

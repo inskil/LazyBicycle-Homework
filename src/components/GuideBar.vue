@@ -26,11 +26,9 @@
                            @on-enter="search_some()"/>
                 </div>
                 <div style="float: left">
-                    <router-link :to="{name:'search'}">
-                        <MenuItem name="search">
-                            <i-button type="ghost" shape="circle" icon="ios-search"/>
-                        </MenuItem>
-                    </router-link>
+                    <MenuItem name="search">
+                        <i-button @click="search_some" type="ghost" shape="circle" icon="ios-search"/>
+                    </MenuItem>
                 </div>
             </div>
 
@@ -48,7 +46,7 @@
                                 <router-link :to="{name:'mine'}">
                                     <Dropdown-item>个人信息</Dropdown-item>
                                 </router-link>
-                                <Dropdown-item ><p @click="qiut" >注销</p></Dropdown-item>
+                                <Dropdown-item><p @click="qiut">注销</p></Dropdown-item>
                                 <router-link :to="{name:'login'}">
                                     <Dropdown-item>切换账号</Dropdown-item>
                                 </router-link>
@@ -98,7 +96,10 @@
         methods: {
             search_some() {
                 if (this.searchVal !== "") {
-                    this.$router.push({name: 'search'})
+                    console.log(this.searchVal)
+                    let path = '/search/' + this.searchVal
+                    console.log('passsssssssss', path)
+                    this.$router.push(path)
                 } else {
                     this.$Notice.success({
                         title: "不能查找空内容"
@@ -116,7 +117,8 @@
                 console.log("qqqqqqqqqqq")
                 this.$store.dispatch('clearInfo')
             }
-        }}
+        },
+    }
 </script>
 
 <style scoped>

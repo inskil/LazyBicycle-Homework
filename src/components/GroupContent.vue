@@ -15,8 +15,8 @@
                             <div class="channel-item">
                                 <div class="likes">{{article.review.length}}<br>喜欢</div>
                                 <div class="bd">
-                                    <h3><router-link :to="tid_url(article.tid)" >{{article.title}}</router-link></h3>
-                                    <router-link :to="tid_url(article.tid)" >
+                                    <h3><router-link :to="tid_url(article.gid,article.tid)" >{{article.title}}</router-link></h3>
+                                    <router-link :to="tid_url(article.gid,article.tid)" >
                                     <div class="block">
                                         <div class="pic">
                                             <div class="pic-wrap">
@@ -93,8 +93,8 @@
             gid_url(id) {
                 return "/groupDetail/" + id
             },
-            tid_url(id) {
-                return "/topic/" + id
+            tid_url(gid,tid) {
+                return "topic/" +gid +'/' + tid
             },
             StringLenFix: function (text) {
                 return text.slice(0, 14)

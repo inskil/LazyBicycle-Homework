@@ -91,7 +91,7 @@
                             }
                             await this.$store.dispatch('addgroup', msg)
                             this.$Message.success('创建成功');
-                            this.$router.push('/group')
+                            //this.$router.push('/group')
                         } catch (e) {
                             console.log(e)
                             this.$Message.error(e);

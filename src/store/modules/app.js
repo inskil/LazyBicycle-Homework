@@ -16,6 +16,9 @@ const app = {
         },
         CHANGEHEADERHEIGHT (state, height) {
             state.header_height = height
+        },
+        KEY(state,key){
+            state.search_key = key
         }
     },
     actions: {
@@ -25,6 +28,9 @@ const app = {
         changeHeaderHeight ({commit}, height) {
             commit('CHANGEHEADERHEIGHT', height)
         },
+        add_key({commit},key){
+            commit('KEY',key)
+        }
     }
 }
 export default app
