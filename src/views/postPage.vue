@@ -74,9 +74,9 @@
                                 title:this.ruleForm.name,
                                 text:this.ruleForm.desc,
                             }
-                            await this.$store.dispatch('addtopic', JSON.stringify({msg:msg}))
+                            await this.$store.dispatch('addtopic', msg)
                             this.$Message.success('创建成功');
-                            //this.$router.push('/group')
+                            this.$router.push('/group')
                         } catch (e) {
                             console.log(e)
                             this.$Message.error(e);

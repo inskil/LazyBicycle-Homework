@@ -47,7 +47,7 @@ const topic = {
         },
         async addtopic({commit}, params) {
             return new Promise((resolve, reject) => {
-                axios.get('/topic/addtopic ', params).then(res => {
+                axios.post('/topic/addtopic ', params).then(res => {
                     resolve(res)
                     console.log('/topic/addtopic', res)
                 }).catch(err => {
