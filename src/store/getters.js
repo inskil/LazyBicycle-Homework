@@ -29,6 +29,15 @@ const getters = {
     topicList:state =>state.topic.list,
     hotTopicList:state =>state.topic.hotTopic,
 
+    //user
+    hasLogin: state =>state.user.hasLogin,
+    username: state =>state.user.username,
+    userheadimg: state =>state.user.userheadimg,
+    ismanager:state =>state.user.ismanager,
+    userinfo:state => state.user.userinfo,
+
+    //notice
+    noticeList:state =>state.notice.list,
 
 }
 export default getters

@@ -1,21 +1,21 @@
 <template>
     <div>
-        <Menu mode="horizontal" :theme="theme1" style="font-size: large">
+        <Menu mode="horizontal" :theme="theme1" style="font-size: large" :active-name="this.active">
             <router-link :to="{name:'hot'}" style="color: aliceblue">
-                <MenuItem name="1" style="font-size: large">热门推荐</MenuItem>
+                <MenuItem name="hot" style="font-size: large">热门推荐</MenuItem>
             </router-link>
             <router-link :to="{name:'book'}">
-                <MenuItem name="2" style="font-size: large">
+                <MenuItem name="book" style="font-size: large">
                     书籍
                 </MenuItem>
             </router-link>
-            <router-link :to="{name:'book'}">
-                <MenuItem name="3" style="font-size: large">
+            <router-link :to="{name:'movie'}">
+                <MenuItem name="movie" style="font-size: large">
                     影视
                 </MenuItem>
             </router-link>
             <router-link :to="{name:'group'}">
-                <MenuItem name="4" style="font-size: large">
+                <MenuItem name="group" style="font-size: large">
                     小组
                 </MenuItem>
             </router-link>
@@ -26,23 +26,32 @@
                            @on-enter="search_some()"/>
                 </div>
                 <div style="float: left">
-                    <router-link :to="{name:'search'}"><MenuItem name="search"><Button type="ghost" shape="circle" icon="ios-search"/></MenuItem></router-link>
+                    <router-link :to="{name:'search'}">
+                        <MenuItem name="search">
+                            <i-button type="ghost" shape="circle" icon="ios-search"/>
+                        </MenuItem>
+                    </router-link>
                 </div>
             </div>
 
-            <div style="font-size: large; width: 20%; left:80%; position:absolute">
-                <div v-if="login">
+            <div style="font-size: large; width: 18rem; right:0.5rem; position:absolute">
+                <div v-if="this.hasLogin">
                     <div style="float: left">
-                        <span class="name"><Icon type="md-person"/> {{user_name}}</span>
+                        <span class="name"><Icon type="md-person"/> {{this.userinfo.username}}</span>
                     </div>
                     <div align="left" style="left: 1rem; position: relative">
                         <Dropdown>
                             <a href="javascript:void(0)">
-                                <Avatar v-bind:src="user_head"/>
+                                <Avatar size="large" v-bind:src="this.userinfo.userheadimg"/>
                             </a>
                             <Dropdown-menu slot="list">
-                                <Dropdown-item>注销</Dropdown-item>
-                                <Dropdown-item>切换账号</Dropdown-item>
+                                <router-link :to="{name:'mine'}">
+                                    <Dropdown-item>个人信息</Dropdown-item>
+                                </router-link>
+                                <Dropdown-item ><p @click="qiut" >注销</p></Dropdown-item>
+                                <router-link :to="{name:'login'}">
+                                    <Dropdown-item>切换账号</Dropdown-item>
+                                </router-link>
                             </Dropdown-menu>
                         </Dropdown>
                     </div>
@@ -67,15 +76,23 @@
 
 </template>
 <script>
+    import {mapGetters} from "vuex";
+
     export default {
         data() {
             return {
                 theme1: 'dark',
-                tag: 1,
-                user_head: 'https://i.loli.net/2017/08/21/599a521472424.jpg',
-                user_name: '小魔仙全身变',
-                login: false,
-                searchVal: ""
+                searchVal: ''
+            }
+        },
+        computed: {
+            ...mapGetters([
+                'hasLogin',
+                'userinfo',
+                'topicList'
+            ]),
+            active: function () {
+                return this.$route.name
             }
         },
         methods: {
@@ -90,9 +107,16 @@
 
                 this.searchVal = ''
 
+            },
+            to(toname) {
+                console.log("ssssssssssssssss")
+                this.$router.push({name: toname})
+            },
+            qiut: function () {
+                console.log("qqqqqqqqqqq")
+                this.$store.dispatch('clearInfo')
             }
-        }
-    }
+        }}
 </script>
 
 <style scoped>
@@ -108,7 +132,7 @@
         color: white;
         font-size: large;
         width: 10rem;
-        top: 1rem;
+        text-align: right;
         position: relative;
         overflow: hidden;
         text-overflow: ellipsis;

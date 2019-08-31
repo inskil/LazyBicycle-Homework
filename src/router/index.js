@@ -99,9 +99,9 @@ export const constantRouterMap =[
         component: _import_('addGroupPage'),
     },
     {
-        path:'/submitpost',
+        path:'/submitpost/:gid',
         name:'submitpost',
-        component:_import_('postPage'),
+        component:_import_('postPage',),
     },
     {
         path:'/publishbookPage',

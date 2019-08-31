@@ -9,12 +9,13 @@
                             :show-file-list="false"
                             :on-success="handleAvatarSuccess"
                             :before-upload="beforeAvatarUpload">
-                        <img v-if="usermsg.userheadimg" :src="usermsg.userheadimg" class="avatar">
+                        <img v-if="userinfo.userheadimg" :src="userinfo.userheadimg" class="avatar">
                         <i v-else class="el-icon-plus avatar-uploader-icon"></i>
                     </el-upload>
                     <div class="name_div">
-                        <h1 class="name" align="left">{{usermsg.username}}</h1>
-                        <Button type="text" icon="md-create" size="large" class="name_btn" @click="changeName = true"></Button>
+                        <h1 class="name" align="left">{{userinfo.username}}</h1>
+                        <Button type="text" icon="md-create" size="large" class="name_btn"
+                                @click="changeName = true"></Button>
                         <Modal
                                 v-model="changeName"
                                 title="修改姓名"
@@ -28,8 +29,9 @@
                         </Modal>
                     </div>
                     <div class="signature_div">
-                        <div class="signature" align="left">个性签名：{{usermsg.signature}}</div>
-                        <Button type="text" icon="md-create" size="large" class="signature_btn" @click="changeSignature = true"></Button>
+                        <div class="signature" align="left">个性签名：{{userinfo.signature}}</div>
+                        <Button type="text" icon="md-create" size="large" class="signature_btn"
+                                @click="changeSignature = true"></Button>
                         <Modal
                                 v-model="changeSignature"
                                 title="修改个性签名"
@@ -37,7 +39,8 @@
                                 @on-cancel="cancel">
                             <Form ref="signatureForm" :model="signatureForm" :rules="signatureRule" :label-width="80">
                                 <FormItem label="个性签名:" prop="newSignature">
-                                    <Input v-model="signatureForm.newSignature" type="textarea" :rows="3" placeholder="请输入个性签名"></Input>
+                                    <Input v-model="signatureForm.newSignature" type="textarea" :rows="3"
+                                           placeholder="请输入个性签名"></Input>
                                 </FormItem>
                             </Form>
                         </Modal>
@@ -45,7 +48,7 @@
                 </div>
                 <div class="card_right" align="left">
                     <h3>个人数据</h3><br>
-                    加入时间：{{usermsg.createtime}}<br>
+                    加入时间：{{userinfo.createtime}}<br>
                     书籍收藏数：{{books.length}}<br>
                     电影收藏数：{{movies.length}}<br>
                     加入小组数：{{groups.length}}
@@ -58,7 +61,7 @@
                 <Row>
                     <Col v-for="book in books" span="4" align="center">
                         <div class="material-card material-hover material-shadow-2">
-                            <img class="pic" :src="book.images.large">
+                            <img class="pic" :src="book.images[0].large">
                         </div>
                         <div class="title">{{book.title}}</div>
                     </Col>
@@ -68,7 +71,7 @@
                 <Row>
                     <Col v-for="movie in movies" span="4" align="center">
                         <div class="material-card material-hover material-shadow-2">
-                            <img class="pic" :src="movie.images.large">
+                            <img class="pic" :src="movie.images[0].large">
                         </div>
                         <div class="title">{{movie.title}}</div>
                     </Col>
@@ -86,7 +89,7 @@
             </TabPane>
             <TabPane label="通知信息" icon="md-mail" class="messages">
                 <Row>
-                    <Col v-for="message in messages" span="12">
+                    <Col v-for="message in noticeList" span="12">
                         <Card class="message" align="left">
                             <Avatar v-bind:src="message.userheadimg" size="large" class="message_head"></Avatar>
                             <div class="message_content">
@@ -96,9 +99,12 @@
                                 <span v-if="message.type==='success'">通过了你在<span class="message_group"> {{message.groupname}} </span>的管理员申请</span>
                             </div>
                             <div class="message_time">{{message.createtime}}</div>
-                            <Button v-if="message.type==='apply'" style="left: 40%" type="success" shape="circle" icon="md-checkmark" class="message_btn" ghost></Button>
-                            <Button v-if="message.type==='apply'" style="right: 40%" type="error" shape="circle" icon="md-close" class="message_btn" ghost></Button>
-                            <Button v-else style="left: 46%" type="primary" shape="circle" icon="md-checkmark" class="message_btn" ghost></Button>
+                            <Button v-if="message.type==='apply'" style="left: 40%" type="success" shape="circle"
+                                    icon="md-checkmark" class="message_btn" ghost></Button>
+                            <Button v-if="message.type==='apply'" style="right: 40%" type="error" shape="circle"
+                                    icon="md-close" class="message_btn" ghost></Button>
+                            <Button v-else style="left: 46%" type="primary" shape="circle" icon="md-checkmark"
+                                    class="message_btn" ghost></Button>
                         </Card>
                     </Col>
                 </Row>
@@ -108,235 +114,58 @@
 </template>
 
 <script>
+    import {mapGetters} from "vuex";
+
     export default {
         data() {
             return {
                 changeName: false,
-                changeSignature:false,
-                nameForm:{
-                    newName:''
+                changeSignature: false,
+                nameForm: {
+                    newName: ''
                 },
-                nameRule:{
+                nameRule: {
                     newName: [
-                        { required: true, message: '用户名不能为空', trigger: 'blur' }
+                        {required: true, message: '用户名不能为空', trigger: 'blur'}
                     ],
                 },
-                signatureForm:{
-                    newSignature:''
+                signatureForm: {
+                    newSignature: ''
                 },
-                signatureRule:{
+                signatureRule: {
                     newSignature: [
-                        { type: 'string', max: 20, message: '个性签名不能超过25个字', trigger: 'blur' }
+                        {type: 'string', max: 20, message: '个性签名不能超过25个字', trigger: 'blur'}
                     ],
                 },
-                usermsg:{
-                    userheadimg: 'https://img3.doubanio.com/icon/ul57495035-24.jpg',
-                    uid:"ren_ran",
-                    username:"荏苒",
-                    signature:"自由而无用的灵魂",
-                    createtime:"2012-01-03"
-                },
-                groups:[
-                    {
-                        groupname:"句子迷",
-                        grouphead:"https://img3.doubanio.com/view/group/sqxs/public/4a62c83f688cbdd.webp"
-                    },
-                    {
-                        groupname:"阅读是幸福时光的糖",
-                        grouphead:"https://img3.doubanio.com/view/group/sqxs/public/a58377c401d37cd.webp"
-                    },
-                    {
-                        groupname:"每月养成一个好习惯",
-                        grouphead:"https://img3.doubanio.com/icon/g111410-23.jpg"
-                    },
-                    {
-                        groupname:"一个陌生人的来信◎互寄明信片",
-                        grouphead:"https://img1.doubanio.com/view/group/sqxs/public/3892a0b4d233ecb.webp"
-                    },
-                    {
-                        groupname:"最近我们读了同一本书",
-                        grouphead:"https://img3.doubanio.com/icon/g290366-1.jpg"
-                    },
-                    {
-                        groupname:"北京国际电影节",
-                        grouphead:"https://img3.doubanio.com/icon/g325380-2.jpg"
-                    },
-                    {
-                        groupname:"句子迷",
-                        grouphead:"https://img3.doubanio.com/view/group/sqxs/public/4a62c83f688cbdd.webp"
-                    },
-                    {
-                        groupname:"阅读是幸福时光的糖",
-                        grouphead:"https://img3.doubanio.com/view/group/sqxs/public/a58377c401d37cd.webp"
-                    },
-                    {
-                        groupname:"每月养成一个好习惯",
-                        grouphead:"https://img3.doubanio.com/icon/g111410-23.jpg"
-                    },
-                    {
-                        groupname:"一个陌生人的来信◎互寄明信片",
-                        grouphead:"https://img1.doubanio.com/view/group/sqxs/public/3892a0b4d233ecb.webp"
-                    },
-                    {
-                        groupname:"最近我们读了同一本书",
-                        grouphead:"https://img3.doubanio.com/icon/g290366-1.jpg"
-                    },
-                    {
-                        groupname:"北京国际电影节",
-                        grouphead:"https://img3.doubanio.com/icon/g325380-2.jpg"
-                    }
-                ],
-                movies:[
-                    {
-                        title:"霸王别姬",
-                        images:{
-                            large:"https://images.weserv.nl/?url=https://img3.doubanio.com/view/photo/s_ratio_poster/public/p2561716440.jpg"
-                        }
-                    },
-                    {
-                        title:"霸王别姬",
-                        images:{
-                            large:"https://images.weserv.nl/?url=https://img3.doubanio.com/view/photo/s_ratio_poster/public/p2561716440.jpg"
-                        }
-                    },
-                    {
-                        title:"霸王别姬",
-                        images:{
-                            large:"https://images.weserv.nl/?url=https://img3.doubanio.com/view/photo/s_ratio_poster/public/p2561716440.jpg"
-                        }
-                    },
-                    {
-                        title:"霸王别姬",
-                        images:{
-                            large:"https://images.weserv.nl/?url=https://img3.doubanio.com/view/photo/s_ratio_poster/public/p2561716440.jpg"
-                        }
-                    },
-                    {
-                        title:"霸王别姬",
-                        images:{
-                            large:"https://images.weserv.nl/?url=https://img3.doubanio.com/view/photo/s_ratio_poster/public/p2561716440.jpg"
-                        }
-                    },
-                    {
-                        title:"霸王别姬",
-                        images:{
-                            large:"https://images.weserv.nl/?url=https://img3.doubanio.com/view/photo/s_ratio_poster/public/p2561716440.jpg"
-                        }
-                    },
-                    {
-                        title:"霸王别姬",
-                        images:{
-                            large:"https://images.weserv.nl/?url=https://img3.doubanio.com/view/photo/s_ratio_poster/public/p2561716440.jpg"
-                        }
-                    },
-                    {
-                        title:"霸王别姬",
-                        images:{
-                            large:"https://images.weserv.nl/?url=https://img3.doubanio.com/view/photo/s_ratio_poster/public/p2561716440.jpg"
-                        }
-                    }
-                ],
-                books:[
-                    {
-                        title:"追风筝的人",
-                        images:{
-                            large:"https://images.weserv.nl/?url=https://img3.doubanio.com/view/subject/l/public/s1727290.jpg"
-                        }
-                    },
-                    {
-                        title:"追风筝的人",
-                        images:{
-                            large:"https://images.weserv.nl/?url=https://img3.doubanio.com/view/subject/l/public/s1727290.jpg"
-                        }
-                    },
-                    {
-                        title:"追风筝的人",
-                        images:{
-                            large:"https://images.weserv.nl/?url=https://img3.doubanio.com/view/subject/l/public/s1727290.jpg"
-                        }
-                    },
-                    {
-                        title:"追风筝的人",
-                        images:{
-                            large:"https://images.weserv.nl/?url=https://img3.doubanio.com/view/subject/l/public/s1727290.jpg"
-                        }
-                    },
-                    {
-                        title:"追风筝的人",
-                        images:{
-                            large:"https://images.weserv.nl/?url=https://img3.doubanio.com/view/subject/l/public/s1727290.jpg"
-                        }
-                    },
-                    {
-                        title:"追风筝的人",
-                        images:{
-                            large:"https://images.weserv.nl/?url=https://img3.doubanio.com/view/subject/l/public/s1727290.jpg"
-                        }
-                    },
-                    {
-                        title:"追风筝的人",
-                        images:{
-                            large:"https://images.weserv.nl/?url=https://img3.doubanio.com/view/subject/l/public/s1727290.jpg"
-                        }
-                    },
-                    {
-                        title:"追风筝的人",
-                        images:{
-                            large:"https://images.weserv.nl/?url=https://img3.doubanio.com/view/subject/l/public/s1727290.jpg"
-                        }
-                    },
-                    {
-                        title:"追风筝的人",
-                        images:{
-                            large:"https://images.weserv.nl/?url=https://img3.doubanio.com/view/subject/l/public/s1727290.jpg"
-                        }
-                    }
-                ],
-                messages:[
-                    {
-                        username: "陈言冬",
-                        userheadimg: "https://img3.doubanio.com/icon/ul62707945-13.jpg",
-                        createtime: "2012-12-09 00:13:21",
-                        type: "apply",
-                        groupname: "句子迷"
-                    },
-                    {
-                        username: "_不负相思引",
-                        userheadimg: "https://img3.doubanio.com/icon/ul66034478-2.jpg",
-                        createtime: "2013-12-09 00:13:21",
-                        type: "notice",
-                        groupname: "句子迷"
-                    },
-                    {
-                        username: "陈言冬",
-                        userheadimg: "https://img3.doubanio.com/icon/ul62707945-13.jpg",
-                        createtime: "2014-12-09 00:13:21",
-                        type: "success",
-                        groupname: "句子迷"
-                    },
-                    {
-                        username: "YippeeH",
-                        userheadimg: "https://img3.doubanio.com/icon/ul42989333-254.jpg",
-                        createtime: "2015-12-09 00:13:21",
-                        type: "apply",
-                        groupname: "句子迷"
-                    },
-                    {
-                        username: "YippeeH",
-                        userheadimg: "https://img3.doubanio.com/icon/ul42989333-254.jpg",
-                        createtime: "2016-12-09 00:13:21",
-                        type: "notice",
-                        groupname: "句子迷"
-                    },
-                    {
-                        username: "_不负相思引",
-                        userheadimg: "https://img3.doubanio.com/icon/ul66034478-2.jpg",
-                        createtime: "2017-12-09 00:13:21",
-                        type: "success",
-                        groupname: "句子迷"
-                    }
-                ]
             };
+        },
+        computed: {
+            ...mapGetters([
+                'groupList',
+                'bookList',
+                'movieList',
+                'userinfo',
+                'noticeList'
+            ]),
+            groups: function () {
+                let group = this.userinfo.group
+                if (group) {
+                    let list = this.groupList.filter(item => group.includes(item.gid))
+                    return list
+                } else return null
+            },
+            movies: function () {
+                let likemovie = this.userinfo.likemovies
+                if (likemovie) {
+                    return this.movieList.filter(item => likemovie.includes(parseInt(item.id)))
+                } else return null
+            },
+            books: function () {
+                let likebook = this.userinfo.likebooks
+                if (likebook) {
+                    return this.bookList.filter(item => likebook.includes(parseInt(item.id)))
+                } else return null
+            },
         },
         methods: {
             handleAvatarSuccess(res, file) {
@@ -354,36 +183,43 @@
                 }
                 return isJPG && isLt2M;
             },
-            cancel () {
+            cancel() {
                 this.$Message.info('修改取消');
             },
-            nameSubmit (name) {
+            nameSubmit(name) {
                 this.$refs[name].validate((valid) => {
                     if (valid) {
-                        this.usermsg.username=this.nameForm.newName;
+                        this.usermsg.username = this.nameForm.newName;
                         this.$Message.success('修改成功');
                     } else {
                         this.$Message.error('修改失败');
                     }
                 })
             },
-            signatureSubmit (name) {
+            signatureSubmit(name) {
                 this.$refs[name].validate((valid) => {
                     if (valid) {
-                        this.usermsg.signature=this.signatureForm.newSignature;
+                        this.usermsg.signature = this.signatureForm.newSignature;
                         this.$Message.success('修改成功');
                     } else {
                         this.$Message.error('修改失败');
                     }
                 })
             }
+        },
+        created(){
+            let data = {
+                uid: this.userinfo.uid
+            }
+            this.$store.dispatch('getNotice',data)
         }
     }
 </script>
 
 <style>
     @import "~@/assets/css/ripple.min.css";
-    .avatar-uploader{
+
+    .avatar-uploader {
         border: 1px solid #d9d9d9;
         border-radius: 6px;
         cursor: pointer;
@@ -392,9 +228,11 @@
         width: 10rem;
         height: 10rem;
     }
+
     .avatar-uploader:hover {
         border-color: #409EFF;
     }
+
     .avatar-uploader-icon {
         font-size: 28px;
         color: #8c939d;
@@ -403,115 +241,137 @@
         line-height: 10rem;
         text-align: center;
     }
+
     .avatar {
         width: 10rem;
         height: 10rem;
         display: block;
     }
-    .main_div{
+
+    .main_div {
         left: 10%;
         width: 80%;
         margin-top: 1rem;
         position: relative;
     }
-    .card_left{
+
+    .card_left {
         left: 0;
         width: 60%;
         position: relative;
         border-right: rgba(0, 0, 0, 0.05) 0.1rem solid;
     }
-    .card_right{
+
+    .card_right {
         left: 60%;
         width: 40%;
-        top:0;
+        top: 0;
         position: absolute;
         padding: 3rem;
     }
-    .head_img{
+
+    .head_img {
         margin: 2rem;
     }
-    .name_div{
+
+    .name_div {
         left: 14rem;
-        top:0;
+        top: 0;
         position: absolute;
         height: 40%;
     }
-    .name{
-        top:0;
+
+    .name {
+        top: 0;
         position: relative;
         width: 12rem;
     }
-    .name_btn{
-        left:18.5rem;
-        top:0;
+
+    .name_btn {
+        left: 18.5rem;
+        top: 0;
         position: absolute
     }
-    .signature_div{
+
+    .signature_div {
         left: 14rem;
         top: 50%;
         position: absolute;
     }
-    .signature{
-        top:0;
+
+    .signature {
+        top: 0;
         width: 18rem;
         white-space: pre-line;
         position: relative
     }
-    .signature_btn{
-        left:18.5rem;
-        top:0;
+
+    .signature_btn {
+        left: 18.5rem;
+        top: 0;
         position: absolute
     }
-    .collection{
+
+    .collection {
         padding: 2rem;
     }
+
     .material-card {
         width: 6rem;
         height: 8rem;
         text-align: left;
     }
+
     .pic {
         width: 100%;
         height: 100%;
         object-fit: cover;
         display: block;
     }
+
     .group-card {
         width: 5rem;
         height: 5rem;
         text-align: left;
     }
-    .title{
-        overflow:hidden;
-        text-overflow:ellipsis;
-        white-space:nowrap;
+
+    .title {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
         font-size: larger;
-        padding:0.5rem;
+        padding: 0.5rem;
     }
-    .message{
+
+    .message {
         margin: 1rem;
         padding: 1rem;
         height: 9rem;
     }
-    .message_content{
+
+    .message_content {
         left: 5.5rem;
         top: 2.7rem;
         position: absolute;
         vertical-align: middle;
     }
-    .message_user{
+
+    .message_user {
         font-size: larger;
         font-weight: bold;
     }
-    .message_group{
+
+    .message_group {
         font-weight: bold;
     }
-    .message_time{
-        top:10%;
-        right:1rem;
+
+    .message_time {
+        top: 10%;
+        right: 1rem;
         position: absolute
     }
-    .message_btn{
+
+    .message_btn {
         bottom: 1rem;
         position: absolute
     }

@@ -54,7 +54,6 @@
                 this.loading = true
                 this.$store.dispatch('getBookList', {
                     //type: this.$route.params.classify,
-                    count: 8
                 })
             },
         },

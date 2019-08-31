@@ -7,20 +7,20 @@
                 <h1 style="float: left">{{group.groupname}}</h1>
                 <div v-if="isMember && !isAdmin" align="right">
                     我是这个小组的成员>
-                    <Button type="text">退出小组</Button>
+                    <Button @click="quitgroup" type="text">退出小组</Button>
                 </div>
                 <div v-if="isAdmin" align="right">
                     我是这个小组的管理员>
-                    <Button type="text">退出小组</Button>
+                    <Button @click="quitgroup" type="text">退出小组</Button>
                 </div>
                 <div v-if="!isMember" align="right">
                     我还不是这个小组的成员>
-                    <Button type="text">加入小组</Button>
+                    <Button @click="jiongroup" type="text">加入小组</Button>
                 </div>
             </div>
             <Divider></Divider>
             <div class="group_info" align="left">
-                <div>创建于{{group.createtime}}&emsp;组长：{{group.creator.username}}</div>
+                <div>创建于{{group.createtime | parseTime}}&emsp;组长：{{group.creator.username}}</div>
                 {{group.text}}
             </div>
             <Divider></Divider>
@@ -38,11 +38,13 @@
                                 <td align="right" style="width: 25%; padding-right: 1rem">最后回应</td>
                             </tr>
                             <tr v-for="topic in hotList">
-                                <td align="left">{{topic.title}}</td>
+                                <router-link :to="'/topic/'+topic.tid">
+                                    <td align="left">{{topic.title}}</td>
+                                </router-link>
                                 <td>{{topic.username}}</td>
                                 <td>{{topic.review.length}}</td>
                                 <td align="right">
-                                    {{topic.updatetime}}
+                                    {{topic.updatetime | parseTime}}
                                     <Button v-if="isAdmin" type="error" shape="circle" icon="md-close" size="small"
                                             style="height: 1.4rem;width: 1.4rem"></Button>
                                 </td>
@@ -62,7 +64,7 @@
                                 <td>{{topic.username}}</td>
                                 <td>{{topic.review.length}}</td>
                                 <td align="right">
-                                    {{topic.updatetime}}
+                                    {{topic.updatetime | parseTime}}
                                     <Button v-if="isAdmin" type="error" shape="circle" icon="md-close" size="small"
                                             style="height: 1.4rem;width: 1.4rem"></Button>
                                 </td>
@@ -70,7 +72,7 @@
                         </table>
                     </TabPane>
                 </Tabs>
-                <Button v-if="isMember" type="primary" ghost
+                <Button @click="addtopic" v-if="isMember" type="primary" ghost
                         style="float: right; top:0rem; right:1rem; position:absolute;">+发言
                 </Button>
             </div>
@@ -90,8 +92,8 @@
             </Row>
             <Divider></Divider>
             <h2 style="float: left">小组成员</h2>
-            <Button v-if="!isMember" style="float:right;" type="text">加入小组</Button>
-            <Button v-else style="float: right;" type="text">退出小组</Button>
+            <Button @click="jiongroup" v-if="!isMember" style="float:right;" type="text">加入小组</Button>
+            <Button @click="quitgroup" v-else style="float: right;" type="text">退出小组</Button>
             <br>
             <Row style="margin-top: 1rem">
                 <Col span="6" v-for="user in group.user">
@@ -114,12 +116,9 @@
                     </div>
                 </Col>
             </Row>
-            <div style="float: left;width: 10%;height: 100%; margin-top: 10%">
-                <div v-if='ismanager'>
-                    <Button type="primary">删除该小组</Button>
-                </div>
-                <div v-else>
-                    <Button type="primary" disabled>删除该小组</Button>
+            <div v-if='isAdmin' style="float: left;width: 10%;height: 100%; margin-top: 10%">
+                <div v-if='isAdmin'>
+                    <Button @click="delgroup" type="primary">删除该小组</Button>
                 </div>
             </div>
         </div>
@@ -139,15 +138,26 @@
         data() {
             return {
                 ismanager: false,
-                isMember: true,
-                isAdmin: true,
             }
         },
         computed: {
             ...mapGetters([
                 'groupList',
-                'topicList'
+                'topicList',
+                'userinfo'
             ]),
+            isAdmin: function () {
+                for (let use in this.group.admin) {
+                    if (use.uid == this.$store.state.uid) return true
+                }
+                return false
+            },
+            isMember: function () {
+                for (let use in this.group.user) {
+                    if (use.uid == this.$store.state.uid) return true
+                }
+                return false
+            },
             hotList: function () {
                 return this.sortKeyNum(this.topiclist_gid, 'review');
             },
@@ -161,10 +171,11 @@
             topiclist_gid: function () {
                 return this.topicList.filter(item => item.gid == this.gid)
             },
-            recommendList:function () {
+            recommendList: function () {
                 return this.groupList
             }
         },
+        inject:['reload'],
         methods: {
             sortKeyNum(array, key) {
                 return array.sort(function (a, b) {
@@ -174,10 +185,7 @@
                 })
             },
             updatePage: function () {
-                const {fullPath} = this.$route
-                this.$router.replace({
-                    path: '/redirect' + fullPath
-                })
+                this.reload()
             }
             ,
             updateAll() {
@@ -196,13 +204,50 @@
                 this.$store.dispatch('getTopicList')
                 this.loading = false
             },
-        }
-        ,
-        created() {
-            // Getting books data on created
-            this.getGroup()
-            this.getTopic()
+            delgroup() {
+                console.log('delllllllllllllll')
+                this.$store.dispatch('delGroup', {uid: this.userinfo.uid, gid: this.gid})
+                this.$router.push('/')
+            },
+            addtopic() {
+                this.$router.push('/submitpost/' + this.gid)
+            },
+            async jiongroup() {
+                let data = {
+                    gid: this.gid,
+                    user: {
+                        username: this.userinfo.username,
+                        userheadimg: this.userinfo.userheadimg,
+                        uid: this.userinfo.uid
+                    }
+                }
+                await this.$axios.post('/joingroup', data).then(res => {
+                    console.log(res)
+                    this.$Message.success('加入成功!');
+                    this.updatePage()
+                }).catch(err => {
+                    console.log(err)
+                })
+            },
+            async quitgroup() {
+                let data = {
+                    gid: this.gid,
+                    uid: this.userinfo.uid
+                }
+                await this.$axios.post('/quitgroup', data).then(res => {
+                    console.log(res)
+                    this.$Message.success('退出成功!');
+                    this.updatePage()
+                }).catch(err => {
+                    console.log(err)
+                })
+            }
         },
+        // created() {
+        //     // Getting books data on created
+        //     this.getGroup()
+        //     this.getTopic()
+        // },
         watch: {
             // 如果路由有变化，会再次执行该方法
             '$router': 'updateAll'

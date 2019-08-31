@@ -3,9 +3,12 @@
 
         <!--推荐小组标题-->
         <h1 style="text-align: left ">
-            <div class="head-nav" style="padding-left: 150px ">
+            <div class="head-nav" style="padding-left: 150px">
                 <span class="head-title" style="margin-top:10%">推荐小组</span>
-                <p></p>
+                <router-link to="/addGroup">
+                    <Button type="primary" style="margin-right:60rem ;float: right ">创建一个新的小组</Button>
+                </router-link>
+
             </div>
         </h1>
         <div class="forum_recommend" alog-alias="forum_recommend" style="background-color: #f5ece0">
@@ -19,7 +22,9 @@
                         </router-link>
                         <div class="rcmd_forum_desc" style="width: 220px">
                             <p class="rcmd_f_name">
-                                <router-link rel="noopener" :to="gid_url(flower.gid)" target="_blank">{{flower.groupname}}</router-link>
+                                <router-link rel="noopener" :to="gid_url(flower.gid)" target="_blank">
+                                    {{flower.groupname}}
+                                </router-link>
                             </p>
                             <p class="rcmd_f_reason">{{reason(flower.text)}}....</p>
                             <p class="rcmd_f_num">
@@ -39,8 +44,9 @@
                             <li class="clearfix" v-for="hot in hots" v-bind:key="hot.groupname"
                                 style="padding-right: 7px">
                                 <router-link rel="noopener" :to="gid_url(hot.gid)" class="good_forum clearfix"
-                                   target="_blank" style="background-color: #f5ece0;border: 1px solid #b5a898">
-                                    <img  v-bind:src="hot.grouphead" width="65"
+                                             target="_blank"
+                                             style="background-color: #f5ece0;border: 1px solid #b5a898">
+                                    <img v-bind:src="hot.grouphead" width="65"
                                          height="65" class="gf_pic">
                                     <div class="gf_desc">
                                         <p class="gf_fname">{{hot.groupname}}</p>

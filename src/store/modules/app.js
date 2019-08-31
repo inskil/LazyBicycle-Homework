@@ -7,7 +7,8 @@ const app = {
             let w = document.documentElement.clientWidth || document.body.clientWidth;
             if (w > 767) return true
                 return false
-        })()
+        }),
+        search_key:''
     },
     mutations: {
         CHANGESCREENWIDTH (state, width) {
@@ -23,7 +24,7 @@ const app = {
         },
         changeHeaderHeight ({commit}, height) {
             commit('CHANGEHEADERHEIGHT', height)
-        }
+        },
     }
 }
 export default app

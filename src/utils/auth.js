@@ -1,10 +1,12 @@
-import { Cookie } from './storage'
+import {Cookie, Session} from './storage'
 const TokenKey = 'Token-Auth'
 
-export function getToken() {  
-	return Cookie.get(TokenKey)
+export function getToken() {
+    return Cookie.get(TokenKey)
 }
-
+export function getSSToken() {
+    return Session.get('token')
+}
 export function setToken(token) {
   return Cookie.set(TokenKey, token)
 }

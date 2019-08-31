@@ -18,7 +18,7 @@ axios.interceptors.response.use(response => response, err => Promise.resolve(err
 
 // 检查状态码
 function checkStatus(res) {
-    //console.log('res in checkstatus',res)
+    console.log('res in checkstatus',res)
     if (res.status === 200 || res.status === 304) {
        return res.data
     }
@@ -62,13 +62,13 @@ export default {
 
     post(url, data) {
         console.log("posting")
+        console.log('data',data)
         if (!url) return
-        var data1 = qs.stringify(data)
-        console.log('data1'+ data1)
         return axios({
             method: 'post',
             url: url,
-            data: data1,
+            data:data,
+            params: data,
             timeout: 30000
         }).then(checkStatus).then(checkCode)
     }

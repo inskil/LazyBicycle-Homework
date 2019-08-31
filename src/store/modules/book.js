@@ -7,9 +7,9 @@ const book = {
         homeList: [],
         info: {},
         currType: '',
-        count: 5,
+        count: 0,
         loadingMore: false,
-        loadingBol: true
+        loadingBol: true,
     },
     mutations: {
         BOOKLIST(state, res) {
@@ -22,12 +22,11 @@ const book = {
     actions: {
         // 获取列表
         async getBookList({commit, state}, params){
-            params.count = params.count || state.count
             //params.type = params.type === 'all' ? null : params.type
             state.loadingMore = true
             state.loadingBol = false
             return new Promise((resolve, reject) => {
-                axios.get('book', params).then(res => {
+                axios.get('book').then(res => {
                     state.loadingMore = false;
                     resolve(res)
                     //if (res.data.length <= 0 && params.pageindex > 1) return

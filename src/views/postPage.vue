@@ -1,7 +1,7 @@
 <template>
-    <div  style="text-align:center">
+    <div style="text-align:center">
         <div style="margin-top: 7%">
-            <el-divider content-position="center"  style="margin-top:10%"><h1>发布帖子</h1></el-divider>
+            <el-divider content-position="center" style="margin-top:10%"><h1>发布帖子</h1></el-divider>
         </div>
         <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm">
 
@@ -26,6 +26,8 @@
 </template>
 
 <script>
+    import {mapGetters} from "vuex";
+
     export default {
         data() {
             return {
@@ -33,28 +35,56 @@
                     name: '',
                     desc: ''
                 },
+                gid: this.$route.gid,
                 rules: {
                     name: [
-                        { required: true, message: '请输入标题', trigger: 'blur' }
+                        {required: true, message: '请输入标题', trigger: 'blur'}
                     ],
                     desc: [
-                        { required: true, message: '请输入帖子内容', trigger: 'blur' },
-                        { min: 25, message: '帖子内容不得少于25个字', trigger: 'blur' }
+                        {required: true, message: '请输入帖子内容', trigger: 'blur'},
+                        {min: 25, message: '帖子内容不得少于25个字', trigger: 'blur'}
                     ]
                 }
             };
         },
+        computed: {
+            ...mapGetters([
+                'bookList'
+            ]),
+        },
         methods: {
             submitForm(formName) {
-                this.$refs[formName].validate((valid) => {
+                this.$refs[formName].validate(async (valid) => {
                     if (valid) {
-                        alert('submit!');
-                    } else {
-                        console.log('error submit!!');
-                        return false;
-                    }
-                });
-            },
+                        try {
+                            let tid = 0
+                            await this.$axios.get('/topic/getnewtid',{gid:this.gid}).then(res => {
+                                console.log(res)
+                                tid = res.data.tid
+                            }).catch(err => {
+                                console.log(err)
+                            })
+                            let msg = {
+                                gid: this.gid,
+                                uid:this.userinfo.uid,
+                                userheadimg:this.userinfo.userheadimg,
+                                username:this.username,
+                                tid:tid,
+                                title:this.ruleForm.name,
+                                text:this.ruleForm.desc,
+                            }
+                            await this.$store.dispatch('addtopic', msg)
+                            this.$Message.success('创建成功');
+                            this.$router.push('/group')
+                        } catch (e) {
+                            console.log(e)
+                            this.$Message.error(e);
+                            this.$Message.error('创建失败');
+                        }
+                    } else this.$Message.error('创建失败');
+                })
+            }
+            ,
             resetForm(formName) {
                 this.$refs[formName].resetFields();
             }
@@ -63,7 +93,7 @@
 </script>
 
 <style scoped>
-    .demo-ruleForm{
+    .demo-ruleForm {
         height: 570px;
     }
 </style>

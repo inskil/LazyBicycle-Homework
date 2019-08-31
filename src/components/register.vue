@@ -74,26 +74,13 @@
                 console.log("函数开始了")
                 this.$refs['formCustom'].validate((valid) => {
                     if (valid) {
-
-                        const _this = this;
-                        this.disablebtn = true;
-                        this.loginText = "注册中...";
-                        //this.$reqs就访问到了main.js中绑定的axios
-                        this.$axios.post("/user/add", {
+                        let param = {
                             username: this.formCustom.name,
                             pwd: this.formCustom.passwd
-                        }).then(function (result) {
-                            //成功
-                            console.log(result)
-                            _this.disablebtn = false;
-                            _this.loginText = "注册";
-                            _this.$Message.success('注册成功!');
-                        }).catch(function (error) {
-                            //失败
-                            _this.disablebtn = false;
-                            _this.loginText = "注册"
-                        })
-
+                        }
+                        this.$store.dispatch('addUser',param)
+                        this.$Message.success('注册成功!');
+                        this.$router.push('/login')
                     } else {
                         this.$Message.error('注册失败!');
                     }

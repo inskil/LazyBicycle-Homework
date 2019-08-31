@@ -6,6 +6,9 @@ import book from "@/store/modules/book";
 import movie from "@/store/modules/movie";
 import group from "@/store/modules/group"
 import topic from "@/store/modules/topic";
+import notice from "@/store/modules/notice";
+import user from "./modules/user";
+
 Vue.use(Vuex)
 
 const store = new Vuex.Store({
@@ -16,8 +19,8 @@ const store = new Vuex.Store({
         // subject,
         group,
         topic,
-        //search,
-        //user,
+        notice,
+        user,
         app,
     },
     getters

@@ -28,7 +28,8 @@
     }
 </style>
 <script>
-    import axios from '../utils/fetch'
+
+    import {mapGetters, mapState} from "vuex";
 
     export default {
         data() {
@@ -78,32 +79,32 @@
                 }
             }
         },
+        computed: {
+            ...mapGetters([
+                'hasLogin',
+            ]),
+        },
         methods: {
             handleSubmit(name) {
-                this.$refs['formCustom'].validate((valid) => {
+                this.$refs['formCustom'].validate(async (valid) => {
                     if (valid) {
-                        const _this = this;
-                        this.disablebtn = true;
-                        this.loginText = "登录中...";
-                       var pa={
+                        let param = {
                             username: this.formCustom.name,
                             pwd: this.formCustom.passwd
                         }
-                        console.log('papapappa'+pa)
-                        //this.$reqs就访问到了main.js中绑定的axios
-                        axios.post("/user/login",pa).then(function (result) {
-                            //成功
-                            console.log(result)
-                            _this.disablebtn = false;
-                            _this.loginText = "登录";
-                            _this.$Message.success('登录成功!');
-                        }).catch(function (error) {
-                            //失败
-                            _this.disablebtn = false;
-                            _this.loginText = "登录"
-                        })
-                    } else {
-                        this.$Message.error('注册失败!');
+                        try {
+                            await this.$store.dispatch('userLogin', param)
+                            console.log(this.hasLogin)
+                            if (this.hasLogin) {
+                                this.$Message.success('登录成功!');
+                                this.$router.push('/')
+                            } else {
+                                this.$Message.error('登录失败!');
+                            }
+                        } catch (e) {
+                           console.log('登录失败!')
+                        }
+
                     }
                 });
             },

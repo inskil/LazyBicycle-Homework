@@ -21,12 +21,11 @@ const movie = {
     actions: {
         // 获取列表
         async getMovieList({commit, state}, params){
-            params.count = params.count || state.count
             //params.type = params.type === 'all' ? null : params.type
             state.loadingMore = true
             state.loadingBol = false
             return new Promise((resolve, reject) => {
-                axios.get('movie', params).then(res => {
+                axios.get('movie').then(res => {
                     state.loadingMore = false;
                     resolve(res)
                     //if (res.data.length <= 0 && params.pageindex > 1) return

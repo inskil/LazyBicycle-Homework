@@ -65,10 +65,33 @@ const group = {
         },
         async joinGroup(params){
             return new Promise((resolve, reject) => {
-                axios.get('/addgroup ', params).then(res => {
+                axios.get('/jiongroup ', params).then(res => {
                     resolve(res)
                 }).catch(err => {
                     // console.log(err)
+                    reject(err)
+                })
+            })
+        },
+        async addgroup({commit}, params){
+            return new Promise((resolve, reject) => {
+                axios.post('/addgroup ', params).then(res => {
+                    resolve(res)
+                    console.log('addgroup',res)
+                }).catch(err => {
+                    // console.log(err)
+                    reject(err)
+                })
+            })
+        },
+        delGroup({commit},data) {
+            console.log('delllllllllllllllllllllllllllllllllll in gourp.js')
+            let {uid,gid} = data
+            return new Promise((resolve, reject) => {
+                axios.post('/delgroup', {uid: uid,gid:gid})
+                    .then(res => {
+                        resolve(res)
+                    }).catch(err => {
                     reject(err)
                 })
             })

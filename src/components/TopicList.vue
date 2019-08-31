@@ -11,7 +11,7 @@
             <td>{{topic.username}}</td>
             <td>{{topic.review.length}}</td>
             <td align="right">
-                {{topic.updatetime}}
+                {{topic.updatetime |parseTime}}
                 <Button v-if="isAdmin" type="error" shape="circle" icon="md-close" size="small"
                         style="height: 1.4rem;width: 1.4rem"></Button>
             </td>
@@ -21,7 +21,7 @@
             <td>{{topic.username}}</td>
             <td>{{topic.review.length}}</td>
             <td align="right">
-                {{topic.updatetime}}
+                {{topic.updatetime | parseTime}}
                 <Button v-if="isAdmin" type="error" shape="circle" icon="md-close" size="small"
                         style="height: 1.4rem;width: 1.4rem"></Button>
             </td>
@@ -52,22 +52,16 @@
                 'topicList',
             ]),
             gid:function () {
-                return this.$router.params.id
+                return this.$route.params.id
             },
             newList: function () {
                 let list = this.topicList.filter(item => item.gid==this.gid)
-                return this.sortKey(list, 'updatetime');
-            }
-        },
-        methods: {
-            sortKey(array, key) {
-                return array.sort(function (a, b) {
-                    var x = a[key];
-                    var y = b[key];
-                    return ((x < y) ? 1 : (x > y) ? -1 : 0)
+                return list.sort(function (a,b) {
+                    return a.updatetime<b.updatetime?1:-1
                 })
             }
-        }
+        },
+        methods: {}
     }
 </script>
 
