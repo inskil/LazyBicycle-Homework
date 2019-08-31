@@ -38,9 +38,7 @@
                                 <td align="right" style="width: 25%; padding-right: 1rem">最后回应</td>
                             </tr>
                             <tr v-for="topic in hotList">
-                                <router-link :to="'/topic/'+topic.tid">
-                                    <td align="left">{{topic.title}}</td>
-                                </router-link>
+                                <td align="left"><router-link class="link" :to="'/topic/'+topic.tid">{{topic.title}}</router-link></td>
                                 <td>{{topic.username}}</td>
                                 <td>{{topic.review.length}}</td>
                                 <td align="right">
@@ -60,7 +58,7 @@
                                 <td align="right" style="width: 25%; padding-right: 1rem">最后回应</td>
                             </tr>
                             <tr v-for="topic in topiclist_gid" v-if="topic.isgood">
-                                <td align="left">{{topic.title}}</td>
+                                <td align="left"><router-link class="link" :to="'/topic/'+topic.tid">{{topic.title}}</router-link></td>
                                 <td>{{topic.username}}</td>
                                 <td>{{topic.review.length}}</td>
                                 <td align="right">
@@ -86,7 +84,7 @@
                     <div align="center">
                         <Avatar v-bind:src="admin.userheadimg" size="large"/>
                         <br>
-                        {{admin.username}}
+                        <div class="name">{{admin.username}}</div>
                     </div>
                 </Col>
             </Row>
@@ -100,7 +98,7 @@
                     <div align="center">
                         <Avatar v-bind:src="user.userheadimg" size="large"/>
                         <br>
-                        {{user.username}}
+                        <div class="name">{{user.username}}</div>
                     </div>
                 </Col>
             </Row>
@@ -112,7 +110,7 @@
                     <div align="center">
                         <Avatar v-bind:src="group.grouphead" size="large" shape="square"/>
                         <br>
-                        {{group.groupname}}
+                        <div class="name">{{group.groupname}}</div>
                     </div>
                 </Col>
             </Row>
@@ -294,5 +292,20 @@
     td {
         border-bottom: 1px dashed #DDDDDD;
         padding: 0.3rem;
+    }
+
+    .name{
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        padding-bottom: 1rem;
+    }
+
+    .link{
+        color: black;
+    }
+
+    .link:hover{
+        color: #2b85e4;
     }
 </style>
