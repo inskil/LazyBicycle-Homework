@@ -96,7 +96,7 @@ module.exports = {
                     user["group"] = [groupmsg["gid"]]
                 }
                 console.log(user)
-                await ctx.add(userModel, user);
+                await ctx.update(userModel,{"uid": json["uid"]}, user);
                 ctx.send('添加成功')
             }
         } catch (e) {
