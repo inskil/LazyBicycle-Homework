@@ -51,6 +51,43 @@ const review = {
                 })
             })
         },
+        async getmoviereviewList({commit, state},title) {
+            //console.log("sssssssssssssssssssssssssssssss")
+            //params.type = params.type === 'all' ? null : params.type
+            state.loadingMore = true
+            state.loadingBol = false
+            return new Promise((resolve, reject) => {
+                axios.get('/moviereview', {title:title}).then(res => {
+                    state.loadingMore = false;
+                    resolve(res)
+                    //console.log("sssssgetsgettttsssssssssss")
+                    console.log(res.data)
+                    // res.data.sort(function (a, b) {
+                    //     return b.review.length - a.review.length
+                    // });
+                    commit('MREVIEWLIST', res.data)
+
+                    //}
+                    // if (res.data.length >= state.count) {
+                    //     state.loadingBol = true;
+                    // }
+                }).catch(err => {
+                    console.log(err)
+                    reject(err)
+                })
+            })
+        },
+        async addmoviereview({commit}, params) {
+            return new Promise((resolve, reject) => {
+                axios.post('/addmoviereview ', params).then(res => {
+                    resolve(res)
+                    console.log('/addreview', res)
+                }).catch(err => {
+                    // console.log(err)
+                    reject(err)
+                })
+            })
+        },
     }
 }
 export default review
