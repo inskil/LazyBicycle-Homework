@@ -43,7 +43,7 @@
                                 <td>{{topic.review.length}}</td>
                                 <td align="right">
                                     {{topic.updatetime | parseTime}}
-                                    <Button v-if="isAdmin" type="error" shape="circle" icon="md-close" size="small"
+                                    <Button @click.native="deltopic(topic.tid)" v-if="isAdmin" type="error" shape="circle" icon="md-close" size="small"
                                             style="height: 1.4rem;width: 1.4rem"></Button>
                                 </td>
                             </tr>
@@ -63,7 +63,7 @@
                                 <td>{{topic.review.length}}</td>
                                 <td align="right">
                                     {{topic.updatetime | parseTime}}
-                                    <Button v-if="isAdmin" type="error" shape="circle" icon="md-close" size="small"
+                                    <Button @click.native="deltopic(topic.tid)"  v-if="isAdmin" type="error" shape="circle" icon="md-close" size="small"
                                             style="height: 1.4rem;width: 1.4rem"></Button>
                                 </td>
                             </tr>
@@ -237,6 +237,21 @@
                 await this.$axios.post('/quitgroup', data).then(res => {
                     console.log(res)
                     this.$Message.success('退出成功!');
+                    this.updatePage()
+                }).catch(err => {
+                    console.log(err)
+                })
+            },
+            async deltopic(tid){
+                console.log('delllllllllll')
+                let data = {
+                    gid: this.gid,
+                    uid: this.userinfo.uid,
+                    tid:tid
+                }
+                 await  this.$axios.post('/removeTopic', data).then(res => {
+                    console.log(res)
+                    this.$Message.success('删除成功!');
                     this.updatePage()
                 }).catch(err => {
                     console.log(err)
