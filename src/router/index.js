@@ -54,7 +54,7 @@ export const constantRouterMap =[
         component: _import_('moviePage'),
     },
     {
-        path: '/search',
+        path: '/search/:searchkey',
         name:'search',
         component: _import_('searchPage'),
     },
@@ -84,7 +84,7 @@ export const constantRouterMap =[
         component: _import_('bookDetailPage'),
     },
     {
-        path: '/topic/:id',
+        path: '/topic/:gid/:tid',
         name:'topicDetail',
         component: _import_('topicPage'),
     },

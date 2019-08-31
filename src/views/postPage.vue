@@ -35,7 +35,7 @@
                     name: '',
                     desc: ''
                 },
-                gid: this.$route.gid,
+                gid: this.$route.params.gid,
                 rules: {
                     name: [
                         {required: true, message: '请输入标题', trigger: 'blur'}
@@ -49,7 +49,8 @@
         },
         computed: {
             ...mapGetters([
-                'bookList'
+                'bookList',
+                'userinfo',
             ]),
         },
         methods: {
@@ -58,7 +59,7 @@
                     if (valid) {
                         try {
                             let tid = 0
-                            await this.$axios.get('/topic/getnewtid',{gid:this.gid}).then(res => {
+                            await this.$axios.get('/topic/getnewtid',{gid:parseInt(this.gid)}).then(res => {
                                 console.log(res)
                                 tid = res.data.tid
                             }).catch(err => {
@@ -68,14 +69,14 @@
                                 gid: this.gid,
                                 uid:this.userinfo.uid,
                                 userheadimg:this.userinfo.userheadimg,
-                                username:this.username,
+                                username:this.userinfo.username,
                                 tid:tid,
                                 title:this.ruleForm.name,
                                 text:this.ruleForm.desc,
                             }
-                            await this.$store.dispatch('addtopic', msg)
+                            await this.$store.dispatch('addtopic', JSON.stringify({msg:msg}))
                             this.$Message.success('创建成功');
-                            this.$router.push('/group')
+                            //this.$router.push('/group')
                         } catch (e) {
                             console.log(e)
                             this.$Message.error(e);
