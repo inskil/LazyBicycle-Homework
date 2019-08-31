@@ -459,6 +459,7 @@ topicmsg:{
 ```
 
 ##notic
+```
 //post 添加一个新申请
 /notice/newapply
 {
@@ -503,3 +504,4 @@ topicmsg:{
 	uid: //申请人uid
 	touid:	//同意人uid
 }
+```
