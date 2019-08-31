@@ -20,11 +20,11 @@ module.exports = {
 
 
     publicPath: process.env.NODE_ENV === 'production' ? '/' : '/',
-//
-// outputDir: 'dist',
-//
-// assetsDir: 'static',
-//
+
+    outputDir: 'dist',
+
+    assetsDir: 'static',
+
 // filenameHashing: true,
 //
 // // When building in multi-pages mode, the webpack config will contain different plugins
