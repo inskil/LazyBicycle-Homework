@@ -17,15 +17,6 @@ body {
   font-family: "Josefin Sans", sans-serif;
 }
 
-.carousel {
-  position: relative;
-  display: block;
-  overflow: hidden;
-  width: 100%;
-  width: 100vw;
-  height: 100%;
-  height: 100vh;
-}
 .carousel .slider {
   position: relative;
   display: block;

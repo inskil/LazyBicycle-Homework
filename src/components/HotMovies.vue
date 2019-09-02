@@ -8,7 +8,7 @@
                             <img class="pic" :src="book.images[0].large">
                             <div class="text">
                                 <h1>{{book.title}}</h1>
-                                <br><br>
+                                <br>
                                 <p>{{book.summary}}</p>
                             </div>
                         </div>
@@ -125,7 +125,11 @@
         display: -webkit-box;
         -webkit-box-orient: vertical;
         word-break: break-all;
-        font-size: medium;
+        font-size: small;
         -webkit-line-clamp: 8;
+    }
+
+    h1{
+        margin: auto;
     }
 </style>

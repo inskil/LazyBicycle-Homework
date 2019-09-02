@@ -79,7 +79,7 @@
             fetchDate: function () {
                 // this.getBook()
                 // this.getMovie()
-                setTimeout(this.slick,3000)
+                setTimeout(this.slick,200)
             },
             getBook() {
                 this.$store.dispatch('getBookList', {
@@ -95,7 +95,6 @@
             },
             slick() {
                 $(function () {
-                    console.log('````````````````start js``````````````')
                     $('.slider-for').slick({
                         slidesToShow: 1,
                         slidesToScroll: 3,
@@ -153,7 +152,7 @@
     @import '~@/assets/css/base.css';
     @import '~@/assets/css/demo.css';
 
-    .nav-item {
-
+    .carousel{
+        height: 50%;
     }
 </style>

@@ -2,12 +2,12 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import getters from './getters'
 import app from './modules/app'
-import book from "@/store/modules/book";
-import movie from "@/store/modules/movie";
-import group from "@/store/modules/group"
-import topic from "@/store/modules/topic";
-import review from "@/store/modules/review";
-import notice from "@/store/modules/notice";
+import book from "./modules/book";
+import movie from "./modules/movie";
+import group from "./modules/group"
+import topic from "./modules/topic";
+import review from "./modules/review";
+import notice from "./modules/notice";
 import user from "./modules/user";
 
 Vue.use(Vuex)

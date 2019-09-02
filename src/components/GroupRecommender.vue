@@ -144,12 +144,13 @@
 
     .forum_recommend {
         border: 1px solid #f5ece0;
-        width: 1150px;
+        width: 89%;
         height: 340px;
-        margin-left: 120px;
+        margin-left: 6%;
         margin-bottom: 30px;
 
     }
+
 
     .class_title {
         text-align: left;
@@ -170,13 +171,24 @@
         width: 168px;
         height: 69px;
     }
-    .create{
+
+    .create {
         font-size: small;
         font-weight: lighter;
         color: #e45659;
         margin-left: 1rem;
     }
-    .create:hover{
+
+    .create:hover {
         color: #e40811;
+    }
+
+    .day_rcmd clearfix {
+        /*width: auto;*/
+    }
+
+    .aside {
+        right: 0;
+        left: 30px;
     }
 </style>

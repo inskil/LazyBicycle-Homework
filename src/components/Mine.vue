@@ -237,7 +237,7 @@
     }
 </script>
 
-<style>
+<style  scoped>
     @import "~@/assets/css/ripple.min.css";
 
     .avatar-uploader {

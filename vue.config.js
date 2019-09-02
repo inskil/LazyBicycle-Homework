@@ -1,4 +1,7 @@
 const webpack = require('webpack')
+const fs = require('fs')
+const path = require('path')
+
 
 module.exports = {
     devServer: {
@@ -18,8 +21,7 @@ module.exports = {
         }
     },
 
-
-    publicPath: process.env.NODE_ENV === 'production' ? '/' : '/',
+    publicPath: process.env.NODE_ENV === 'production' ? './' : './',
 
     outputDir: 'dist',
 
@@ -151,8 +153,8 @@ module.exports = {
             })
 
         ]
-
     }
 }
+
 
 

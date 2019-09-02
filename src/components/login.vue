@@ -19,7 +19,7 @@
         </Form>
     </div>
 </template>
-<style>
+<style  scoped>
     .form {
         top: 2rem;
         left: 32%;

@@ -33,5 +33,16 @@
         text-align: center;
         color: #2c3e50;
     }
+
+    .carousel {
+        position: relative;
+        display: block;
+        overflow: hidden;
+        width: 100%;
+        width: 100vw;
+        height: 100%;
+        height: 100vh;
+    }
+
 </style>
 

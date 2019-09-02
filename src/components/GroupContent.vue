@@ -130,12 +130,15 @@
     .wrapper {
         text-align: left;
         background-color: white;
-        width: 100%;
+        width: 90%;
         height: 100%;
+    }
+    .ivu-col{
+        width: auto;
     }
 
     .aside {
         position: relative;
-        left: 101px;
+        left: 30px;
     }
 </style>

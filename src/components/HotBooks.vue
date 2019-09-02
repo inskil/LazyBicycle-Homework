@@ -1,21 +1,21 @@
 <template>
     <div class="carousel">
-        <Carousel autoplay v-model="value2" :dots="setting.dots" :radius-dot="setting.radiusDot" loop>
-            <CarouselItem v-for="book in newbooks" v-bind:key="book.id">
+        <carousel autoplay v-model="value2" :dots="setting.dots" :radius-dot="setting.radiusDot" loop>
+            <carouselItem v-for="book in newbooks" v-bind:key="book.id">
                 <div class="demo-carousel" align="center">
                     <router-link :to="'/bookDetail/'+book.id">
                         <div class="material-card material-shadow-2 material-hover">
                             <img class="pic" :src="book.images[0].large">
                             <div class="text">
                                 <h1>{{book.title}}</h1>
-                                <br><br>
+                                <br>
                                 <p id="pp">{{book.summary}}</p>
                             </div>
                         </div>
                     </router-link >
                 </div>
-            </CarouselItem>
-        </Carousel>
+            </carouselItem>
+        </carousel>
     </div>
 </template>
 
@@ -105,7 +105,10 @@
         display: -webkit-box;
         -webkit-box-orient: vertical;
         word-break: break-all;
-        font-size: medium;
+        font-size: small;
         -webkit-line-clamp: 8;
+    }
+    h1{
+        margin: auto;
     }
 </style>
